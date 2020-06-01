@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-   array<int, 5> items{1, 2, 3, 4, 5};
+   array<int, 5> items{1, 2, 3, 4, 5}; // list initializer
 
    // display items before modification
    cout << "items before modification: ";

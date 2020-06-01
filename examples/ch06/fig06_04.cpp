@@ -1,5 +1,5 @@
 // fig06_04.cpp
-// Set array s to the even integers from 2 to 10.
+// Set array values to the even integers from 2 to 10.
 #include <iostream>
 #include <array>
 using namespace std;
@@ -14,7 +14,7 @@ int main() {
       values.at(i) = 2 + 2 * i;
    }
 
-   // output contents of array s in tabular format
+   // output contents of array values in tabular format
    for (const int value : values) {
       cout << value << "  ";
    }

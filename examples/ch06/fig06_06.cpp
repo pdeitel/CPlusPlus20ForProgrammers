@@ -6,12 +6,12 @@ using namespace std;
 
 int main() {
    constexpr size_t arraySize{11};
-   array<int, arraySize> n{0, 0, 0, 0, 0, 0, 1, 2, 4, 2, 1};
+   array<int, arraySize> frequencies{0, 0, 0, 0, 0, 0, 1, 2, 4, 2, 1};
 
    cout << "Grade distribution:" << endl;
 
-   // for each element of array n, output a bar of the chart
-   for (int i{0}; const int item : n) {
+   // for each element of frequencies, output a bar of the chart
+   for (int i{0}; const int frequency : frequencies) {
       // output bar labels ("0-9:", ..., "90-99:", "100:")
       if (0 == i) {
          cout << "  0-9: ";
@@ -26,7 +26,7 @@ int main() {
       ++i;
 
       // print bar of asterisks
-      for (int stars{0}; stars < item; ++stars) {
+      for (int stars{0}; stars < frequency; ++stars) {
          cout << '*';
       }
 

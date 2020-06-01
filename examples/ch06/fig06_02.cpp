@@ -1,7 +1,6 @@
 // fig06_02.cpp
 // Initializing an array in a declaration.
 #include <iostream>
-#include <iomanip>
 #include <array>
 using namespace std;
 

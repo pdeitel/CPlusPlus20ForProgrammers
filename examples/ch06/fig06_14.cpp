@@ -1,7 +1,6 @@
 // fig06_14.cpp
 // Demonstrating C++ standard library class template vector.
 #include <iostream>
-#include <iomanip>
 #include <vector>   
 #include <stdexcept>
 using namespace std;
@@ -65,10 +64,10 @@ int main() {
       cout << "integers1 and integers2 are equal" << endl;
    }
 
-   // use square brackets to use the value at location 5 as an rvalue
+   // use the value at location 5 as an rvalue
    cout << "\nintegers1.at(5) is " << integers1.at(5);
 
-   // use square brackets to create lvalue
+   // use integers1.at(5) as an lvalue
    cout << "\n\nAssigning 1000 to integers1.at(5)" << endl;
    integers1.at(5) = 1000;
    cout << "integers1: ";

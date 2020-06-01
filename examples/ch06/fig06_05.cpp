@@ -9,7 +9,7 @@ int main() {
    array<int, arraySize> integers{10, 20, 30, 40};
    int total{0};
 
-   // sum contents of array a             
+   // sum contents of array integers             
    for (const int item : integers) {
       total += item;
    }
