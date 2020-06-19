@@ -1,6 +1,6 @@
 // fig07_03.cpp
 // Pass-by-reference with a pointer argument used to cube a 
-// variable’s value.
+// variable's value.
 #include <iostream>
 using namespace std;
 

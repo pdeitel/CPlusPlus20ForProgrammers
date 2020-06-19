@@ -15,7 +15,7 @@ int main() {
    // initializing an array with a string literal
    // creates a one-element array<const char*>
    const auto array1 = array{"abc"};
-   cout << "\n\narray1.size() = " << array1.size() << "\narray1: ";
+   cout << "array1.size() = " << array1.size() << "\narray1: ";
    display(array1); // use lambda to display contents
 
    // creating std::array of characters from a string literal 

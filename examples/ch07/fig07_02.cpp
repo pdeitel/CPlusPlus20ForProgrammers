@@ -1,5 +1,5 @@
 // fig07_02.cpp
-// Pass-by-value used to cube a variable’s value.
+// Pass-by-value used to cube a variable's value.
 #include <iostream>
 using namespace std;
 

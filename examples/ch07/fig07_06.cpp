@@ -23,7 +23,7 @@ int main() {
    // creating a std::array from an initializer list
    const auto array2 = to_array({1, 2, 3, 4});
    cout << "\n\narray2.size() = " << array2.size() << "\narray2: ";
-   display(array1); // use lambda to display contents
+   display(array2); // use lambda to display contents
 
    cout << endl;
 }
