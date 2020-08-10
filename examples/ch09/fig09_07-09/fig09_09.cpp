@@ -3,7 +3,7 @@
 // NOTE: This file must be compiled with Time.cpp. 
 #include <iostream>
 #include <stdexcept> // invalid_argument exception class
-#include "fmt/format.h" // In C++20, this will be #include <format> 
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Time.h" // definition of class Time from Time.h 
 using namespace std;
 
@@ -25,7 +25,7 @@ int main() {
       t.setTime(99, 99, 99); // all values out of range
    }
    catch (const invalid_argument& e) {
-      cout << "Exception: " << e.what() << "\n\n";
+      cout << fmt::format("Exception: {}\n\n", e.what());
    }
 
    // display t's value after attempting to set an invalid time

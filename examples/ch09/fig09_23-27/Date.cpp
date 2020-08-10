@@ -3,25 +3,29 @@
 #include <array>
 #include <iostream>
 #include <stdexcept>
-#include "fmt/format.h" // In C++20, this will be #include <format> 
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Date.h" // include Date class definition
 using namespace std;
 
 // constructor confirms proper value for month; calls
 // utility function checkDay to confirm proper value for day
-Date::Date(int mn, int dy, int yr)
-   : month{mn}, day{checkDay(dy)}, year{yr} {
-   if (mn < 1 || mn > monthsPerYear) { // validate the month
-      throw invalid_argument("month must be 1-12");
+Date::Date(int month, int day, int year)
+   : m_month{month}, m_day{day}, m_year{year} {
+   if (m_month < 1 || m_month > monthsPerYear) { // validate the month
+      throw invalid_argument{"month must be 1-12"};
+   }
+
+   if (!checkDay(day)) { // validate the day
+      throw invalid_argument{"Invalid day for current month and year"};
    }
 
    // output Date object to show when its constructor is called
    cout << fmt::format("Date object constructor: {}\n", toString());
 }
 
-// print Date object in form month/day/year
+// gets string representation of a Date in the form month/day/year
 string Date::toString() const {
-   return fmt::format("{}/{}/{}", month, day, year);
+   return fmt::format("{}/{}/{}", m_month, m_day, m_year);
 }
 
 // output Date object to show when its destructor is called
@@ -31,23 +35,24 @@ Date::~Date() {
 
 // utility function to confirm proper day value based on 
 // month and year; handles leap years, too
-int Date::checkDay(int testDay) const {
+bool Date::checkDay(int day) const {
    static const array<int, monthsPerYear + 1> daysPerMonth{
       0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
    // determine whether testDay is valid for specified month
-   if (testDay > 0 && testDay <= daysPerMonth.at(month)) {
-      return testDay;
+   if (day > 0 && day <= daysPerMonth.at(m_month)) {
+      return true;
    }
 
    // February 29 check for leap year 
-   if (month == 2 && testDay == 29 && (year % 400 == 0 ||
-      (year % 4 == 0 && year % 100 != 0))) {
-      return testDay;
+   if (m_month == 2 && day == 29 && (m_year % 400 == 0 ||
+      (m_year % 4 == 0 && m_year % 100 != 0))) {
+      return true;
    }
 
-   throw invalid_argument("Invalid day for current month and year");
+   return false; // invalid day, based on current m_month and m_year
 }
+
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

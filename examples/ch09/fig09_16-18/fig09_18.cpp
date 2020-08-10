@@ -2,6 +2,7 @@
 // public member function that
 // returns a reference to private data.
 #include <iostream>
+#include <fmt/format.h>
 #include "Time.h" // include definition of class Time
 using namespace std;
 
@@ -11,21 +12,18 @@ int main() {
    // initialize hourRef with the reference returned by badSetHour
    int& hourRef{t.badSetHour(20)}; // 20 is a valid hour 
 
-   cout << "Valid hour before modification: " << hourRef;
+   cout << fmt::format("Valid hour before modification: {}\n", hourRef);   
    hourRef = 30; // use hourRef to set invalid value in Time object t
-   cout << "\nInvalid hour after modification: " << t.getHour();
+   cout << fmt::format("Invalid hour after modification: {}\n\n",
+      t.getHour());
 
-   // Dangerous: Function call that returns                      
-   // a reference can be used as an lvalue!                      
+   // Dangerous: Function call that returns a reference can be 
+   // used as an lvalue! POOR PROGRAMMING PRACTICE!!!!!!!!
    t.badSetHour(12) = 74; // assign another invalid value to hour
 
-   cout << "\n\n*************************************************\n"
-      << "POOR PROGRAMMING PRACTICE!!!!!!!!\n"
-      << "t.badSetHour(12) as an lvalue, invalid hour: "
-      << t.getHour()
-      << "\n*************************************************" << endl;
+   cout << "After using t.badSetHour(12) as an lvalue, "
+      << fmt::format("hour is: {}\n", t.getHour());
 }
-
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

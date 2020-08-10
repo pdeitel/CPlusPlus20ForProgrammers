@@ -2,6 +2,8 @@
 // Serializing and deserializing objects containing private data.
 #include <iostream>
 #include <fstream>
+#include <string>
+#include <string_view>
 #include <vector>
 #include <fmt/format.h> // In C++20, this will be #include <format> 
 #include <cereal/archives/json.hpp>
@@ -11,36 +13,37 @@ using namespace std;
 
 class Record {
    // declare serialize as a friend for direct access to private data
-   template<class Archive>
+   template<typename Archive>
    friend void serialize(Archive& archive, Record& record);
 
 public:
    // constructor
-   Record(int account = 0, const string& first = "",
-      const string& last = "", double balance = 0.0)
-      : account{account}, first{first}, last{last}, balance{balance} {}
+   explicit Record(int account = 0, string_view first = "",
+      string_view last = "", double balance = 0.0)
+      : m_account{account}, m_first{first},
+      m_last{last}, m_balance{balance} {}
 
    // get member functions
-   int getAccount() const {return account;}
-   string getFirst() const {return first;}
-   string getLast() const {return last;}
-   double getBalance() const {return balance;}
+   int getAccount() const { return m_account; }
+   const string& getFirst() const { return m_first; }
+   const string& getLast() const { return m_last; }
+   double getBalance() const { return m_balance; }
 
 private:
-   int account{};
-   string first{};
-   string last{};
-   double balance{};
+   int m_account{};
+   string m_first{};
+   string m_last{};
+   double m_balance{};
 };
 
 // function template serialize is responsible for serializing and 
 // deserializing Record objects to/from the specified Archive
-template <class Archive>
+template <typename Archive>
 void serialize(Archive& archive, Record& record) {
-   archive(cereal::make_nvp("account", record.account),
-      cereal::make_nvp("first", record.first),
-      cereal::make_nvp("last", record.last),
-      cereal::make_nvp("balance", record.balance));
+   archive(cereal::make_nvp("account", record.m_account),
+      cereal::make_nvp("first", record.m_first),
+      cereal::make_nvp("last", record.m_last),
+      cereal::make_nvp("balance", record.m_balance));
 }
 
 // display record at command line
@@ -52,9 +55,9 @@ void displayRecords(const vector<Record>& records) {
 }
 
 int main() {
-   vector<Record> records{
-      {100, "Brian", "Blue", 123.45},
-      {200, "Sue", "Green", 987.65}
+   vector records{
+      Record{100, "Brian", "Blue", 123.45},
+      Record{200, "Sue", "Green", 987.65}
    };
 
    cout << "Records to serialize:\n";

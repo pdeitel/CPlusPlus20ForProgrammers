@@ -1,29 +1,23 @@
 // Fig. 9.25: Employee.h
 // Employee class definition showing composition.
 // Member functions defined in Employee.cpp.
+#pragma once // prevent multiple inclusions of header
 #include <string>
-
-#ifndef EMPLOYEE_H
-#define EMPLOYEE_H
-
-#include <string>
+#include <string_view>
 #include "Date.h" // include Date class definition
 
 class Employee {
 public:
-   Employee(const std::string& first, const std::string& last,
-      const Date& dateOfBirth, const Date& dateOfHire);
+   Employee(std::string_view firstName, std::string_view lastName,
+      const Date& birthDate, const Date& hireDate);
    std::string toString() const;
    ~Employee(); // provided to confirm destruction order
 private:
-   std::string firstName; // composition: member object
-   std::string lastName; // composition: member object
-   const Date birthDate; // composition: member object
-   const Date hireDate; // composition: member object
+   const std::string m_firstName; // composition: member object
+   const std::string m_lastName; // composition: member object
+   const Date m_birthDate; // composition: member object
+   const Date m_hireDate; // composition: member object
 };
-
-#endif
-
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

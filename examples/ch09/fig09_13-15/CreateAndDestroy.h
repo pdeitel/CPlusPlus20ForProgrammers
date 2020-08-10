@@ -1,21 +1,18 @@
 // Fig. 9.13: CreateAndDestroy.h
 // CreateAndDestroy class definition.
 // Member functions defined in CreateAndDestroy.cpp.
+#pragma once // prevent multiple inclusions of header
 #include <string>
-
-#ifndef CREATE_H
-#define CREATE_H
+#include <string_view>
 
 class CreateAndDestroy {
 public:
-   CreateAndDestroy(int ID, std::string messageString); // constructor
+   CreateAndDestroy(int ID, std::string_view message); // constructor
    ~CreateAndDestroy(); // destructor                
 private:
-   int objectID; // ID number for object
-   std::string message; // message describing object
+   int m_ID; // ID number for object
+   std::string m_message; // message describing object
 };
-
-#endif
 
 
 

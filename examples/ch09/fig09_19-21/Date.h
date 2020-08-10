@@ -1,23 +1,19 @@
 // Fig. 9.19: Date.h
 // Date class declaration. Member functions are defined in Date.cpp.
+#pragma once // prevent multiple inclusions of header
 #include <string>
-
-// prevent multiple inclusions of header
-#ifndef DATE_H
-#define DATE_H
 
 // class Date definition
 class Date {
 public:
-   explicit Date(int m = 1, int d = 1, int y = 2000);
+   explicit Date(int month = 1, int day = 1, int year = 2000);
    std::string toString() const;
 private:
-   int month;
-   int day;
-   int year;
+   int m_month;
+   int m_day;
+   int m_year;
 };
 
-#endif
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

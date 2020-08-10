@@ -1,21 +1,18 @@
 // Fig. 9.30: Time.h
 // Time class modified to enable cascaded member-function calls.
+#pragma once // prevent multiple inclusions of header
 #include <string>
-
-// Time class definition.
-// Member functions defined in Time.cpp.
-#ifndef TIME_H
-#define TIME_H
 
 class Time {
 public:
-   explicit Time(int h = 0, int m = 0, int s = 0); // default constructor
+   // default constructor because it can be called with no arguments
+   explicit Time(int hour = 0, int minute = 0, int second = 0);
 
-   // set functions (the Time& return types enable cascading)
-   Time& setTime(int h, int m, int s); // set hour, minute, second
-   Time& setHour(int h); // set hour                              
-   Time& setMinute(int m); // set minute                          
-   Time& setSecond(int s); // set second                          
+   // set functions
+   Time& setTime(int hour, int minute, int second);
+   Time& setHour(int hour); // set hour (after validation)
+   Time& setMinute(int minute); // set minute (after validation)
+   Time& setSecond(int second); // set second (after validation)
 
    int getHour() const; // return hour
    int getMinute() const; // return minute
@@ -23,12 +20,11 @@ public:
    std::string toUniversalString() const; // 24-hour time format string
    std::string toStandardString() const; // 12-hour time format string
 private:
-   int hour{0}; // 0 - 23 (24-hour clock format)
-   int minute{0}; // 0 - 59
-   int second{0}; // 0 - 59
+   int m_hour{0}; // 0 - 23 (24-hour clock format)
+   int m_minute{0}; // 0 - 59
+   int m_second{0}; // 0 - 59
 };
 
-#endif
 
 
 

@@ -1,8 +1,8 @@
 // Fig. 9.4: AccountTest.cpp
-// Using the Account constructor to initialize the name data
+// Using the Account constructor to initialize the m_name data
 // member at the time each Account object is created.
 #include <iostream>
-#include "fmt/format.h" // In C++20, this will be #include <format> 
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Account.h"
 
 using namespace std;
@@ -12,10 +12,11 @@ int main() {
    Account account1{"Jane Green"};
    Account account2{"John Blue"};
 
-   // display initial value of name for each Account
+   // display initial each Account's corresponding name
    cout << fmt::format("account1 name is: {}\naccount2 name is: {}\n",
               account1.getName(), account2.getName());
 }
+
 
 
 /**************************************************************************

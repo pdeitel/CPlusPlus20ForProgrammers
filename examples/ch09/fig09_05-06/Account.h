@@ -1,46 +1,48 @@
 // Fig. 9.5: Account.h
-// Account class with name and balance data members, and a 
+// Account class with m_name and m_balance data members, and a 
 // constructor and deposit function that each perform validation.
 #include <string>
+#include <string_view>
 
 class Account {
 public:
    // Account constructor with two parameters  
-   Account(const std::string& accountName, double initialBalance)
-      : name{accountName} { // assign accountName to data member name
+   Account(std::string_view name, double balance)
+      : m_name{name} { // member initializer for m_name  
 
-      // validate that the initialBalance is greater than 0; if not,  
-      // data member balance keeps its default initial value of 0     
-      if (initialBalance > 0) { // if the initialBalance is valid     
-         balance = initialBalance; // assign it to data member balance
+      // validate that balance is greater than 0.0; if not,  
+      // data member m_balance keeps its default initial value of 0.0     
+      if (balance > 0.0) { // if the balance is valid     
+         m_balance = balance; // assign it to data member m_balance  
       }
    }
 
    // function that deposits (adds) only a valid amount to the balance
-   void deposit(double depositAmount) {
-      if (depositAmount > 0) { // if the depositAmount is valid
-         balance += depositAmount; // add it to the balance    
+   void deposit(double amount) {
+      if (amount > 0.0) { // if the amount is valid
+         m_balance += amount; // add it to m_balance      
       }
    }
 
    // function returns the account balance
    double getBalance() const {
-      return balance;
+      return m_balance;
    }
 
-   // function that sets the name
-   void setName(const std::string& accountName) {
-      name = accountName;
+   // function that sets the account name
+   void setName(std::string_view name) {
+      m_name = name; // replace m_name's value with name
    }
 
-   // function that returns the name
-   std::string getName() const {
-      return name;
+   // function that returns the account name
+   const std::string& getName() const {
+      return m_name;
    }
 private:
-   std::string name; // account name data member 
-   double balance{0.0}; // data member with default initial value
+   std::string m_name; // account name data member 
+   double m_balance{0.0}; // data member with default initial value
 }; // end class Account
+
 
 
 /**************************************************************************

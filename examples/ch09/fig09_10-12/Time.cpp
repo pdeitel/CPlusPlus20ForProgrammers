@@ -2,71 +2,78 @@
 // Member-function definitions for class Time.
 #include <stdexcept>
 #include <string>
-#include "fmt/format.h" // In C++20, this will be #include <format> 
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Time.h" // include definition of class Time from Time.h
 using namespace std;
 
 // Time constructor initializes each data member    
 Time::Time(int hour, int minute, int second) {
-   setTime(hour, minute, second); // validate and set time 
+   setHour(hour); // validate and set private field m_hour
+   setMinute(minute); // validate and set private field m_minute
+   setSecond(second); // validate and set private field m_second
 }
 
 // set new Time value using universal time
-void Time::setTime(int h, int m, int s) {
-   setHour(h); // set private field hour
-   setMinute(m); // set private field minute
-   setSecond(s); // set private field second
+void Time::setTime(int hour, int minute, int second) {
+   // validate hour, minute and second
+   if ((hour < 0 || hour >= 24) || (minute < 0 || minute >= 60) ||
+      (second < 0 || second >= 60)) {
+      throw invalid_argument{"hour, minute or second was out of range"};
+   }
+
+   m_hour = hour;
+   m_minute = minute;
+   m_second = second;
 }
 
 // set hour value
-void Time::setHour(int h) {
-   if (h < 0 || h >= 24) {
-      throw invalid_argument("hour must be 0-23");
-   } 
+void Time::setHour(int hour) {
+   if (hour < 0 || hour >= 24) {
+      throw invalid_argument{"hour must be 0-23"};
+   }
 
-   hour = h;
-} 
+   m_hour = hour;
+}
 
 // set minute value
-void Time::setMinute(int m) {
-   if (m < 0 || m >= 60) {
-      throw invalid_argument("minute must be 0-59");
-   } 
+void Time::setMinute(int minute) {
+   if (minute < 0 || minute >= 60) {
+      throw invalid_argument{"minute must be 0-59"};
+   }
 
-   minute = m;
-} 
+   m_minute = minute;
+}
 
 // set second value
-void Time::setSecond(int s) {
-   if (s < 0 && s >= 60) {
-      throw invalid_argument("second must be 0-59");
-   } 
+void Time::setSecond(int second) {
+   if (second < 0 && second >= 60) {
+      throw invalid_argument{"second must be 0-59"};
+   }
 
-   second = s;
-} 
+   m_second = second;
+}
 
 // return hour value
-int Time::getHour() const { return hour; }
+int Time::getHour() const { return m_hour; }
 
 // return minute value
-int Time::getMinute() const { return minute; }
+int Time::getMinute() const { return m_minute; }
 
 // return second value
-int Time::getSecond() const { return second; }
+int Time::getSecond() const { return m_second; }
 
 // return Time as a string in universal-time format (HH:MM:SS)
 string Time::toUniversalString() const {
    return fmt::format("{:02d}:{:02d}:{:02d}",
-              getHour(), getMinute(), getSecond());
+      getHour(), getMinute(), getSecond());
 }
 
 // return Time as string in standard-time format (HH:MM:SS AM or PM)
 string Time::toStandardString() const {
    return fmt::format("{}:{:02d}:{:02d} {}",
-             ((getHour() % 12 == 0) ? 12 : getHour() % 12),
-             getMinute(), getSecond(), (getHour() < 12 ? "AM" : "PM"));
+      ((getHour() % 12 == 0) ? 12 : getHour() % 12),
+      getMinute(), getSecond(), (getHour() < 12 ? "AM" : "PM"));
 }
-
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

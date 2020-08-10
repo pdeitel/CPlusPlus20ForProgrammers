@@ -1,35 +1,34 @@
 // Fig. 9.26: Employee.cpp
 // Employee class member-function definitions.
 #include <iostream>
-#include "fmt/format.h" // In C++20, this will be #include <format> 
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Employee.h" // Employee class definition
 #include "Date.h" // Date class definition
 using namespace std;
 
 // constructor uses member initializer list to pass initializer 
 // values to constructors of member objects 
-Employee::Employee(const string& first, const string& last,
-   const Date& dateOfBirth, const Date& dateOfHire)
-   : firstName{first}, // initialize firstName      
-   lastName{last}, // initialize lastName         
-   birthDate{dateOfBirth}, // initialize birthDate
-   hireDate{dateOfHire} { // initialize hireDate    
+Employee::Employee(string_view firstName, string_view lastName,
+   const Date &birthDate, const Date & hireDate)
+   : m_firstName{firstName}, m_lastName{lastName},
+     m_birthDate{birthDate}, m_hireDate{hireDate} {
    // output Employee object to show when constructor is called
-   cout << fmt::format("Employee object constructor: {} {}\n",
-              firstName, lastName);
-}
+   cout << fmt::format("Employee object constructor: {} {}\n", 
+              m_firstName, m_lastName);
+} 
 
-// print Employee object
+// gets string representation of an Employee object
 string Employee::toString() const {
-   return fmt::format("{}, {}  Hired: {}  Birthday: {}", lastName,
-             firstName, hireDate.toString(), birthDate.toString());
-}
+   return fmt::format("{}, {}  Hired: {}  Birthday: {}", m_lastName,
+             m_firstName, m_hireDate.toString(), m_birthDate.toString());
+} 
 
 // output Employee object to show when its destructor is called
 Employee::~Employee() {
    cout << fmt::format("Employee object destructor: {}, {}\n",
-              lastName, firstName);
+              m_lastName, m_firstName);
 }
+
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

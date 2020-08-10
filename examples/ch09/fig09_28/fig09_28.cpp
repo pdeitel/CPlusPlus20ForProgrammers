@@ -1,30 +1,30 @@
 // fig09_28.cpp  
 // Friends can access private members of a class.
 #include <iostream>
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 using namespace std;
 
 // Count class definition 
 class Count {
-   friend void setX(Count& c, int val); // friend declaration
+   friend void setX(Count& c, int value); // friend declaration
 public:
-   int getX() const { return x; }
+   int getX() const { return m_x; }
 private:
-   int x{0};
+   int m_x{0};
 };
 
 // function setX can modify private data of Count         
 // because setX is declared as a friend of Count (line 8)
-void setX(Count& c, int val) {
-   c.x = val; // allowed because setX is a friend of Count 
+void setX(Count& c, int value) {
+   c.m_x = value; // allowed because setX is a friend of Count 
 }
 
 int main() {
    Count counter{}; // create Count object
 
-   cout << "counter.x after instantiation: " << counter.getX();
+   cout << fmt::format("Initial counter.x value: {}\n", counter.getX());
    setX(counter, 8); // set x using a friend function
-   cout << "\ncounter.x after call to setX friend function: "
-      << counter.getX() << "\n";
+   cout << fmt::format("counter.x after setX call: {}\n", counter.getX());
 }
 
 

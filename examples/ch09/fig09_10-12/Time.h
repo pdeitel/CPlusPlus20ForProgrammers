@@ -1,22 +1,20 @@
 // Fig. 9.10: Time.h
 // Time class containing a constructor with default arguments.
 // Member functions defined in Time.cpp.
+#pragma once // prevent multiple inclusions of header
 #include <string>
-
-// prevent multiple inclusions of header
-#ifndef TIME_H
-#define TIME_H
 
 // Time class definition
 class Time {
 public:
-   explicit Time(int h = 0, int m = 0, int s = 0); // default constructor
+   // default constructor because it can be called with no arguments
+   explicit Time(int hour = 0, int minute = 0, int second = 0);
 
    // set functions
-   void setTime(int h, int m, int s); // set hour, minute, second
-   void setHour(int h); // set hour (after validation)
-   void setMinute(int m); // set minute (after validation)
-   void setSecond(int s); // set second (after validation)
+   void setTime(int hour, int minute, int second);
+   void setHour(int hour); // set hour (after validation)
+   void setMinute(int minute); // set minute (after validation)
+   void setSecond(int second); // set second (after validation)
 
    // get functions
    int getHour() const; // return hour
@@ -26,12 +24,11 @@ public:
    std::string toUniversalString() const; // 24-hour time format string
    std::string toStandardString() const; // 12-hour time format string
 private:
-   int hour{0}; // 0 - 23 (24-hour clock format)
-   int minute{0}; // 0 - 59
-   int second{0}; // 0 - 59
+   int m_hour{0}; // 0 - 23 (24-hour clock format)
+   int m_minute{0}; // 0 - 59
+   int m_second{0}; // 0 - 59
 };
 
-#endif
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

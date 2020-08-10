@@ -2,18 +2,19 @@
 // Constructor with default arguments.
 #include <iostream>
 #include <stdexcept>
-#include "fmt/format.h" // In C++20, this will be #include <format> 
+#include <string>
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Time.h" // include definition of class Time from Time.h
 using namespace std;
 
 // displays a Time in 24-hour and 12-hour formats
-void displayTime(const string& message, const Time& time) {
+void displayTime(string_view message, const Time& time) {
    cout << fmt::format("{}\nUniversal time: {}\nStandard time: {}\n\n",
-              message, time.toUniversalString(), time.toStandardString());
+      message, time.toUniversalString(), time.toStandardString());
 }
 
 int main() {
-   const Time t1; // all arguments defaulted                            
+   const Time t1{}; // all arguments defaulted                            
    const Time t2{2}; // hour specified; minute and second defaulted     
    const Time t3{21, 34}; // hour and minute specified; second defaulted
    const Time t4{12, 25, 42}; // hour, minute and second specified      
@@ -29,9 +30,10 @@ int main() {
       const Time t5{27, 74, 99}; // all bad values specified
    }
    catch (const invalid_argument& e) {
-      cerr << "Exception while initializing t5: " << e.what() << endl;
+      cerr << fmt::format("t5 not created: {}\n", e.what());
    }
 }
+
 
 
 /**************************************************************************

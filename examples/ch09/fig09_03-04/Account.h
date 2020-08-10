@@ -1,27 +1,30 @@
 // Fig. 9.3: Account.h
 // Account class with a constructor that initializes the account name.
 #include <string>
+#include <string_view>
 
 class Account {
 public:
-   // constructor initializes data member name with parameter accountName
-   explicit Account(const std::string& accountName)
-      : name{accountName} { // member initializer
-     // empty body                               
+   // constructor initializes data member m_name with the parameter name
+   explicit Account(std::string_view name)
+      : m_name{name} { // member initializer  
+     // empty body                                 
    }
 
    // function to set the account name
-   void setName(const std::string& accountName) {
-      name = accountName;
+   void setName(std::string_view name) {
+      m_name = name; // replace m_name's value with name
    }
 
    // function to retrieve the account name
-   std::string getName() const {
-      return name;
+   const std::string& getName() const {
+      return m_name;
    }
 private:
-   std::string name; // account name data member
+   std::string m_name; // account name data member
 }; // end class Account
+
+
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

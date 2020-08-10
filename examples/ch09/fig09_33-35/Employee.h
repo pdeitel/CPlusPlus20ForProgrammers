@@ -1,29 +1,27 @@
 // Fig. 9.33: Employee.h
 // Employee class definition with a static data member to 
 // track the number of Employee objects in memory
-#ifndef EMPLOYEE_H
-#define EMPLOYEE_H
-
+#pragma once
 #include <string>
+#include <string_view>
 
 class Employee {
 public:
-   Employee(const std::string& first, const std::string& last);
+   Employee(std::string_view firstName, std::string_view lastName);
    ~Employee(); // destructor
-   std::string getFirstName() const; // return first name
-   std::string getLastName() const; // return last name
+   const std::string& getFirstName() const; // return first name
+   const std::string& getLastName() const; // return last name
 
    // static member function                                          
    static int getCount(); // return # of objects instantiated
 private:
-   std::string firstName;
-   std::string lastName;
+   const std::string m_firstName;
+   const std::string m_lastName;
 
    // static data
-   static int count; // number of objects instantiated
+   inline static int m_count{0}; // number of objects instantiated
 };
 
-#endif
 
 
 /**************************************************************************

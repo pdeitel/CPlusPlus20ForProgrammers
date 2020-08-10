@@ -1,6 +1,7 @@
 // fig09_29.cpp  
 // Using the this pointer to refer to object members.
 #include <iostream>
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 using namespace std;
 
 class Test {
@@ -8,31 +9,32 @@ public:
    explicit Test(int value);
    void print() const;
 private:
-   int x{0};
+   int m_x{0};
 };
 
 // constructor
-Test::Test(int value) : x{value} {} // initialize x to value
+Test::Test(int value) : m_x{value} {} // initialize x to value
 
 // print x using implicit then explicit this pointers;
 // the parentheses around *this are required due to precedence
 void Test::print() const {
    // implicitly use the this pointer to access the member x
-   cout << "        x = " << x;
+   cout << fmt::format("        x = {}\n", m_x);
 
    // explicitly use the this pointer and the arrow operator
    // to access the member x                                
-   cout << "\n  this->x = " << this->x;
+   cout << fmt::format("  this->x = {}\n", this->m_x);
 
    // explicitly use the dereferenced this pointer and
    // the dot operator to access the member x         
-   cout << "\n(*this).x = " << (*this).x << "\n";
+   cout << fmt::format("(*this).x = {}\n", (*this).m_x);
 }
 
 int main() {
    const Test testObject{12}; // instantiate and initialize testObject
    testObject.print();
 }
+
 
 
 /**************************************************************************

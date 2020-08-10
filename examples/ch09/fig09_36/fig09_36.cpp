@@ -18,7 +18,7 @@ struct Record {
 
 // function template serialize is responsible for serializing and 
 // deserializing Record objects to/from the specified Archive
-template <class Archive> 
+template <typename Archive> 
 void serialize(Archive& archive, Record& record) {
    archive(cereal::make_nvp("account", record.account), 
       cereal::make_nvp("first", record.first), 
@@ -35,9 +35,9 @@ void displayRecords(const vector<Record>& records) {
 }
 
 int main() {
-   vector<Record> records{
-      {100, "Brian", "Blue", 123.45},
-      {200, "Sue", "Green", 987.65}
+   vector records{
+      Record{100, "Brian", "Blue", 123.45},
+      Record{200, "Sue", "Green", 987.65}
    };
 
    cout << "Records to serialize:\n";

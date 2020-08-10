@@ -1,78 +1,75 @@
 // Fig. 9.31: Time.cpp 
 // Time class member-function definitions.
-#include <iomanip>
 #include <stdexcept>
-#include "fmt/format.h" // In C++20, this will be #include <format> 
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Time.h" // Time class definition
 using namespace std;
 
-// constructor function to initialize private data;
-// calls member function setTime to set variables;
-// default values are 0 (see class definition)
-Time::Time(int h, int m, int s) {
-   setTime(h, m, s); 
-} 
+// Time constructor initializes each data member    
+Time::Time(int hour, int minute, int second) {
+   setHour(hour); // validate and set private field m_hour
+   setMinute(minute); // validate and set private field m_minute
+   setSecond(second); // validate and set private field m_second
+}
 
-// set values of hour, minute, and second
-Time& Time::setTime(int h, int m, int s) { // note Time& return
-   setHour(h);
-   setMinute(m);
-   setSecond(s); 
+// set new Time value using universal time
+Time& Time::setTime(int hour, int minute, int second) {
+   Time time{hour, minute, second};
+   *this = time; // if time is valid, assign its members to current object
    return *this; // enables cascading
-} 
+}
 
 // set hour value
-Time& Time::setHour(int h) { // note Time& return 
-   if (h < 0 || h >= 24) {
-      throw invalid_argument("hour must be 0-23");
-   } 
+Time& Time::setHour(int hour) { // note Time& return 
+   if (hour < 0 || hour >= 24) {
+      throw invalid_argument{"hour must be 0-23"};
+   }
 
-   hour = h;
+   m_hour = hour;
    return *this; // enables cascading
-} 
+}
 
 // set minute value
 Time& Time::setMinute(int m) { // note Time& return
    if (m < 0 || m >= 60) {
-      throw invalid_argument("minute must be 0-59");
-   } 
+      throw invalid_argument{"minute must be 0-59"};
+   }
 
-   minute = m;
+   m_minute = m;
    return *this; // enables cascading
-} 
+}
 
 // set second value
 Time& Time::setSecond(int s) { // note Time& return
    if (s < 0 || s >= 60) {
-      throw invalid_argument("second must be 0-59");
-   } 
+      throw invalid_argument{"second must be 0-59"};
+   }
 
-   second = s;
+   m_second = s;
    return *this; // enables cascading
-} 
+}
 
 // get hour value
-int Time::getHour() const {return hour;}
+int Time::getHour() const { return m_hour; }
 
 // get minute value
-int Time::getMinute() const {return minute;}
+int Time::getMinute() const { return m_minute; }
 
 // get second value
-int Time::getSecond() const {return second;}
+int Time::getSecond() const { return m_second; }
 
 // return Time as a string in universal-time format (HH:MM:SS)
 string Time::toUniversalString() const {
-   return fmt::format("{:02d}:{:02d}:{:02d}", 
+   return fmt::format("{:02d}:{:02d}:{:02d}",
              getHour(), getMinute(), getSecond());
-} 
+}
 
 // return Time as string in standard-time format (HH:MM:SS AM or PM)
 string Time::toStandardString() const {
-   return fmt::format("{}:{:02d}:{:02d} {}", 
-      ((getHour() % 12 == 0) ? 12 : getHour() % 12), 
-      getMinute(), getSecond(), (getHour() < 12 ? "AM" : "PM"));
-} 
-
+   return fmt::format("{}:{:02d}:{:02d} {}",
+             ((getHour() % 12 == 0) ? 12 : getHour() % 12),
+             getMinute(), getSecond(), (getHour() < 12 ? "AM" : "PM"));
+}
 
 
 

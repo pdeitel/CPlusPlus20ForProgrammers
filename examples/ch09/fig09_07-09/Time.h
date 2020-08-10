@@ -1,25 +1,21 @@
 // Fig. 9.7: Time.h
 // Time class definition.                   
 // Member functions are defined in Time.cpp 
+#pragma once // prevent multiple inclusions of header
 #include <string>
-
-// prevent multiple inclusions of header
-#ifndef TIME_H 
-#define TIME_H 
 
 // Time class definition
 class Time {
 public:
-   void setTime(int h, int m, int s); // set hour, minute and second
-   std::string toUniversalString() const; // 24-hour time format string
-   std::string toStandardString() const; // 12-hour time format string
+   void setTime(int hour, int minute, int second);
+   std::string toUniversalString() const; // 24-hour string format
+   std::string toStandardString() const; // 12-hour string format
 private:
-   int hour{0}; // 0 - 23 (24-hour clock format)
-   int minute{0}; // 0 - 59
-   int second{0}; // 0 - 59
+   int m_hour{0}; // 0 - 23 (24-hour clock format)
+   int m_minute{0}; // 0 - 59
+   int m_second{0}; // 0 - 59
 };
-
-#endif 
+   
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

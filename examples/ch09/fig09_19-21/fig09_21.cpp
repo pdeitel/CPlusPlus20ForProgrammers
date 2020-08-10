@@ -2,7 +2,7 @@
 // Demonstrating that class objects can be assigned
 // to each other using the default assignment operator.
 #include <iostream>
-#include "fmt/format.h" // In C++20, this will be #include <format> 
+#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Date.h" // include definition of class Date from Date.h
 using namespace std;
 
@@ -11,7 +11,7 @@ int main() {
    Date date2; // date2 defaults to 1/1/2000
 
    cout << fmt::format("date1: {}\ndate2: {}\n\n",
-              date1.toString(), date2.toString());
+      date1.toString(), date2.toString());
    date2 = date1; // uses the default assignment operator
    cout << fmt::format("After assignment, date2: {}\n", date2.toString());
 }
