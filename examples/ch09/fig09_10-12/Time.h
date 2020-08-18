@@ -21,8 +21,8 @@ public:
    int getMinute() const; // return minute
    int getSecond() const; // return second
 
-   std::string toUniversalString() const; // 24-hour time format string
-   std::string toStandardString() const; // 12-hour time format string
+   std::string to24HourString() const; // 24-hour time format string
+   std::string to12HourString() const; // 12-hour time format string
 private:
    int m_hour{0}; // 0 - 23 (24-hour clock format)
    int m_minute{0}; // 0 - 59

@@ -9,8 +9,8 @@ using namespace std;
 
 // displays a Time in 24-hour and 12-hour formats
 void displayTime(string_view message, const Time& time) {
-   cout << fmt::format("{}\nUniversal time: {}\nStandard time: {}\n\n",
-      message, time.toUniversalString(), time.toStandardString());
+   cout << fmt::format("{}\n24-hour time: {}\n12-hour time: {}\n\n",
+      message, time.to24HourString(), time.to12HourString());
 }
 
 int main() {

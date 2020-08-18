@@ -14,8 +14,8 @@ Time::Time(int hour, int minute, int second) {
 
 // set new Time value using universal time
 Time& Time::setTime(int hour, int minute, int second) {
-   Time time{hour, minute, second};
-   *this = time; // if time is valid, assign its members to current object
+   Time time{hour, minute, second}; // create a temporary Time object
+   *this = time; // assign time's members to current object
    return *this; // enables cascading
 }
 

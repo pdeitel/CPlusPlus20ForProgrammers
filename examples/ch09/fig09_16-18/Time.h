@@ -1,5 +1,5 @@
 // Fig. 9.16: Time.h
-// Time class declaration.
+// Time class definition.
 // Member functions defined in Time.cpp
 
 // prevent multiple inclusions of header

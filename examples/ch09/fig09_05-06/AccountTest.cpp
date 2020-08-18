@@ -19,22 +19,22 @@ int main() {
    cout << "Enter deposit amount for account1: "; // prompt
    double amount;
    cin >> amount; // obtain user input
-   cout << fmt::format("adding ${:.2f} to account1 balance", amount);
+   cout << fmt::format("adding ${:.2f} to account1 balance\n\n", amount);
    account1.deposit(amount); // add to account1's balance
 
    // display balances
-   cout << fmt::format("\n\naccount1: {} balance is ${:.2f}\n",
+   cout << fmt::format("account1: {} balance is ${:.2f}\n",
       account1.getName(), account1.getBalance());
    cout << fmt::format("account2: {} balance is ${:.2f}\n\n",
       account2.getName(), account2.getBalance());
 
    cout << "Enter deposit amount for account2: "; // prompt
    cin >> amount; // obtain user input
-   cout << fmt::format("adding ${:.2f} to account2 balance", amount);
+   cout << fmt::format("adding ${:.2f} to account2 balance\n\n", amount);
    account2.deposit(amount); // add to account2 balance
 
    // display balances
-   cout << fmt::format("\n\naccount1: {} balance is ${:.2f}\n",
+   cout << fmt::format("account1: {} balance is ${:.2f}\n",
       account1.getName(), account1.getBalance());
    cout << fmt::format("account2: {} balance is ${:.2f}\n",
       account2.getName(), account2.getBalance());

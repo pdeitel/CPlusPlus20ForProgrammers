@@ -15,8 +15,8 @@ public:
    // static member function                                          
    static int getCount(); // return # of objects instantiated
 private:
-   const std::string m_firstName;
-   const std::string m_lastName;
+   std::string m_firstName;
+   std::string m_lastName;
 
    // static data
    inline static int m_count{0}; // number of objects instantiated

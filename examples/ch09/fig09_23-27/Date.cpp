@@ -36,11 +36,11 @@ Date::~Date() {
 // utility function to confirm proper day value based on 
 // month and year; handles leap years, too
 bool Date::checkDay(int day) const {
-   static const array<int, monthsPerYear + 1> daysPerMonth{
+   static const array daysPerMonth{
       0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
    // determine whether testDay is valid for specified month
-   if (day > 0 && day <= daysPerMonth.at(m_month)) {
+   if (1 <= day && day <= daysPerMonth.at(m_month)) {
       return true;
    }
 

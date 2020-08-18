@@ -6,9 +6,9 @@
 class Date {
 public:
    static const int monthsPerYear{12}; // months in a year
-   explicit Date(int month = 1, int day = 1, int year = 1900);
+   explicit Date(int month, int day, int year);
    std::string toString() const; // date string in month/day/year format
-   ~Date(); // provided to confirm destruction order
+   ~Date(); // provided to show when destruction occurs
 private:
    int m_month; // 1-12 (January-December)
    int m_day; // 1-31 based on month

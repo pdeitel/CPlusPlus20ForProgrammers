@@ -10,13 +10,13 @@ int main() {
 
    t.setHour(18).setMinute(30).setSecond(22); // cascaded function calls
 
-   // output time in universal and standard formats
-   cout << fmt::format("Universal time: {}\nStandard time: {}\n\n",
-              t.toUniversalString(), t.toStandardString());
+   // output time in 24-hour and 12-hour formats
+   cout << fmt::format("24-hour time: {}\n12-hour time: {}\n\n",
+              t.to24HourString(), t.to12HourString());
 
    // cascaded function calls        
-   cout << fmt::format("New standard time: {}\n",
-              t.setTime(20, 20, 20).toStandardString());
+   cout << fmt::format("New 12-hour time: {}\n",
+              t.setTime(20, 20, 20).to12HourString());
 }
 
 /**************************************************************************

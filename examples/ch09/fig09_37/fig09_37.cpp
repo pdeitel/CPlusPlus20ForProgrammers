@@ -48,7 +48,7 @@ void serialize(Archive& archive, Record& record) {
 
 // display record at command line
 void displayRecords(const vector<Record>& records) {
-   for (auto& r : records) {
+   for (const auto& r : records) {
       cout << fmt::format("{} {} {} {:.2f}\n", r.getAccount(), 
                  r.getFirst(), r.getLast(), r.getBalance());
    }
@@ -64,13 +64,13 @@ int main() {
    displayRecords(records);
 
    // serialize vector of Records to JSON and store in text file
-   if (ofstream output{"records2.json"}; output) {
+   if (ofstream output{"records2.json"}) {
       cereal::JSONOutputArchive archive{output};
       archive(cereal::make_nvp("records", records)); // serialize records
    }
 
    // deserialize JSON from text file into vector of Records
-   if (ifstream input{"records2.json"}; input) {
+   if (ifstream input{"records2.json"}) {
       cereal::JSONInputArchive archive{input};
       vector<Record> deserializedRecords{};
       archive(deserializedRecords); // deserialize records

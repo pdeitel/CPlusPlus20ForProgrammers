@@ -13,7 +13,7 @@ Time::Time(int hour, int minute, int second) {
    setSecond(second); // validate and set private field m_second
 }
 
-// set new Time value using universal time
+// set new Time value using 24-hour time
 void Time::setTime(int hour, int minute, int second) {
    // validate hour, minute and second
    if ((hour < 0 || hour >= 24) || (minute < 0 || minute >= 60) ||
@@ -62,14 +62,14 @@ int Time::getMinute() const { return m_minute; }
 // return second value
 int Time::getSecond() const { return m_second; }
 
-// return Time as a string in universal-time format (HH:MM:SS)
-string Time::toUniversalString() const {
+// return Time as a string in 24-hour format (HH:MM:SS)
+string Time::to24HourString() const {
    return fmt::format("{:02d}:{:02d}:{:02d}",
       getHour(), getMinute(), getSecond());
 }
 
-// return Time as string in standard-time format (HH:MM:SS AM or PM)
-string Time::toStandardString() const {
+// return Time as string in 12-hour format (HH:MM:SS AM or PM)
+string Time::to12HourString() const {
    return fmt::format("{}:{:02d}:{:02d} {}",
       ((getHour() % 12 == 0) ? 12 : getHour() % 12),
       getMinute(), getSecond(), (getHour() < 12 ? "AM" : "PM"));

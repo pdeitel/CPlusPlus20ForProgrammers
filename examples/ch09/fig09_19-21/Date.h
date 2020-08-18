@@ -6,7 +6,7 @@
 // class Date definition
 class Date {
 public:
-   explicit Date(int month = 1, int day = 1, int year = 2000);
+   explicit Date(int month, int day, int year);
    std::string toString() const;
 private:
    int m_month;

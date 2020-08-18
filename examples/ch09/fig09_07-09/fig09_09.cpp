@@ -3,14 +3,15 @@
 // NOTE: This file must be compiled with Time.cpp. 
 #include <iostream>
 #include <stdexcept> // invalid_argument exception class
+#include <string_view> 
 #include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Time.h" // definition of class Time from Time.h 
 using namespace std;
 
 // displays a Time in 24-hour and 12-hour formats
-void displayTime(const string& message, const Time& time) {
-   cout << fmt::format("{}\nUniversal time: {}\nStandard time: {}\n\n",
-              message, time.toUniversalString(), time.toStandardString());
+void displayTime(string_view message, const Time& time) {
+   cout << fmt::format("{}\n24-hour time: {}\n12-hour time: {}\n\n",
+      message, time.to24HourString(), time.to12HourString());
 }
 
 int main() {

@@ -13,10 +13,10 @@ public:
    std::string toString() const;
    ~Employee(); // provided to confirm destruction order
 private:
-   const std::string m_firstName; // composition: member object
-   const std::string m_lastName; // composition: member object
-   const Date m_birthDate; // composition: member object
-   const Date m_hireDate; // composition: member object
+   std::string m_firstName; // composition: member object
+   std::string m_lastName; // composition: member object
+   Date m_birthDate; // composition: member object
+   Date m_hireDate; // composition: member object
 };
 
 /**************************************************************************

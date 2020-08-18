@@ -7,7 +7,7 @@
 
 using namespace std;
 
-// set new Time value using universal time
+// set new Time value using 24-hour time
 void Time::setTime(int hour, int minute, int second) {
    // validate hour, minute and second
    if ((hour < 0 || hour >= 24) || (minute < 0 || minute >= 60) ||
@@ -20,13 +20,13 @@ void Time::setTime(int hour, int minute, int second) {
    m_second = second;
 }
 
-// return Time as a string in universal-time format (HH:MM:SS)
-string Time::toUniversalString() const {
+// return Time as a string in 24-hour format (HH:MM:SS)
+string Time::to24HourString() const {
    return fmt::format("{:02d}:{:02d}:{:02d}", m_hour, m_minute, m_second);
 }
 
-// return Time as string in standard-time format (HH:MM:SS AM or PM)
-string Time::toStandardString() const {
+// return Time as string in 12-hour format (HH:MM:SS AM or PM)
+string Time::to12HourString() const {
    return fmt::format("{}:{:02d}:{:02d} {}",
       ((m_hour % 12 == 0) ? 12 : m_hour % 12), m_minute, m_second,
       (m_hour < 12 ? "AM" : "PM"));
