@@ -19,15 +19,15 @@ Test::Test(int value) : m_x{value} {} // initialize x to value
 // the parentheses around *this are required due to precedence
 void Test::print() const {
    // implicitly use the this pointer to access the member x
-   cout << fmt::format("        x = {}\n", m_x);
+   cout << fmt::format("        m_x = {}\n", m_x);
 
    // explicitly use the this pointer and the arrow operator
    // to access the member x                                
-   cout << fmt::format("  this->x = {}\n", this->m_x);
+   cout << fmt::format("  this->m_x = {}\n", this->m_x);
 
    // explicitly use the dereferenced this pointer and
    // the dot operator to access the member x         
-   cout << fmt::format("(*this).x = {}\n", (*this).m_x);
+   cout << fmt::format("(*this).m_x = {}\n", (*this).m_x);
 }
 
 int main() {

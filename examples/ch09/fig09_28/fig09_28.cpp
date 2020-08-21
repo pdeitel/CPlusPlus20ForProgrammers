@@ -22,9 +22,9 @@ void setX(Count& c, int value) {
 int main() {
    Count counter{}; // create Count object
 
-   cout << fmt::format("Initial counter.x value: {}\n", counter.getX());
+   cout << fmt::format("Initial counter.m_x: {}\n", counter.getX());
    setX(counter, 8); // set x using a friend function
-   cout << fmt::format("counter.x after setX call: {}\n", counter.getX());
+   cout << fmt::format("counter.m_x after setX: {}\n", counter.getX());
 }
 
 

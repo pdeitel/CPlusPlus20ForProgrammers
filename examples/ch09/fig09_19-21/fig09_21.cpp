@@ -7,8 +7,8 @@
 using namespace std;
 
 int main() {
-   const Date date1{7, 4, 2004};
-   Date date2; // date2 defaults to 1/1/2000
+   const Date date1{2004, 7, 4};
+   Date date2{2020, 1, 1};
 
    cout << fmt::format("date1: {}\ndate2: {}\n\n",
       date1.toString(), date2.toString());

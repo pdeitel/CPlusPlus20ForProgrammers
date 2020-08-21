@@ -6,16 +6,13 @@
 using namespace std;
 
 // Date constructor (should do range checking)
-Date::Date(int month, int day, int year)
-   : m_month{month}, m_day{day}, m_year{year} {}
+Date::Date(int year, int month, int day)
+   : m_year{year}, m_month{month}, m_day{day} {}
 
-// return string representation of a Date in the format month/day/year
+// return string representation of a Date in the format yyyy-mm-dd
 string Date::toString() const {
-   return fmt::format("{}/{}/{}", m_month, m_day, m_year);
+   return fmt::format("{}-{:02d}-{:02d}", m_year, m_month, m_day);
 }
-
-
-
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

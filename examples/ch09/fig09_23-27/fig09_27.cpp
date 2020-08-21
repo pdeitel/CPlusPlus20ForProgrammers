@@ -7,8 +7,8 @@
 using namespace std;
 
 int main() {
-   const Date birth{7, 24, 1987}; 
-   const Date hire{3, 12, 2018};
+   const Date birth{1987, 7, 24};
+   const Date hire{2018, 3, 12};
    const Employee manager{"Sue", "Green", birth, hire}; 
 
    cout << fmt::format("\n{}\n", manager.toString());

@@ -6,18 +6,17 @@
 class Date {
 public:
    static const int monthsPerYear{12}; // months in a year
-   explicit Date(int month, int day, int year);
-   std::string toString() const; // date string in month/day/year format
+   Date(int year, int month, int day);
+   std::string toString() const; // date string in yyyy-mm-dd format
    ~Date(); // provided to show when destruction occurs
 private:
+   int m_year; // any year
    int m_month; // 1-12 (January-December)
    int m_day; // 1-31 based on month
-   int m_year; // any year
 
    // utility function to check if day is proper for month and year
    bool checkDay(int day) const;
 };
-
 
 
 /**************************************************************************

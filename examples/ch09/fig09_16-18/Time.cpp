@@ -5,34 +5,30 @@
 using namespace std;
 
 // set values of hour, minute and second
-void Time::setTime(int h, int m, int s) {
+void Time::setTime(int hour, int minute, int second) {
    // validate hour, minute and second
-   if ((h >= 0 && h < 24) && (m >= 0 && m < 60) && (s >= 0 && s < 60)) {
-      hour = h;
-      minute = m;
-      second = s;
-   }
-   else {
-      throw invalid_argument(
-         "hour, minute and/or second was out of range");
-   }
-}
+   if ((hour < 0 || hour >= 24) || (minute < 0 || minute >= 60) || 
+      (second < 0 || second >= 60)) {
+      throw invalid_argument{"hour, minute or second was out of range"};
+   } 
+
+   m_hour = hour;
+   m_minute = minute;
+   m_second = second;
+} 
 
 // return hour value
-int Time::getHour() const { return hour; }
+int Time::getHour() const {return m_hour;}
 
 // poor practice: returning a reference to a private data member. 
-int& Time::badSetHour(int h) {
-   if (h >= 0 && h < 24) {
-      hour = h;
-   }
-   else {
-      throw invalid_argument("hour must be 0-23");
-   }
+int& Time::badSetHour(int hour) {
+   if (hour < 0 || hour >= 24) {
+      throw invalid_argument{"hour must be 0-23"};
+   } 
 
-   return hour; // dangerous reference return                    
-}
-
+   m_hour = hour;
+   return m_hour; // dangerous reference return                    
+}                                   
 
 
 /**************************************************************************

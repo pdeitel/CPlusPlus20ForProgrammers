@@ -3,21 +3,18 @@
 // Member functions defined in Time.cpp
 
 // prevent multiple inclusions of header
-#ifndef TIME_H 
-#define TIME_H 
+#pragma once 
 
 class Time {
 public:
-   void setTime(int h, int m, int s);
+   void setTime(int hour, int minute, int second);
    int getHour() const;
-   int& badSetHour(int h); // dangerous reference return
+   int& badSetHour(int hour); // dangerous reference return
 private:
-   int hour{0};
-   int minute{0};
-   int second{0};
-};
-
-#endif
+   int m_hour{0};
+   int m_minute{0};
+   int m_second{0};
+}; 
 
 
 

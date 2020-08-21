@@ -9,8 +9,8 @@ using namespace std;
 
 // constructor confirms proper value for month; calls
 // utility function checkDay to confirm proper value for day
-Date::Date(int month, int day, int year)
-   : m_month{month}, m_day{day}, m_year{year} {
+Date::Date(int year, int month, int day)
+   : m_year{year}, m_month{month}, m_day{day} {
    if (m_month < 1 || m_month > monthsPerYear) { // validate the month
       throw invalid_argument{"month must be 1-12"};
    }
@@ -23,9 +23,9 @@ Date::Date(int month, int day, int year)
    cout << fmt::format("Date object constructor: {}\n", toString());
 }
 
-// gets string representation of a Date in the form month/day/year
+// gets string representation of a Date in the form yyyy-mm-dd
 string Date::toString() const {
-   return fmt::format("{}/{}/{}", m_month, m_day, m_year);
+   return fmt::format("{}-{:02d}-{:02d}", m_year, m_month, m_day);
 }
 
 // output Date object to show when its destructor is called
@@ -52,6 +52,7 @@ bool Date::checkDay(int day) const {
 
    return false; // invalid day, based on current m_month and m_year
 }
+
 
 
 /**************************************************************************

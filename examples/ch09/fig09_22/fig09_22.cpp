@@ -11,8 +11,8 @@ int main() {
    noon.setHour(12);         // const       non-const
    wakeUp.getHour();         // non-const   const
    noon.getMinute();         // const       const
-   noon.to24HourString(); // const       const
-   noon.to12HourString();  // const       non-const
+   noon.to24HourString();    // const       const
+   noon.to12HourString();    // const       non-const
 }
 
 

@@ -12,18 +12,18 @@ int main() {
    // initialize hourRef with the reference returned by badSetHour
    int& hourRef{t.badSetHour(20)}; // 20 is a valid hour 
 
-   cout << fmt::format("Valid hour before modification: {}\n", hourRef);   
+   cout << fmt::format("Valid hour before modification: {}\n", hourRef);
    hourRef = 30; // use hourRef to set invalid value in Time object t
-   cout << fmt::format("Invalid hour after modification: {}\n\n",
-      t.getHour());
+   cout << fmt::format("Invalid hour after modification: {}\n\n", 
+              t.getHour());
 
    // Dangerous: Function call that returns a reference can be 
    // used as an lvalue! POOR PROGRAMMING PRACTICE!!!!!!!!
    t.badSetHour(12) = 74; // assign another invalid value to hour
 
    cout << "After using t.badSetHour(12) as an lvalue, "
-      << fmt::format("hour is: {}\n", t.getHour());
-}
+        << fmt::format("hour is: {}\n", t.getHour());
+} 
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
