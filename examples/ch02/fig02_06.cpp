@@ -1,5 +1,5 @@
 // fig02_06.cpp
-// Standard Library string class test program. 
+// Standard library string class test program. 
 #include <iostream>
 #include <string> 
 using namespace std;

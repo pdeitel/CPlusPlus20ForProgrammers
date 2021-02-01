@@ -1,18 +1,18 @@
 // fig03_05.cpp
-// Integer ranges and arbitrary precision integers.
+// Integer ranges and arbitrary-precision integers.
 #include <iostream>
 #include "bignumber.h" 
 using namespace std;
 
 int main() {
    // use the maximum long long fundamental type value in calculations
-   long long value1{9'223'372'036'854'775'807ll}; // max long long value
+   const long long value1{9'223'372'036'854'775'807LL}; // long long max
    cout << "long long value1: " << value1
       << "\nvalue1 - 1: " << value1 - 1 // OK
       << "\nvalue1 + 1: " << value1 + 1; // result is undefined
 
-   // use an arbitrary precision integer
-   BigNumber value2{value1};
+   // use an arbitrary-precision integer
+   const BigNumber value2{value1};
    cout << "\n\nBigNumber value2: " << value2
       << "\nvalue2 - 1: " << value2 - 1 // OK
       << "\nvalue2 + 1: " << value2 + 1; // OK

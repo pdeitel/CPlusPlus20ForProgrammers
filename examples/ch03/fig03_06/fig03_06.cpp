@@ -1,7 +1,7 @@
 // fig03_06.cpp
 // C++20 string formatting.
 #include <iostream>
-#include "fmt/format.h" // C++20: This will be #include <format>
+#include <fmt/format.h> // C++20: This will be #include <format>
 using namespace std;
 using namespace fmt; // not needed in C++20
 

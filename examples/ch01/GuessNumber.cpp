@@ -1,6 +1,6 @@
 // Randomly generate numbers between 1 and 1000 for user to guess.
 #include <iostream>
-#include <cstdlib>
+#include <random> // contains C++11 random number generation features 
 #include <ctime>
 using namespace std;
 
@@ -8,23 +8,27 @@ void guessGame(); // function prototype
 bool isCorrect(int, int); // function prototype
 
 int main() {
-   // srand(time(0)); // seed random number generator
    guessGame();
 
    return 0; // indicate successful termination
-
-} // end main
+} 
 
 // guessGame generates numbers between 1 and 1000
 // and checks user's guess
 void guessGame() {
-   char response; // determines whether to continue playing
+   // use the default random-number generation engine to                
+   // produce uniformly distributed pseudorandom int values from 1 to 6 
+//   default_random_engine engine{static_cast<unsigned int>(time(0))};
+   default_random_engine engine{};
+   uniform_int_distribution<int> randomInt{1, 1000};
+
+   char response = 'n'; // determines whether to continue playing
 
    // loop until user types 'n' to quit game
    do {
       // generate random number between 1 and 1000
       // 1 is shift, 1000 is scaling factor
-      int answer{1 + rand() % 1000};
+      const int answer{randomInt(engine)};
 
       // prompt for guess
       cout << "I have a number between 1 and 1000.\n" 
@@ -49,14 +53,14 @@ void guessGame() {
 
 // isCorrect returns true if g equals a
 // if g does not equal a, displays hint
-bool isCorrect(int g, int a) {
+bool isCorrect(int guess, int answer) {
    // guess is correct
-   if (g == a) {
+   if (guess == answer) {
       return true;
    }
 
    // guess is incorrect; display hint
-   if (g < a) {
+   if (guess < answer) {
       cout << "Too low. Try again.\n? ";
    }
    else {
