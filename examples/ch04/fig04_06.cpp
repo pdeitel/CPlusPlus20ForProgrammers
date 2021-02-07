@@ -59,7 +59,7 @@ int main() {
    // if user entered at least one grade...
    if (gradeCounter != 0) {
       // calculate average of all grades entered
-      double average = static_cast<double>(total) / gradeCounter;  
+      double average{static_cast<double>(total) / gradeCounter};
 
       // output summary of results
       cout << "Total of the " << gradeCounter << " grades entered is " 

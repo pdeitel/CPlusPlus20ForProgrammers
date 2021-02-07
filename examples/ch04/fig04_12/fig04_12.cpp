@@ -18,10 +18,7 @@ int main() {
 
    // calculate amount on deposit for each of ten years
    for (int year{1}; year <= 10; ++year) {
-      // calculate amount on deposit at the end of the specified year
-      double amount = principal * pow(1.0 + rate, year);
-
-      // display the year and the amount
+      double amount{principal * pow(1.0 + rate, year)};
       cout << format("{:>4d}{:>20.2f}\n", year, amount);
    }
 }

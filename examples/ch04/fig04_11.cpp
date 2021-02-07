@@ -10,7 +10,7 @@ int main() {
    string zipFileName;
    getline(cin, zipFileName); // inputs a line of text
 
-   // strings literals separated only by whitespace are combined 
+   // string literals separated only by whitespace are combined 
    // into a single string by the compiler
    string content{ 
       "This chapter introduces all but one of the remaining control "
@@ -29,9 +29,9 @@ int main() {
 
    miniz_cpp::zip_file output; // create zip_file object
 
-   // write content into a text file in outputZipFile
+   // write content into a text file in output
    output.writestr("intro.txt", content); // create file in ZIP
-   output.save(zipFileName); // save outputZipFile to zipFileName
+   output.save(zipFileName); // save output to zipFileName
 
    miniz_cpp::zip_file input{zipFileName}; // load zipFileName
 
