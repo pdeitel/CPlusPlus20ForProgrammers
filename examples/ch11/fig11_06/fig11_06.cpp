@@ -1,5 +1,6 @@
 // fig11_06.cpp
 // C++20 three-way comparison (spaceship) operator.
+#include <compare>
 #include <iostream>
 #include <string>
 #include "fmt/format.h"

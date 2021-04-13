@@ -7,14 +7,14 @@
 using namespace std;
 
 int main() {
-   string s1{"happy"};    
-   string s2{" birthday"};
+   string s1{"happy"}; // initialize string from char*
+   string s2{" birthday"}; // initialize string from char*
    string s3; // creates an empty string
-   string_view v{"hello"}; 
+   string_view v{"hello"}; // initialize string_view from char*
 
    // output strings and string_view
-   cout << "s1: \"" << s1 << "\"; s2: \"" << s2
-      << "\"; s3: \"" << s3 << "\"; v: \"" << v << "\"\n\n";
+   cout << fmt::format("s1: \"{}\"; s2: \"{}\"; s3: \"{}\"; v: \"{}\"\n\n",
+              s1, s2, s3, v);
 
    // test overloaded equality and relational operators
    cout << "The results of comparing s2 and s1:\n"   
@@ -45,7 +45,7 @@ int main() {
    // test string concatenation with a C++14 string-object literal
    s1 += ", have a great day!"s; // s after " for string-object literal
    cout << fmt::format(
-              "s1 += \", have a great day!\" yields\ns1 = {}\n\n", s1);
+              "s1 += \", have a great day!\"s yields\ns1 = {}\n\n", s1);
 
    // test string member function substr
    cout << fmt::format("{} {}\n{}\n\n",
@@ -82,7 +82,7 @@ int main() {
       cout << "Attempt to assign 'd' to s1.at(100) yields:\n";
       s1.at(100) = 'd'; // ERROR: subscript out of range            
    } 
-   catch (out_of_range& ex) {                                       
+   catch (const out_of_range& ex) {                                       
       cout << fmt::format("An exception occurred: {}\n", ex.what());        
    }
 } 

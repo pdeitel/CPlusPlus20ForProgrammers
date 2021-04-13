@@ -7,7 +7,7 @@ using namespace std;
 void outputArray(const MyArray&); // prototype
 
 int main() {
-   MyArray ints1{7}; // 7-element MyArray
+   MyArray ints1(7); // 7-element MyArray
    outputArray(ints1); // output MyArray ints1
    outputArray(3); // convert 3 to a MyArray and output its contents
    outputArray(MyArray(3)); // explicit single-argument constructor call
@@ -16,7 +16,7 @@ int main() {
 // print MyArray contents
 void outputArray(const MyArray& arrayToOutput) {
    cout << "The MyArray received has " << arrayToOutput.size() 
-      << " elements. The contents are: " << arrayToOutput << ;
+      << " elements. The contents are: " << arrayToOutput << "\n";
 } 
 
 

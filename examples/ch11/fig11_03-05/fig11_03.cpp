@@ -38,7 +38,7 @@ int main() {
    }
 
    // create MyArray ints3 by copying ints1      
-   MyArray ints3(ints1); // invokes copy constructor 
+   MyArray ints3{ints1}; // invokes copy constructor 
 
    // print ints3 size and contents                
    cout << "\nints3 size: " << ints3.size() << "\ncontents: " << ints3;
@@ -73,17 +73,17 @@ int main() {
       cout << "An exception occurred: " << ex.what() << "\n";
    } 
 
-   // use MyArray move constructor to initialize ints4 with contents of 
-   // MyArray xvalue returned by getArrayByValue; print size and contents
+   // initialize ints4 with contents of the MyArray returned by 
+   // getArrayByValue; print size and contents
    cout << "\nInitialize ints4 with temporary MyArray object\n";
-   MyArray ints4(getArrayByValue()); // invokes move constructor
+   MyArray ints4{getArrayByValue()}; 
 
    cout << "\nints4 size: " << ints4.size() << "\ncontents: " << ints4;
 
    // convert ints4 to an rvalue reference with std::move and
    // use the result to initialize MyArray ints5
    cout << "\n\nInitialize ints5 with the result of std::move(ints4)\n";
-   MyArray ints5(std::move(ints4)); // invokes move constructor
+   MyArray ints5{std::move(ints4)}; // invokes move constructor
 
    cout << "\nints5 size: " << ints5.size() << "\ncontents: " << ints5;
    cout << "\n\nSize of ints4 is now: " << ints4.size();
@@ -95,7 +95,7 @@ int main() {
    cout << "\nints4 size: " << ints4.size() << "\ncontents: " << ints4;
    cout << "\n\nSize of ints5 is now: " << ints5.size();
 
-   // check if ints5 is empty by implicitly converting it to a bool
+   // check if ints5 is empty by contextually converting it to a bool
    if (ints5) {
       cout << "\n\nints5 contains elements\n";
    }
@@ -111,7 +111,7 @@ int main() {
    cout << "\n\npostincrementing ints4: " << ints4++ << "\n";
    cout << "\nints4 now contains: " << ints4;
 
-   // add a value to element of ints4 using +=
+   // add a value to every element of ints4 using +=
    cout << "\n\nAdd 7 to every ints4 element: " << (ints4 += 7) << "\n\n";
 }
 

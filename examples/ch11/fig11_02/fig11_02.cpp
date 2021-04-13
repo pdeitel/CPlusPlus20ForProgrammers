@@ -18,19 +18,19 @@ public:
 
    int getValue() const {return value;}; // return Integer value
 private:
-   int value{};
+   int value{0};
 };
 
 // use unique_ptr to manipulate Integer object
 int main() {
    cout << "Creating a unique_ptr object that points to an Integer\n";
 
-   // "aim" unique_ptr at Integer object                  
-   unique_ptr<Integer> ptr{make_unique<Integer>(7)};
+   // "aim" unique_ptr at a new Integer object                  
+   auto ptr{make_unique<Integer>(7)};
 
    // use unique_ptr to call an Integer member function
    cout << "Integer value: " << ptr->getValue()
-      << "\n\nTerminating program\n";
+      << "\n\nMain ends\n";
 }
 
 
