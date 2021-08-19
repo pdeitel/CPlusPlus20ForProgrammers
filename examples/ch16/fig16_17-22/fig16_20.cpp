@@ -1,16 +1,21 @@
-// fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
-#include <iostream> // enables program to output data to the screen
+// fig16_20.cpp
+// Using the deitel.math.roots module's functions.
+import <iostream>;
+import deitel.math.roots; // import the deitel.math.roots module
 
-// function main begins program execution
+using namespace deitel::math; 
+
 int main() {
-   std::cout << "Welcome\nto\n\nC++!\n";
-} // end function main
+   std::cout << "squareRoot(9): " << squareRoot(9)
+      << "\ncubeRoot(1000): " << cubeRoot(1000) << '\n';
+}
 
 
 
-/**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+
+
+ /*************************************************************************
+ * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

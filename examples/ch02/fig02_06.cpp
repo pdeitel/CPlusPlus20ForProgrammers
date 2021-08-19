@@ -9,7 +9,7 @@ int main() {
    string s2{" birthday"};
    string s3; // creates an empty string
               
-   // display the strings and show their lengths (length is C++20)
+   // display the strings and show their lengths
    cout << "s1: \"" << s1 << "\"; length: " << s1.length()
       << "\ns2: \"" << s2 << "\"; length: " << s2.length()
       << "\ns3: \"" << s3 << "\"; length: " << s3.length();

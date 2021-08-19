@@ -1,16 +1,34 @@
-// Fig. 12.1: DivideByZeroException.h
-// Class DivideByZeroException definition.
-#include <stdexcept> // stdexcept header contains runtime_error
+// Fig. 16.11: deitel.time-impl.cpp
+// deitel.time module implementation unit containing the 
+// Time class member function definitions. 
+module deitel.time; // module implementation unit for deitel.time
 
-// DivideByZeroException objects should be thrown 
-// by functions upon detecting division-by-zero 
-class DivideByZeroException : public std::runtime_error {
-public:
-   // constructor specifies default error message
-   DivideByZeroException()
-      : std::runtime_error{"attempted to divide by zero"} {}
-}; 
+import <stdexcept>;
+import <string>;
+using namespace deitel::time;
 
+// Time constructor initializes each data member    
+Time::Time(int hour, int minute, int second) {
+   // validate hour, minute and second
+   if ((hour < 0 || hour >= 24) || (minute < 0 || minute >= 60) ||
+      (second < 0 || second >= 60)) {
+      throw std::invalid_argument{
+         "hour, minute or second was out of range" };
+   }
+
+   m_hour = hour;
+   m_minute = minute;
+   m_second = second;
+}
+
+// return a string representation of the Time
+std::string Time::toString() const {
+   using namespace std::string_literals;
+
+   return "Hour: "s + std::to_string(m_hour) +
+      "\nMinute: "s + std::to_string(m_minute) +
+      "\nSecond: "s + std::to_string(m_second);
+}
 
 
 /**************************************************************************

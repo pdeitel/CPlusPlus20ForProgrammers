@@ -1,16 +1,16 @@
-// fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
-#include <iostream> // enables program to output data to the screen
+// fig16_28.cpp
+// Showing that moduleB does not implicitly export moduleA's function.
+import <iostream>;
+import moduleB; 
 
-// function main begins program execution
 int main() {
-   std::cout << "Welcome\nto\n\nC++!\n";
-} // end function main
+   std::cout << "square(6): " << square(6) // exported from moduleB
+      << "\ncube(5): " << cube(5) << '\n'; // not exported from moduleB
+}
 
 
-
-/**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ /*************************************************************************
+ * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

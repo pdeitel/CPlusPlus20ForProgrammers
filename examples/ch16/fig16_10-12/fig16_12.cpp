@@ -1,16 +1,29 @@
-// fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
-#include <iostream> // enables program to output data to the screen
+// fig16_12.cpp 
+// Importing the deitel.time module and using the modularized Time class.
+import <iostream>;
+import <stdexcept>;
+import <string>;
 
-// function main begins program execution
+import deitel.time;
+using namespace deitel::time;
+
 int main() {
-   std::cout << "Welcome\nto\n\nC++!\n";
-} // end function main
+   const Time t{ 12, 25, 42 }; // hour, minute and second specified      
 
+   std::cout << "Time t:\n" << t.toString() << "\n\n";
+
+   // attempt to initialize t2 with invalid values
+   try {
+      const Time t2{ 27, 74, 99 }; // all bad values specified
+   }
+   catch (const std::invalid_argument& e) {
+      std::cout << "t2 not created: " << e.what() << '\n';
+   }
+}
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

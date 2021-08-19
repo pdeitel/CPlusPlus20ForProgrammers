@@ -1,16 +1,23 @@
-// fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
-#include <iostream> // enables program to output data to the screen
+// fig16_16.cpp
+// Using the deitel.math module's functions.
+import <iostream>;
+import deitel.math; // import the deitel.math module
 
-// function main begins program execution
+using namespace deitel::math; 
+
 int main() {
-   std::cout << "Welcome\nto\n\nC++!\n";
-} // end function main
+   std::cout << "square(6): " << square(6)
+      << "\ncube(5): " << cube(5)
+      << "\nsquareRoot(9): " << squareRoot(9)
+      << "\ncubeRoot(1000): " << cubeRoot(1000) << '\n';
+}
 
 
 
-/**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+
+
+ /*************************************************************************
+ * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

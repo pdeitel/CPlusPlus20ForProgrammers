@@ -1,16 +1,21 @@
-// fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
-#include <iostream> // enables program to output data to the screen
+// fig16_03.cpp
+// Importing a module and using its exported items.
+import <iostream>; 
+import welcome; // import the welcome module
 
-// function main begins program execution
 int main() {
-   std::cout << "Welcome\nto\n\nC++!\n";
-} // end function main
+   std::cout << welcomeStandalone() << '\n' 
+      << welcomeFromExportBlock() << '\n'
+      << TestNamespace1::welcomeFromTestNamespace1() << '\n'
+      << TestNamespace2::welcomeFromTestNamespace2() << '\n';
+}
 
 
 
-/**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+
+
+ /*************************************************************************
+ * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

@@ -1,16 +1,21 @@
-// fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
-#include <iostream> // enables program to output data to the screen
+// fig16_30.cpp 
+// Importing the deitel.time module and using the modularized Time class.
+import <iostream>;
+import deitel.time;
 
-// function main begins program execution
 int main() {
-   std::cout << "Welcome\nto\n\nC++!\n";
-} // end function main
+   // initalize t with the object returned by getTime; cannot declare t 
+   // as type Time because the type is not exported, and thus not visible
+   auto t{ deitel::time::getTime() };
 
+   // Time's toString function is reachable, even though
+   // class Time was not exported by module deitel.time
+   std::cout << "Time t:\n" << t.toString() << "\n\n";
+}
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

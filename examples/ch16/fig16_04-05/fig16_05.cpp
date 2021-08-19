@@ -1,16 +1,23 @@
-// fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
-#include <iostream> // enables program to output data to the screen
+// fig16_05.cpp
+// Showing that a module's non-exported identifiers are inaccessible.
+import <iostream>; 
+import deitel.math; // import the deitel.math module
 
-// function main begins program execution
 int main() {
-   std::cout << "Welcome\nto\n\nC++!\n";
-} // end function main
+   // can call square because it's exported from namespace deitel::math, 
+   // which implicitly exports the namespace
+   std::cout << "square(3) = " << deitel::math::square(3) << '\n';
+
+   // cannot call cube because it's not exported 
+   std::cout << "cube(3) = " << deitel::math::cube(7.5, 2.5) << '\n';
+}
 
 
 
-/**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+
+
+ /*************************************************************************
+ * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

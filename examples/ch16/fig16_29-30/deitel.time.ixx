@@ -1,16 +1,29 @@
-// fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
-#include <iostream> // enables program to output data to the screen
+// Fig. 16.29: deitel.time.ixx
+// Primary module interface unit for the deitel.time module.
+export module deitel.time; // declare the primary module interface
 
-// function main begins program execution
-int main() {
-   std::cout << "Welcome\nto\n\nC++!\n";
-} // end function main
+import <string>; // rather than #include <string>
 
+namespace deitel::time {
+   class Time { // not exported
+   public:
+      // default constructor because it can be called with no arguments
+      explicit Time(int hour = 0, int minute = 0, int second = 0);
+
+      std::string toString() const; 
+   private:
+      int m_hour{0}; // 0 - 23 (24-hour clock format)
+      int m_minute{0}; // 0 - 59
+      int m_second{0}; // 0 - 59
+   };
+
+   // exported function returns a valid Time
+   export Time getTime() { return Time(6, 45, 0); }
+}
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *
