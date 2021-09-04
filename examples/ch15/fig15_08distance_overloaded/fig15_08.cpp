@@ -1,17 +1,16 @@
-// fig15_07.cpp
+// fig15_08.cpp
 // Using concepts to select overloads.
 #include <array>
 #include <iostream>
 #include <iterator>
 #include <list>
-#include <ranges>
 
 // calculate the distance (number of items) between two iterators 
 // using input iterators; requires incrementing between iterators, 
 // so this is an O(n) operation
-auto customDistance(std::input_iterator auto begin,
-   std::input_iterator auto end) {
-   std::cout << "Called customDistance with bidirectional iterators\n";
+template <std::input_iterator Iterator>
+auto customDistance(Iterator begin, Iterator end) {
+   std::cout << "Called customDistance with input iterators\n";
    std::ptrdiff_t count{0};
 
    // increment from begin to end and count number of iterations
@@ -24,20 +23,20 @@ auto customDistance(std::input_iterator auto begin,
 
 // calculate the distance (number of items) between two iterators 
 // using random-access iterators and an O(1) operation
-auto customDistance(std::random_access_iterator auto begin,
-   std::random_access_iterator auto end) {
+template <std::random_access_iterator Iterator>
+auto customDistance(Iterator begin, Iterator end) {
    std::cout << "Called customDistance with random-access iterators\n";
    return end - begin;
 }
 
 int main() {
-   const std::array ints1{1, 2, 3, 4, 5}; // has random-access iterators
-   const std::list ints2{1, 2, 3}; // has bidirectional iterators
+   std::array ints1{1, 2, 3, 4, 5}; // has random-access iterators
+   std::list ints2{1, 2, 3}; // has bidirectional iterators
 
    auto result1{customDistance(ints1.begin(), ints1.end())};
    std::cout << "ints1 number of elements: " << result1 << "\n";
    auto result2{customDistance(ints2.begin(), ints2.end())};
-   std::cout << "ints1 number of elements: " << result2 << "\n";
+   std::cout << "ints2 number of elements: " << result2 << "\n";
 }
 
 /**************************************************************************

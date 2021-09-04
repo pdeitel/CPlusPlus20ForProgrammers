@@ -25,33 +25,33 @@ struct my_remove_ptr<T*> {
 int main() {
    std::cout << fmt::format("{}\n{}{}\n{}{}\n\n",
       "ADD CONST TO A TYPE VIA A CUSTOM TYPE METAFUNCTION",
-      "std::is_same<const int, my_add_const<int>::type>::value: ",
-      std::is_same<const int, my_add_const<int>::type>::value,
-      "std::is_same<int* const, my_add_const<int*>::type>::value: ",
-      std::is_same<int* const, my_add_const<int*>::type>::value);
+      "std::is_same_v<const int, my_add_const<int>::type>: ",
+      std::is_same_v<const int, my_add_const<int>::type>,
+      "std::is_same_v<int* const, my_add_const<int*>::type>: ",
+      std::is_same_v<int* const, my_add_const<int*>::type>);
 
    std::cout << fmt::format("{}\n{}{}\n{}{}\n\n",
       "REMOVE POINTER FROM TYPES VIA A CUSTOM TYPE METAFUNCTION",
-      "std::is_same<int, my_remove_ptr<int>::type>::value: ",
-      std::is_same<int, my_remove_ptr<int>::type>::value,
-      "std::is_same<int, my_remove_ptr<int*>::type>::value: ",
-      std::is_same<int, my_remove_ptr<int*>::type>::value);
+      "std::is_same_v<int, my_remove_ptr<int>::type>: ",
+      std::is_same_v<int, my_remove_ptr<int>::type>,
+      "std::is_same_v<int, my_remove_ptr<int*>::type>: ",
+      std::is_same_v<int, my_remove_ptr<int*>::type>);
 
    std::cout << fmt::format("{}\n{}{}\n{}{}\n\n",
       "ADD REFERENCES TO TYPES USING STANDARD TYPE TRAITS",
-      "std::is_same<int&, std::add_lvalue_reference<int>::type>::value: ",
-      std::is_same<int&, std::add_lvalue_reference<int>::type>::value,
-      "std::is_same<int&&, std::add_rvalue_reference<int>::type>::value: ",
-      std::is_same<int&&, std::add_rvalue_reference<int>::type>::value);
+      "std::is_same_v<int&, std::add_lvalue_reference<int>::type>: ",
+      std::is_same_v<int&, std::add_lvalue_reference<int>::type>,
+      "std::is_same_v<int&&, std::add_rvalue_reference<int>::type>: ",
+      std::is_same_v<int&&, std::add_rvalue_reference<int>::type>);
 
    std::cout << fmt::format("{}\n{}{}\n{}{}\n{}{}\n",
       "REMOVE REFERENCES FROM TYPES USING STANDARD TYPE TRAITS",
-      "std::is_same<int, std::remove_reference<int>::type>::value: ",
-      std::is_same<int, std::remove_reference<int>::type>::value,
-      "std::is_same<int, std::remove_reference<int&>::type>::value: ",
-      std::is_same<int, std::remove_reference<int&>::type>::value,
-      "std::is_same<int, std::remove_reference<int&&>::type>::value: ",
-      std::is_same<int, std::remove_reference<int&&>::type>::value);
+      "std::is_same_v<int, std::remove_reference<int>::type>: ",
+      std::is_same_v<int, std::remove_reference<int>::type>,
+      "std::is_same_v<int, std::remove_reference<int&>::type>: ",
+      std::is_same_v<int, std::remove_reference<int&>::type>,
+      "std::is_same_v<int, std::remove_reference<int&&>::type>: ",
+      std::is_same_v<int, std::remove_reference<int&&>::type>);
 }
 
 

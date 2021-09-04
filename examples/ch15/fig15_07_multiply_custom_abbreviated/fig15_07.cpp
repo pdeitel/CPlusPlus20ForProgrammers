@@ -1,4 +1,4 @@
-// fig15_06.cpp
+// fig15_07.cpp
 // Constrained multiply abbreviated function template.
 #include <concepts>
 #include <iostream>

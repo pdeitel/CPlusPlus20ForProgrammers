@@ -41,7 +41,7 @@ int main() {
       "Quantity", std::get<2>(hammer), "Price", std::get<3>(hammer));
 
    std::cout << fmt::format("A Part tuple has {} elements\n",
-      std::tuple_size<Part>{});
+      std::tuple_size<Part>{}); // get the tuple size
 }
 
 

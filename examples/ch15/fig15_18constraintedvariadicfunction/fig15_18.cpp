@@ -5,8 +5,8 @@
 #include <iostream>
 #include <string>
 
-template <typename T, typename... U>
-concept SameTypeElements = (std::same_as<T, U> && ...);
+template <typename T, typename... Us>
+concept SameTypeElements = (std::same_as<T, Us> && ...);
 
 // add one or more arguments with a fold expression
 template <typename FirstItem, typename... RemainingItems>

@@ -1,8 +1,9 @@
-// Fig. 15.4: MyArray.h
+// Fig. 15.11: MyArray.h
 // Class template MyArray with custom iterators implemented 
 // by class templates ConstIterator and Iterator
 #pragma once
 #include <algorithm>
+#include <compare>
 #include <initializer_list>
 #include <iostream>
 #include <iterator>
@@ -22,13 +23,13 @@ public:
    using reference = const value_type&;
 
    // default constructor
-   ConstIterator() : m_ptr{nullptr} {}
+   ConstIterator() = default;
 
    // initialize a ConstIterator with a pointer into a MyArray
    ConstIterator(pointer p) : m_ptr{p} {}
    
    // OPERATIONS ALL ITERATORS MUST PROVIDE
-   // increment the next element and 
+   // increment the iterator to the next element and 
    // return a reference to the iterator
    ConstIterator& operator++() noexcept {
       ++m_ptr;
@@ -72,7 +73,7 @@ public:
       return temp; 
    }
 private:
-   pointer m_ptr;
+   pointer m_ptr{nullptr};
 };
 
 // class template Iterator for a MyArray non-const iterator;
@@ -181,7 +182,7 @@ struct MyArray {
    const_reverse_iterator crend() const {return rend();}
 
    // auto-generated three-way comparison operator
-   auto operator<=>(const MyArray& t) const noexcept = default;
+   auto operator<=>(const MyArray& t) const = default;
 
    // overloaded subscript operator for non-const MyArrays;
    // reference return creates a modifiable lvalue
@@ -209,9 +210,9 @@ struct MyArray {
    T m_data[SIZE]; // built-in array of type T with SIZE elements
 };
 
-// deduction guide to enable MyArrays to be list initialized
-template<typename T, typename... U>
-MyArray(T first, U... rest) ->MyArray<T, 1 + sizeof...(U)>;
+// deduction guide to enable MyArrays to be brace initialized
+template<typename T, typename... Us>
+MyArray(T first, Us... rest) ->MyArray<T, 1 + sizeof...(Us)>;
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

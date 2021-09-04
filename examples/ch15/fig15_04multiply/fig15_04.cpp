@@ -1,6 +1,5 @@
 // fig15_04.cpp
 // Simple unconstrained multiply function template.
-#include <concepts>
 #include <iostream>
 
 template<typename T>

@@ -6,6 +6,7 @@
 #include <concepts>
 #include <iostream>
 #include <iterator>
+#include <list>
 #include <ranges>
 #include <vector>
 
@@ -41,9 +42,9 @@ int main() {
    std::cout << "\naverage of doubles: " << average(doubles);
 
    std::ostream_iterator<long double> outputLongDouble(std::cout, " ");
-   const std::vector longDoubles{10.1L, 20.2L, 35.3L};
+   const std::list longDoubles{10.1L, 20.2L, 35.3L};
    std::cout << "\n\nlist longDoubles: ";
-   std::ranges::copy(longDoubles, outputDouble);
+   std::ranges::copy(longDoubles, outputLongDouble);
    std::cout << "\naverage of longDoubles: " << average(longDoubles) 
       << "\n";
 }

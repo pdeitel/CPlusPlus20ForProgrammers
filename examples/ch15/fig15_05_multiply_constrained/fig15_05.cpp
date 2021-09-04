@@ -14,9 +14,9 @@ int main() {
    std::cout << "Product of 5 and 3: " << multiply(5, 3)
       << "\nProduct of 7.25 and 2.0: " << multiply(7.25, 2.0) << "\n";
 
-   //std::string s1{"hi"};
-   //std::string s2{"bye"};
-   //auto result{multiply(s1, s2)};
+   std::string s1{"hi"};
+   std::string s2{"bye"};
+   auto result{multiply(s1, s2)};
 }
 
 

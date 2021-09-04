@@ -1,12 +1,10 @@
 // fig15_17.cpp
 // Repeating a task using the comma operator and fold expressions.
-#include <fmt/format.h> 
 #include <iostream>
-#include <vector>
 
 template <typename... Items>
 void printItems(Items... items) {
-   ((std::cout << items << "\n"), ...); // binary left fold
+   ((std::cout << items << "\n"), ...); // unary right fold
 }
 
 int main() {

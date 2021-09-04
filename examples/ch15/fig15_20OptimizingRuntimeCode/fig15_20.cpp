@@ -9,12 +9,11 @@
 
 // calculate the distance (number of items) between two iterators;
 // requires at least input iterators
-template <typename Iterator> 
-   requires std::input_iterator<Iterator>
+template <std::input_iterator Iterator>
 auto customDistance(Iterator begin, Iterator end) {
    // for random-access iterators subtract the iterators 
-   if constexpr (std::is_same<Iterator::iterator_category, 
-      std::random_access_iterator_tag>::value) {
+   if constexpr (std::is_base_of_v<std::random_access_iterator_tag,
+      Iterator::iterator_category>) {
 
       std::cout << "Called customDistance with random-access iterators\n";
       return end - begin; // O(1) operation for random-access iterators
@@ -25,7 +24,7 @@ auto customDistance(Iterator begin, Iterator end) {
 
       // increment from begin to end and count number of iterations;
       // O(n) operation for non-random-access iterators
-      for (auto& iter{begin}; iter != end; ++iter) {
+      for (auto iter{begin}; iter != end; ++iter) {
          ++count;
       }
 
@@ -40,7 +39,7 @@ int main() {
    auto result1{customDistance(ints1.begin(), ints1.end())};
    std::cout << "ints1 number of elements: " << result1 << "\n";
    auto result2{customDistance(ints2.begin(), ints2.end())};
-   std::cout << "ints1 number of elements: " << result2 << "\n";
+   std::cout << "ints2 number of elements: " << result2 << "\n";
 }
 
 /**************************************************************************

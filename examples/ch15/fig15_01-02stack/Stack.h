@@ -1,4 +1,4 @@
-// Fig. 16.1: Stack.h
+// Fig. 15.1: Stack.h
 // Stack class template.
 #pragma once
 #include <deque>
@@ -7,7 +7,7 @@ template<typename T>
 class Stack {
 public:
    // return the top element of the Stack
-   const T& top() {
+   const T& top() const {
       return stack.front();
    } 
 
@@ -32,7 +32,7 @@ public:
    } 
 
 private:
-   std::deque<T> stack; // internal representation of the Stack
+   std::deque<T> stack{}; // internal representation of the Stack
 }; 
 
 /**************************************************************************

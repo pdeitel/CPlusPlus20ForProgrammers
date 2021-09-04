@@ -20,7 +20,8 @@ int main() {
    std::cout << "\ndoubles: ";
    std::ranges::copy(doubles, outputDouble);
 
-   MyArray strings{"red", "orange", "yellow"};
+   using namespace std::string_literals; // for string object literals 
+   MyArray strings{"red"s, "orange"s, "yellow"s};
    std::cout << "\nstrings: ";
    std::ranges::copy(strings, outputString);
 
@@ -31,21 +32,21 @@ int main() {
    }
 
    std::cout << "\n\nCopying a MyArray with std::ranges::copy, "
-      << "which requires input iterators:\n";
+      << "which requires an input range and output iterator:\n";
    MyArray<std::string, strings.size()> strings2{};
    std::ranges::copy(strings, strings2.begin());
-   std::cout << "strings2 after copying from strings1: ";
+   std::cout << "strings2 after copying from strings: ";
    std::ranges::copy(strings2, outputString);
 
    std::cout << "\n\nFinding min and max elements in a MyArray "
       << "with std::ranges::minmax_element, which requires "
-      << "forward iterators:\n";
+      << "a forward range:\n";
    const auto& [min, max] {std::ranges::minmax_element(strings)};
    std::cout << "min and max elements of strings are: "
       << *min << ", " << *max;
 
    std::cout << "\n\nReversing a MyArray with std::ranges::reverse, "
-      << "which requires bidirectional iterators:\n";
+      << "which requires a bidirectional range:\n";
    std::ranges::reverse(ints);
    std::cout << "ints after reversing elements: ";
    std::ranges::copy(ints, outputInt);

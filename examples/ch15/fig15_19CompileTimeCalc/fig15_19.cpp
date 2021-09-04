@@ -38,7 +38,7 @@ constexpr long long iterativeFactorial(int number) {
 int main() {
    // "calling" a value metafunction requires specializing 
    // the template and accessing its static value member
-   std::cout << "CALCULATING FACTORIALS AT COMPILE-TIME"
+   std::cout << "CALCULATING FACTORIALS AT COMPILE TIME"
       << "\nWITH A RECURSIVE METAFUNCTION"
       << "\nFactorial(0): " << Factorial<0>::value
       << "\nFactorial(1): " << Factorial<1>::value
@@ -48,7 +48,7 @@ int main() {
       << "\nFactorial(5): " << Factorial<5>::value;
 
    // calling the recursive constexpr function recursiveFactorial
-   std::cout << "\n\nCALCULATING FACTORIALS AT COMPILE-TIME"
+   std::cout << "\n\nCALCULATING FACTORIALS AT COMPILE TIME"
       << "\nWITH A RECURSIVE CONSTEXPR FUNCTION"
       << "\nrecursiveFactorial(0): " << recursiveFactorial(0)
       << "\nrecursiveFactorial(1): " << recursiveFactorial(1)
@@ -57,8 +57,8 @@ int main() {
       << "\nrecursiveFactorial(4): " << recursiveFactorial(4)
       << "\nrecursiveFactorial(5): " << recursiveFactorial(5);
 
-   // calling the iterative constexpr function recursiveFactorial
-   std::cout << "\n\nCALCULATING FACTORIALS AT COMPILE-TIME"
+   // calling the iterative constexpr function iterativeFactorial
+   std::cout << "\n\nCALCULATING FACTORIALS AT COMPILE TIME"
       << "\nWITH AN ITERATIVE CONSTEXPR FUNCTION"
       << "\niterativeFactorial(0): " << iterativeFactorial(0)
       << "\niterativeFactorial(1): " << iterativeFactorial(1)

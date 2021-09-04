@@ -6,10 +6,17 @@
 template<typename T>
 concept Numeric = std::integral<T> || std::floating_point<T>;
 
+template<class T>     
+auto multiply(T a, T b) {      
+   static_assert(Numeric<T>);      
+   return a * b;     
+} 
+
 int main() {
-   static_assert(Numeric<int>); // OK: int is Numeric
-   static_assert(Numeric<double>); // OK: double is Numeric
-   static_assert(Numeric<std::string>); // error: string is not Numeric
+   using namespace std::string_literals;
+   multiply(2, 5); // OK: int is Numeric
+   multiply(2.5, 5.5); // OK: double is Numeric
+   multiply("2"s, "5"s); // error: string is not Numeric
 } 
 
 
