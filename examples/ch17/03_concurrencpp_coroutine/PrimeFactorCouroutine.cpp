@@ -70,7 +70,7 @@ FactorResults getFactors(std::string name, long long number) {
       factors.push_back({number, 1});
    }
 
-   bool isPrime{factors.size() == 1 ? true : false}; // prime?
+   bool isPrime{factors.size() == 1 && get<int>(factors[0]) == 1};
    auto endTime{steady_clock::now()}; // time after calculation
    auto duration{duration_cast<milliseconds>(endTime - startTime)};
 
@@ -164,7 +164,7 @@ void displayResults(std::vector<FactorResults> results) {
       const auto& [name, number, isPrime, factors, time] {result};
 
       std::cout << fmt::format("\n{} results:\n", name);
-      std::cout << fmt::format("Duration (ms): {}\n", time);
+      std::cout << fmt::format("Duration (ms): {}\n", time.count());
 
       // display whether value is prime
       if (isPrime) {
