@@ -1,4 +1,4 @@
-// printtask.cpp
+// Fig. 17.20: printtask.cpp
 // Setting up the concurrencpp::runtime and scheduling tasks with it.
 #include <chrono>
 #include <concurrencpp/concurrencpp.h>
@@ -11,14 +11,14 @@
 
 // get current thread's ID as a string
 std::string id() {
-    std::ostringstream out{};
+    std::ostringstream out;
     out << std::this_thread::get_id();
     return out.str();
 }
 
 // Function printTask sleeps for a specified period in milliseconds. 
 // When it continues executing, it prints its name and completes.
-void printTask(std::string_view name, std::chrono::milliseconds sleep) {
+void printTask(std::string name, std::chrono::milliseconds sleep) {
    std::cout << fmt::format(
       "{} (thread ID: {}) going to sleep for {} ms\n",
       name, id(), sleep.count());
@@ -32,24 +32,24 @@ void printTask(std::string_view name, std::chrono::milliseconds sleep) {
 
 int main() {
    // set up the concurrencpp runtime for scheduling tasks to execute
-   concurrencpp::runtime runtime{};
+   concurrencpp::runtime runtime;
 
    std::cout << fmt::format("main's thread ID: {}\n\n", id());
 
    // set up random number generation for random sleep times
-   std::random_device rd{};
-   std::mt19937_64 generator(rd()); 
-   std::uniform_int_distribution ints{0, 5001};
+   std::random_device rd;
+   std::mt19937_64 random{rd()}; 
+   std::uniform_int_distribution ints{0, 5000};
 
    // stores the tasks so we can wait for them to complete later;
    // concurrencpp::result<void> indicates that each task returns void
-   std::vector<concurrencpp::result<void>> results{}; 
+   std::vector<concurrencpp::result<void>> results; 
 
    std::cout << "STARTING THREE CONCURRENCPP TASKS\n";
 
    // schedule three tasks
    for (int i{1}; i < 4; ++i) {
-      std::chrono::milliseconds sleepTime{ints(generator)};
+      std::chrono::milliseconds sleepTime{ints(random)};
       std::string name{fmt::format("Task {}", i)};
 
       // use a concurrencpp thread_pool_executor to schedule a call

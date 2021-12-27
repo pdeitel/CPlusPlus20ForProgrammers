@@ -1,4 +1,4 @@
-// FibonacciGenerator.cpp
+// Fig. 17.19: FibonacciGenerator.cpp
 // Creating a generator coroutine with co_yield.
 #include <fmt/format.h>
 #include <iostream>
@@ -8,7 +8,7 @@
 
 // get current thread's ID as a string
 std::string id() {
-   std::ostringstream out{};
+   std::ostringstream out;
    out << std::this_thread::get_id();
    return out.str();
 }
