@@ -1,18 +1,17 @@
 // cipher.h
 // Deitel implementation of the Vigenère cipher. 
+#pragma once
 #include <algorithm>
 #include <array>
 #include <iostream>
-//#include <iterator>
-//#include <sstream>
 #include <string>
 #include <cctype>
 #include <stdexcept>
-#include "gsl/gsl"
+#include <gsl/gsl>
 
 class Cipher {
 public:
-   Cipher() {
+   Cipher() noexcept {
       std::array<char, size> alphabet{};
 
       for (int i{0}; i < size; ++i) {
@@ -25,13 +24,6 @@ public:
          std::rotate(alphabet.begin(), alphabet.begin() + 1, alphabet.end());
          square.at(row) = alphabet;
       }
-
-      //for (auto& row : square) {
-      //   for (auto& col : row) {
-      //      std::cout << col << ' ';
-      //   }
-      //   std::cout << std::endl;
-      //}
    }
 
    std::string encrypt(const std::string& plainText, 
@@ -39,7 +31,7 @@ public:
       checkKey(secret); // ensure only letters in secret
 
       std::string cipherText{};
-      int keyCounter{0};
+      size_t keyCounter{0};
 
       for (size_t i{0}; i < plainText.length(); ++i) {
          const bool upper = std::isupper(plainText.at(i));
@@ -47,7 +39,6 @@ public:
          if ('a' <= current && current <= 'z') {
             const int row{tolower(secret.at(keyCounter)) - 'a'};
             keyCounter = (keyCounter + 1) % secret.length();
-            //const int row{tolower(key.at(i)) - 'a'};
             const int col{current - 'a'};
             const char substitute{square.at(row).at(col)};
             cipherText += (upper ? std::toupper(substitute) : substitute);
@@ -64,7 +55,7 @@ public:
       checkKey(secret); // ensure only letters in secret
 
       std::string plainText;
-      int keyCounter{0};
+      size_t keyCounter{0};
 
       for (size_t i{0}; i < text.length(); ++i) {
          const bool upper = std::isupper(text.at(i));
@@ -76,7 +67,7 @@ public:
             int column{-1};
             for (size_t col{0}; col < square.at(row).size(); ++col) {
                if (square.at(row).at(col) == current) {
-                  column = col;
+                  column = gsl::narrow_cast<int>(col);
                   break;
                }
             }
@@ -94,9 +85,9 @@ private:
    std::array<std::array<char, 26>, 26> square;
 
    // checks that secret key contains only letters
-   void checkKey(const std::string& secret) {
-      for (const char letter : secret) {
-         if (tolower(letter) < 'a' || tolower(letter) > 'z') {
+   void checkKey(std::string secret) {
+      for (int i{0}; i < secret.size(); ++i) {
+         if (tolower(secret.at(i)) < 'a' || tolower(secret.at(i)) > 'z') {
             throw std::invalid_argument(
                "key must contain only letters A-Z or a-z");
          }

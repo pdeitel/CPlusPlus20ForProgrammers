@@ -1,23 +1,37 @@
 // fig05_08.cpp
-// inline function that calculates the volume of a cube.
+// Passing arguments by value and by reference.
 #include <iostream>
 using namespace std;
 
-// Definition of inline function cube. Definition of function appears 
-// before function is called, so a function prototype is not required. 
-// First line of function definition also acts as the prototype.
-inline double cube(double side) {
-   return side * side * side; // calculate cube
-}
+int squareByValue(int number); // prototype (for value pass)          
+void squareByReference(int& numberRef); // prototype (for reference pass)
 
 int main() {
-   double sideValue; // stores value entered by user 
-   cout << "Enter the side length of your cube: ";
-   cin >> sideValue; // read value from user
+   int x{2}; // value to square using squareByValue
+   int z{4}; // value to square using squareByReference
 
-   // calculate cube of sideValue and display result
-   cout << "Volume of cube with side "
-      << sideValue << " is " << cube(sideValue) << endl;
+   // demonstrate squareByValue
+   cout << "x = " << x << " before squareByValue\n";
+   cout << "Value returned by squareByValue: "
+      << squareByValue(x) << endl;
+   cout << "x = " << x << " after squareByValue\n\n";
+
+   // demonstrate squareByReference
+   cout << "z = " << z << " before squareByReference\n";
+   squareByReference(z);
+   cout << "z = " << z << " after squareByReference\n";
+}
+
+// squareByValue multiplies number by itself, stores the     
+// result in number and returns the new value of number      
+int squareByValue(int number) {
+   return number *= number; // caller's argument not modified 
+}
+
+// squareByReference multiplies numberRef by itself and stores the result
+// in the variable to which numberRef refers in function main            
+void squareByReference(int& numberRef) {
+   numberRef *= numberRef; // caller's argument modified 
 }
 
 

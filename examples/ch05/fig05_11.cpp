@@ -1,19 +1,26 @@
 // fig05_11.cpp
-// Unary scope resolution operator.
+// Overloaded square functions.
 #include <iostream>
 using namespace std;
 
-const int number{7}; // global variable named number
-
-int main() {
-   const double number{10.5}; // local variable named number
-
-   // display values of local and global variables
-   cout << "Local double value of number = " << number
-      << "\nGlobal int value of number = " << ::number << endl;
+// function square for int values              
+int square(int x) {
+   cout << "square of integer " << x << " is ";
+   return x * x;
 }
 
+// function square for double values           
+double square(double y) {
+   cout << "square of double " << y << " is ";
+   return y * y;
+}
 
+int main() {
+   cout << square(7); // calls int version
+   cout << '\n';
+   cout << square(7.5); // calls double version
+   cout << '\n';
+}
 
 /**************************************************************************
  * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *

@@ -1,28 +1,67 @@
 // fig05_06.cpp
-// Using a C++11 random-number generation engine and distribution
-// to roll a six-sided die more securely.
+// Scoping example.
 #include <iostream>
-#include <iomanip>
-#include <random> // contains C++11 random number generation features 
-#include <ctime>
-#include "gsl/gsl"
 using namespace std;
 
-int main() {
-   // use the default random-number generation engine to                
-   // produce uniformly distributed pseudorandom int values from 1 to 6 
-   default_random_engine engine{gsl::narrow_cast   <unsigned int>(time(0))};
-   const uniform_int_distribution<int> randomInt{1, 6};
+void useLocal(); // function prototype
+void useStaticLocal(); // function prototype
+void useGlobal(); // function prototype
 
-   // loop 10 times
-   for (int counter{1}; counter <= 10; ++counter) {
-      // pick random number from 1 to 6 and output it
-      cout << randomInt(engine) << " ";
+int x{1}; // global variable
+
+int main() {
+   cout << "global x in main is " << x << '\n';
+
+   const int x{5}; // local variable to main
+
+   cout << "local x in main's outer scope is " << x << '\n';
+
+   { // block starts a new scope                               
+      const int x{7}; // hides both x in outer scope and global x   
+
+      cout << "local x in main's inner scope is " << x << '\n';
    }
-   
-   cout << endl;
+
+   cout << "local x in main's outer scope is " << x << '\n';
+
+   useLocal(); // useLocal has local x
+   useStaticLocal(); // useStaticLocal has static local x
+   useGlobal(); // useGlobal uses global x
+   useLocal(); // useLocal reinitializes its local x
+   useStaticLocal(); // static local x retains its prior value
+   useGlobal(); // global x also retains its prior value
+
+   cout << "\nlocal x in main is " << x << '\n';
 }
 
+// useLocal reinitializes local variable x during each call
+void useLocal() {
+   int x{25}; // initialized each time useLocal is called
+
+   cout << "\nlocal x is " << x << " on entering useLocal\n";
+   ++x;
+   cout << "local x is " << x << " on exiting useLocal\n";
+}
+
+// useStaticLocal initializes static local variable x only the
+// first time the function is called; value of x is saved
+// between calls to this function
+void useStaticLocal() {
+   static int x{50}; // initialized first time useStaticLocal is called
+
+   cout << "\nlocal static x is " << x 
+      << " on entering useStaticLocal\n";
+   ++x;
+   cout << "local static x is " << x << 
+      " on exiting useStaticLocal\n";
+}
+
+// useGlobal modifies global variable x during each call
+void useGlobal() {
+   cout << "\nglobal x is " << x << " on entering useGlobal\n";
+   x *= 10;
+   cout << "global x is " << x << " on exiting useGlobal\n";
+}
 
 /**************************************************************************
  * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *

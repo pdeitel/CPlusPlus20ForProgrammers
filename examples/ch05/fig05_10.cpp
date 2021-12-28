@@ -1,33 +1,18 @@
 // fig05_10.cpp
-// Using default arguments.
+// Unary scope resolution operator.
 #include <iostream>
 using namespace std;
 
-// function prototype that specifies default arguments
-int boxVolume(int length = 1, int width = 1, int height = 1);
+const int number{7}; // global variable named number
 
 int main() {
-   // no arguments--use default values for all dimensions
-   cout << "The default box volume is: " << boxVolume();
+   const double number{10.5}; // local variable named number
 
-   // specify length; default width and height
-   cout << "\n\nThe volume of a box with length 10,\n"
-      << "width 1 and height 1 is: " << boxVolume(10);
-
-   // specify length and width; default height
-   cout << "\n\nThe volume of a box with length 10,\n"
-      << "width 5 and height 1 is: " << boxVolume(10, 5);
-
-   // specify all arguments 
-   cout << "\n\nThe volume of a box with length 10,\n"
-      << "width 5 and height 2 is: " << boxVolume(10, 5, 2)
-      << endl;
+   // display values of local and global variables
+   cout << "Local double value of number = " << number
+      << "\nGlobal int value of number = " << ::number << '\n';
 }
 
-// function boxVolume calculates the volume of a box
-int boxVolume(int length, int width, int height) {
-   return length * width * height;
-}
 
 
 /**************************************************************************

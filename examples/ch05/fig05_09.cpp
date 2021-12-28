@@ -1,37 +1,32 @@
 // fig05_09.cpp
-// Passing arguments by value and by reference.
+// Using default arguments.
 #include <iostream>
 using namespace std;
 
-int squareByValue(int x); // function prototype (for value pass)          
-void squareByReference(int& z); // function prototype (for reference pass)
+// function prototype that specifies default arguments
+int boxVolume(int length = 1, int width = 1, int height = 1);
 
 int main() {
-   const int x{2}; // value to square using squareByValue
-   int z{4}; // value to square using squareByReference
+   // no arguments--use default values for all dimensions
+   cout << "The default box volume is: " << boxVolume();
 
-   // demonstrate squareByValue
-   cout << "x = " << x << " before squareByValue\n";
-   cout << "Value returned by squareByValue: "
-      << squareByValue(x) << endl;
-   cout << "x = " << x << " after squareByValue\n" << endl;
+   // specify length; default width and height
+   cout << "\n\nThe volume of a box with length 10,\n"
+      << "width 1 and height 1 is: " << boxVolume(10);
 
-   // demonstrate squareByReference
-   cout << "z = " << z << " before squareByReference" << endl;
-   squareByReference(z);
-   cout << "z = " << z << " after squareByReference" << endl;
+   // specify length and width; default height
+   cout << "\n\nThe volume of a box with length 10,\n"
+      << "width 5 and height 1 is: " << boxVolume(10, 5);
+
+   // specify all arguments 
+   cout << "\n\nThe volume of a box with length 10,\n"
+      << "width 5 and height 2 is: " << boxVolume(10, 5, 2)
+      << '\n';
 }
 
-// squareByValue multiplies number by itself, stores the     
-// result in number and returns the new value of number      
-int squareByValue(int number) {
-   return number *= number; // caller's argument not modified 
-}
-
-// squareByReference multiplies numberRef by itself and stores the result
-// in the variable to which numberRef refers in function main            
-void squareByReference(int& numberRef) {
-   numberRef *= numberRef; // caller's argument modified 
+// function boxVolume calculates the volume of a box
+int boxVolume(int length, int width, int height) {
+   return length * width * height;
 }
 
 

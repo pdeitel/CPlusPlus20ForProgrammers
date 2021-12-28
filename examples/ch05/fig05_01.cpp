@@ -13,7 +13,7 @@ int main() {
 
    // invoke maximum 
    cout << "The maximum integer value is: "
-      << maximum(int1, int2, int3) << endl;
+      << maximum(int1, int2, int3) << '\n';
 }
 
 // returns the largest of three integers   

@@ -1,28 +1,32 @@
 // fig05_16.cpp
-// Recursive function factorial.
+// Recursive function fibonacci.
 #include <iostream>
-#include <iomanip>
 using namespace std;
 
-long factorial(long number); // function prototype
+long fibonacci(long number); // function prototype
 
 int main() {
-   // calculate the factorials of 0 through 10
-   for (int counter{0}; counter <= 10; ++counter) {
-      cout << setw(2) << counter << "! = " << factorial(counter)
-         << endl;
+   // calculate the fibonacci values of 0 through 10
+   for (int counter{0}; counter <= 10; ++counter)
+      cout << "fibonacci(" << counter << ") = "
+         << fibonacci(counter) << '\n';
+
+   // display higher fibonacci values
+   cout << "\nfibonacci(20) = " << fibonacci(20);
+   cout << "\nfibonacci(30) = " << fibonacci(30);
+   cout << "\nfibonacci(35) = " << fibonacci(35) << '\n';
+}
+
+// recursive function fibonacci                            
+long fibonacci(long number) {
+   if ((0 == number) || (1 == number)) { // base cases     
+      return number;
+   }
+   else { // recursion step                                
+      return fibonacci(number - 1) + fibonacci(number - 2);
    }
 }
 
-// recursive definition of function factorial   
-long factorial(long number) {
-   if (number <= 1) { // test for base case     
-      return 1; // base cases: 0! = 1 and 1! = 1
-   }
-   else { // recursion step                     
-      return number * factorial(number - 1);
-   }
-}
 
 /*************************************************************************
 * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *

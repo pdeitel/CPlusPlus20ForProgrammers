@@ -1,4 +1,4 @@
-// Fig. 5.14: maximum.h
+// Fig. 5.13: maximum.h
 // Function template maximum header.
 template <typename T>  // or template<class T>      
 T maximum(T value1, T value2, T value3) {

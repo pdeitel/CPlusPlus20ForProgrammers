@@ -1,25 +1,21 @@
 // fig05_05.cpp
 // Craps simulation.
+#include <fmt/format.h>
 #include <iostream>
-#include <cstdlib> // contains prototypes for functions srand and rand
-#include <ctime> // contains prototype for function time 
-#include "gsl/gsl" // Guidelines Support Library for narrow_cast
+#include <random> 
 using namespace std;
 
 int rollDice(); // rolls dice, calculates and displays sum 
 
 int main() {
    // scoped enumeration with constants that represent the game status
-   enum class Status {keepRolling, won, lost}; // all caps in constants   
-
-   // randomize random number generator using current time
-   srand(gsl::narrow_cast<unsigned int>(time(0)));
-
+   enum class Status {keepRolling, won, lost};   
+   
    int myPoint{0}; // point if no win or loss on first roll
    Status gameStatus{Status::keepRolling}; // game is not over 
 
    // determine game status and point (if needed) based on first roll
-   switch (const int sumOfDice{rollDice()}; sumOfDice) {
+   switch (const int sumOfDice{rollDice()}) {
       case 7: // win with 7 on first roll
       case 11: // win with 11 on first roll           
          gameStatus = Status::won;
@@ -31,8 +27,8 @@ int main() {
          break;
       default: // did not win or lose, so remember point
          myPoint = sumOfDice; // remember the point
-         cout << "Point is " << myPoint << endl;
-         break; // optional at end of switch  
+         cout << fmt::format("Point is {}\n", myPoint);
+         break; // optional (but recommended) at end of switch  
    }
 
    // while game is not complete
@@ -41,31 +37,34 @@ int main() {
       if (const int sumOfDice{rollDice()}; sumOfDice == myPoint) {
          gameStatus = Status::won;
       }
-      else {
-         if (sumOfDice == 7) { // lose by rolling 7 before point
-            gameStatus = Status::lost;
-         }
+      else if (sumOfDice == 7) { // lose by rolling 7 before point
+         gameStatus = Status::lost;
       }
    }
 
    // display won or lost message
    if (Status::won == gameStatus) {
-      cout << "Player wins" << endl;
+      cout << "Player wins\n";
    }
    else {
-      cout << "Player loses" << endl;
+      cout << "Player loses\n";
    }
 }
 
 // roll dice, calculate sum and display results
 int rollDice() {
-   const int die1{1 + rand() % 6}; // first die roll
-   const int die2{1 + rand() % 6}; // second die roll
+   // set up random-number generation
+   static random_device rd; // used to seed the default_random_engine
+   static default_random_engine engine{rd()}; // rd() produces a seed 
+   static uniform_int_distribution randomDie{1, 6};
+
+   const int die1{randomDie(engine)}; // first die roll
+   const int die2{randomDie(engine)}; // second die roll
    const int sum{die1 + die2}; // compute sum of die values
 
    // display results of this roll
-   cout << "Player rolled " << die1 << " + " << die2
-      << " = " << sum << endl;
+   cout << fmt::format("Player rolled {} + {} = {}\n", die1, die2, sum);
+
    return sum;
 }
 

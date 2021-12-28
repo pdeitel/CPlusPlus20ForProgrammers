@@ -1,35 +1,38 @@
-// fig15_20.cpp
-// Encrypting and decrypting text with a Vigenère cipher. 
-#include "cipher.h"
+// fig05_14.cpp
+// Function template maximum test program.
 #include <iostream>
-#include <string>
+#include "maximum.h" // include definition of function template maximum
 using namespace std;
 
 int main() {
-   string plainText;
-   cout << "Enter the text to encrypt:\n";
-   getline(cin, plainText);
+   // demonstrate maximum with int values
+   cout << "Input three integer values: ";
+   int int1, int2, int3;
+   cin >> int1 >> int2 >> int3;
 
-   string secretKey;
-   cout << "\nEnter the secret key:\n";
-   getline(cin, secretKey);
+   // invoke int version of maximum
+   cout << "The maximum integer value is: "
+      << maximum(int1, int2, int3);        
 
-   Cipher cipher; 
+   // demonstrate maximum with double values
+   cout << "\n\nInput three double values: ";
+   double double1, double2, double3;
+   cin >> double1 >> double2 >> double3;
 
-   // encrypt plainText using secretKey
-   string cipherText{cipher.encrypt(plainText, secretKey)};
-   cout << "\nEncrypted:\n   " << cipherText << endl;
+   // invoke double version of maximum
+   cout << "The maximum double value is: "
+      << maximum(double1, double2, double3);
 
-   // decrypt cipherText
-   cout << "\nDecrypted:\n   "  
-      << cipher.decrypt(cipherText, secretKey) << endl;
-   
-   // decrypt ciphertext entered by the user
-   cout << "\nEnter the ciphertext to decipher:\n";
-   getline(cin, cipherText);
-   cout << "\nDecrypted:\n   " 
-      << cipher.decrypt(cipherText, secretKey) << endl;
-}
+   // demonstrate maximum with char values
+   cout << "\n\nInput three characters: ";
+   char char1, char2, char3;
+   cin >> char1 >> char2 >> char3;
+
+   // invoke char version of maximum
+   cout << "The maximum character value is: "
+      << maximum(char1, char2, char3) << '\n';
+} // end main
+
 
 /**************************************************************************
  * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *

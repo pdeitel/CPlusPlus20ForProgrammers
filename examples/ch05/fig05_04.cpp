@@ -2,23 +2,25 @@
 // Randomizing the die-rolling program.
 #include <iostream>
 #include <iomanip>
-#include <cstdlib> // contains prototypes for functions srand and rand 
+#include <random>
 using namespace std;
 
 int main() {
-   int seed{0}; // stores the seed entered by the user
+   unsigned int seed{0}; // stores the seed entered by the user
 
    cout << "Enter seed: ";
    cin >> seed;
-   srand(seed); // seed random number generator
 
-   // loop 10 times
+   // set up random-number generation
+   default_random_engine engine{seed}; // seed the engine
+   uniform_int_distribution randomDie{1, 6};
+
+   // display 10 random die rolls
    for (int counter{1}; counter <= 10; ++counter) {
-      // pick random number from 1 to 6 and output it
-      cout << (1 + rand() % 6) << " ";
+      cout << randomDie(engine) << " ";
    }
 
-   cout << endl;
+   cout << '\n';
 }
 
 
