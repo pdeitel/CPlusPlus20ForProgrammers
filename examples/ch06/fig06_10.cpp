@@ -2,35 +2,36 @@
 // Initializing multidimensional arrays.
 #include <iostream>
 #include <array>
-using namespace std;
 
 constexpr size_t rows{2};
 constexpr size_t columns{3};
-void printArray(const array<array<int, columns>, rows>& a);
+void printArray(const std::array<std::array<int, columns>, rows>& a);
 
 int main() {
-   const array<array<int, columns>, rows> array1{1, 2, 3, 4, 5, 6};
-   const array<array<int, columns>, rows> array2{1, 2, 3, 4, 5};
+   constexpr std::array values1{std::array{1, 2, 3}, std::array{4, 5, 6}};
+   constexpr std::array values2{std::array{1, 2, 3}, std::array{4, 5, 0}};
 
-   cout << "Values in array1 by row are:" << endl;
-   printArray(array1);
+   std::cout << "values1 by row:\n";
+   printArray(values1);
 
-   cout << "\nValues in array2 by row are:" << endl;
-   printArray(array2);
+   std::cout << "\nvalues2 by row:\n";
+   printArray(values2);
 }
 
 // output array with two rows and three columns                 
-void printArray(const array<array<int, columns>, rows>& a) {
-   // loop through array's rows                             
-   for (auto const& row : a) {
+void printArray(const std::array<std::array<int, columns>, rows>& a) {
+   // loop through array's rows             
+   for (const auto& row : a) {
       // loop through columns of current row                
-      for (auto const& element : row) {
-         cout << element << ' ';
+      for (const auto& element : row) {
+         std::cout << element << ' ';
       }
 
-      cout << endl; // start new line of output             
+      std::cout << '\n'; // start new line of output             
    }
 }
+
+
 
 /**************************************************************************
  * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *

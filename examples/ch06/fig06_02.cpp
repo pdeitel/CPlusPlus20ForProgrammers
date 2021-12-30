@@ -1,18 +1,28 @@
 // fig06_02.cpp
 // Initializing an array in a declaration.
+#include <fmt/format.h>
 #include <iostream>
 #include <array>
-using namespace std;
 
 int main() {
-   array<int, 5> n{32, 27, 64, 18, 95}; // list initializer
+   std::array<int, 5> values{32, 27, 64, 18, 95}; // braced initializer
 
    // output each array element's value
-   for (size_t i{0}; i < n.size(); ++i) {
-      cout << n.at(i) << "  ";
+   for (size_t i{0}; i < values.size(); ++i) {
+      std::cout << fmt::format("{}  ", values.at(i));
    }
 
-   cout << endl;
+   std::cout << "\n\n";
+
+   // using class-template argument deduction to determine values2's type
+   std::array values2{1.1, 2.2, 3.3, 4.4};
+
+   // output each array element's value
+   for (size_t i{0}; i < values.size(); ++i) {
+      std::cout << fmt::format("{}  ", values.at(i));
+   }
+
+   std::cout << "\n";
 }
 
 

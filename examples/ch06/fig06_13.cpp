@@ -1,51 +1,53 @@
 // fig06_13.cpp
 // Functional-style programming with C++20 ranges and views.
 #include <array>
+#include <fmt/format.h>
 #include <iostream>
 #include <numeric>
 #include <ranges>
-using namespace std;
 
 int main() {
    // lambda to display results of range operations
-   auto showValues = [](auto& values, const string& message) {
-      cout << message << ": ";
+   auto showValues{
+      [](auto& values, const std::string& message) {
+         std::cout << fmt::format("{}: ", message);
 
-      for (auto value : values) {
-         cout << value << " ";
+         for (const auto& value : values) {
+            std::cout << fmt::format("{} ", value);
+         }
+
+         std::cout << '\n';
       }
-
-      cout << endl;
    };
 
-   auto values1 = views::iota(1, 11); // generate integers 1-10
+   auto values1{std::views::iota(1, 11)}; // generate integers 1-10
    showValues(values1, "Generate integers 1-10");
 
    // filter each value in values1, keeping only the even integers
-   auto values2 = 
-      values1 | views::filter([](const auto& x) {return x % 2 == 0;});
+   auto values2{values1 |
+      std::views::filter([](const auto& x) {return x % 2 == 0;})};
    showValues(values2, "Filtering even integers");
 
    // map each value in values2 to its square
-   auto values3 = 
-      values2 | views::transform([](const auto& x) {return x * x;}); 
+   auto values3{
+      values2 | std::views::transform([](const auto& x) {return x * x;})};
    showValues(values3, "Mapping even integers to squares");
 
    // combine filter and transform to get squares of the even integers
-   auto values4 = 
-      values1 | views::filter([](const auto& x) {return x % 2 == 0;}) 
-              | views::transform([](const auto& x) {return x * x;});
+   auto values4{
+      values1 | std::views::filter([](const auto& x) {return x % 2 == 0;})
+              | std::views::transform([](const auto& x) {return x * x; })};
    showValues(values4, "Squares of even integers");
 
    // total the squares of the even integers 
-   cout << "Sum the squares of the even integers from 2-10: " <<
-      accumulate(begin(values4), end(values4), 0) << endl;
+   std::cout << fmt::format("Sum squares of even integers 2-10: {}\n",
+      std::accumulate(std::begin(values4), std::end(values4), 0));
 
    // process a container's elements
-   array<int, 10> numbers{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-   auto values5 = 
-      numbers | views::filter([](const auto& x) {return x % 2 == 0;}) 
-              | views::transform([](const auto& x) {return x * x;});
+   constexpr std::array numbers{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+   auto values5{
+      numbers | std::views::filter([](const auto& x) {return x % 2 == 0;})
+              | std::views::transform([](const auto& x) {return x * x; })};
    showValues(values5, "Squares of even integers in array numbers");
 }
 
