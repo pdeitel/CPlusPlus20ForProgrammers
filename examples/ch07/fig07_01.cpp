@@ -10,7 +10,7 @@ int main() {
    cout << "The address of a is " << &a
       << "\nThe value of aPtr is " << aPtr;
    cout << "\n\nThe value of a is " << a
-      << "\nThe value of *aPtr is " << *aPtr << endl;
+      << "\nThe value of *aPtr is " << *aPtr << '\n';
 }
 
 

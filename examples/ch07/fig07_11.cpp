@@ -1,7 +1,7 @@
 // fig07_11.cpp
 // sizeof operator used to determine standard data type sizes.
+#include <fmt/format.h>
 #include <iostream>
-using namespace std;
 
 int main() {
    constexpr char c{}; // variable of type char
@@ -14,27 +14,26 @@ int main() {
    constexpr long double ld{}; // variable of type long double
    constexpr int array[20]{}; // built-in array of int
    const int* const ptr{array}; // variable of type int*
- 
-   cout << "sizeof c = " << sizeof c
-      << "\tsizeof(char) = " << sizeof(char)
-      << "\nsizeof s = " << sizeof s
-      << "\tsizeof(short) = " << sizeof(short)
-      << "\nsizeof i = " << sizeof i
-      << "\tsizeof(int) = " << sizeof(int)
-      << "\nsizeof l = " << sizeof l
-      << "\tsizeof(long) = " << sizeof(long)
-      << "\nsizeof ll = " << sizeof ll
-      << "\tsizeof(long long) = " << sizeof(long long)
-      << "\nsizeof f = " << sizeof f
-      << "\tsizeof(float) = " << sizeof(float)
-      << "\nsizeof d = " << sizeof d
-      << "\tsizeof(double) = " << sizeof(double)
-      << "\nsizeof ld = " << sizeof ld
-      << "\tsizeof(long double) = " << sizeof(long double)
-      << "\nsizeof array = " << sizeof array
-      << "\nsizeof ptr = " << sizeof ptr << endl;
-}
 
+   std::cout << fmt::format("sizeof c = {}\tsizeof(char) = {}\n",
+      sizeof c, sizeof(char));
+   std::cout << fmt::format("sizeof s = {}\tsizeof(short) = {}\n",
+      sizeof s, sizeof(short));
+   std::cout << fmt::format("sizeof i = {}\tsizeof(int) = {}\n",
+      sizeof i, sizeof(int));
+   std::cout << fmt::format("sizeof l = {}\tsizeof(long) = {}\n",
+      sizeof l, sizeof(long));
+   std::cout << fmt::format("sizeof ll = {}\tsizeof(long long) = {}\n",
+      sizeof ll, sizeof(long long));
+   std::cout << fmt::format("sizeof f = {}\tsizeof(float) = {}\n",
+      sizeof f, sizeof(float));
+   std::cout << fmt::format("sizeof d = {}\tsizeof(double) = {}\n",
+      sizeof d, sizeof(double));
+   std::cout << fmt::format("sizeof ld = {}\tsizeof(long double) = {}\n",
+      sizeof ld, sizeof(long double));
+   std::cout << fmt::format("sizeof array = {}\n", sizeof array);
+   std::cout << fmt::format("sizeof ptr = {}\n", sizeof ptr);
+}
 
 /**************************************************************************
  * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and               *

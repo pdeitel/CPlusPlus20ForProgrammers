@@ -1,14 +1,16 @@
 // fig07_13.cpp
 // Reading in command-line arguments.
+#include <fmt/format.h>
 #include <iostream>
-using namespace std;
 
 int main(int argc, char* argv[]) {
-   cout << "There were " << argc << " command-line arguments:\n";
+   std::cout << fmt::format("Number of arguments: {}\n\n", argc);
+
    for (int i{0}; i < argc; ++i) {
-      cout << argv[i] << endl;
+      std::cout << fmt::format("{}\n", argv[i]);
    }
 }
+
 
 
 /**************************************************************************
