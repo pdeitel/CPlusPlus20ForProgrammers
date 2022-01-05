@@ -1,37 +1,37 @@
 // fig08_11.cpp
 // Reading and printing a sequential file.
-#include <iostream>
-#include <fstream> // file stream        
-#include <string>
 #include <cstdlib> 
-#include "fmt/format.h" // In C++20, this will be #include <format>  
-using namespace std;
+#include <fmt/format.h> 
+#include <fstream> // file stream        
+#include <iostream>
+#include <string>
 
 int main() {
    // ifstream opens the file          
-   if (ifstream input{"clients.txt", ios::in}; input) {
-      cout << fmt::format("{:<10}{:<13}{}\n",
-                 "Account", "Name", "Balance");
+   if (std::ifstream input{"clients.txt", std::ios::in}) {
+      std::cout << fmt::format("{:<10}{:<13}{:>7}\n",
+         "Account", "Name", "Balance");
 
-      int account; 
-      string name;
+      int account;
+      std::string name;
       double balance;
 
       // display each record in file
       while (input >> account >> name >> balance) {
-         cout << fmt::format("{:<10}{:<13}{:>7.2f}\n",
+         std::cout << fmt::format("{:<10}{:<13}{:>7.2f}\n",
             account, name, balance);
       }
    }
    else {
-      cerr << "File could not be opened\n";
-      exit(EXIT_FAILURE);
+      std::cerr << "File could not be opened\n";
+      std::exit(EXIT_FAILURE);
    }
 }
 
 
+
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

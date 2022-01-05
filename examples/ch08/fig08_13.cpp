@@ -1,38 +1,36 @@
 // fig08_13.cpp
 // Demonstrating input from an istringstream object.
+#include <fmt/format.h> 
 #include <iostream>
 #include <sstream> 
 #include <string>
-#include "fmt/format.h" // In C++20, this will be #include <format>  
-using namespace std;
 
 int main() {
-   const string inputString{"Amanda test 123 4.7 A"};
-   istringstream input{inputString};
-   string s1;
-   string s2;
+   const std::string inputString{"Amanda test 123 4.7 A"};
+   std::istringstream input{inputString};
+   std::string s1;
+   std::string s2;
    int i;
    double d;
    char c;
 
    input >> s1 >> s2 >> i >> d >> c;
 
-   cout << "Items extracted from the istringstream object:\n"
-      << fmt::format("{}\n{}\n{}\n{}\n{}\n\n", s1, s2, i, d, c);
+   std::cout << "Items extracted from the istringstream object:\n"
+      << fmt::format("{}\n{}\n{}\n{}\n{}\n", s1, s2, i, d, c);
 
    // attempt to read from empty stream
    if (long value; input >> value) {
-      cout << fmt::format("long value is: {}\n", value);
+      std::cout << fmt::format("\nlong value is: {}\n", value);
    }
    else {
-      cout << fmt::format("input is empty\n");
+      std::cout << fmt::format("\ninput is empty\n");
    }
 }
 
 
-
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

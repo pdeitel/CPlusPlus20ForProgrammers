@@ -1,22 +1,21 @@
 // fig08_17.cpp
 // Regular expression replacements.
+#include <fmt/format.h> 
 #include <iostream>
 #include <regex>
 #include <string>
-#include <vector>
-#include "fmt/format.h" // In C++20, this will be #include <format>  
-using namespace std;
 
 int main() {
    // replace tabs with commas
-   string s1("1\t2\t3\t4");
-   cout << "Original string: 1\\t2\\t3\\t4\n";
-   cout << fmt::format("After replacing tabs with commas: {}\n", 
-      regex_replace(s1, regex{R"(\t)"}, ","));
+   std::string s1{"1\t2\t3\t4"};
+   std::cout << fmt::format("Original string: {}\n", R"(1\t2\t3\t4)")
+      << fmt::format("After replacing tabs with commas: {}\n",
+            std::regex_replace(s1, std::regex{"\t"}, ","));
 }
 
+
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

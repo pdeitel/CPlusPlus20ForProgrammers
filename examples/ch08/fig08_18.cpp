@@ -1,45 +1,46 @@
 // fig08_18.cpp
 // Matching patterns throughout a string.
+#include <fmt/format.h> 
 #include <iostream>
 #include <regex>
 #include <string>
-#include "fmt/format.h" // In C++20, this will be #include <format>  
-using namespace std;
 
 int main() {
    // performing a simple match
-   string s1{"Programming is fun"};
-   cout << fmt::format("s1: {}\n\n", s1);
-   cout << "Search anywhere in s1:\n"
+   std::string s1{"Programming is fun"};
+   std::cout << fmt::format("s1: {}\n\n", s1);
+   std::cout << "Search anywhere in s1:\n"
       << fmt::format("Programming: {}; fun: {}; fn: {}\n\n",
-            regex_search(s1, regex{"Programming"}),
-            regex_search(s1, regex{"fun"}),
-            regex_search(s1, regex{"fn"}));
+            std::regex_search(s1, std::regex{"Programming"}),
+            std::regex_search(s1, std::regex{"fun"}),
+            std::regex_search(s1, std::regex{"fn"}));
 
    // ignoring case
-   string s2{"SAM WHITE"};
-   smatch match; // store the text that matches the pattern
-   cout << fmt::format("s2: {}\n\n", s2);
-   cout << "Case insensitive search for Sam in s2:\n"
-      << fmt::format("Sam: {}\n",
-            regex_search(s2, match, regex{"Sam", regex_constants::icase}))
+   std::string s2{"SAM WHITE"};
+   std::smatch match; // store the text that matches the pattern
+   std::cout << fmt::format("s2: {}\n\n", s2);
+   std::cout << "Case insensitive search for Sam in s2:\n"
+      << fmt::format("Sam: {}\n", std::regex_search(s2, match,
+            std::regex{"Sam", std::regex_constants::icase}))
       << fmt::format("Matched text: {}\n\n", match.str());
 
    // finding all matches
-   string contact{"Wally White, Home: 555-555-1234, Work: 555-555-4321"};
-   regex phone{R"(\d{3}-\d{3}-\d{4})"};
+   std::string contact{
+      "Wally White, Home: 555-555-1234, Work: 555-555-4321"};
+   std::regex phone{R"(\d{3}-\d{3}-\d{4})"};
 
-   cout << "\nFinding all phone numbers in:\n" << contact << "\n";
-   while (regex_search(contact, match, phone)) {
-      cout << fmt::format("   {}\n", match.str());
+   std::cout << fmt::format("Finding phone numbers in:\n{}\n", contact);
+   while (std::regex_search(contact, match, phone)) {
+      std::cout << fmt::format("   {}\n", match.str());
       contact = match.suffix();
    }
 }
 
 
 
+
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

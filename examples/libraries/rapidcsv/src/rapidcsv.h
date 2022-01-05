@@ -2,9 +2,9 @@
  * rapidcsv.h
  *
  * URL:      https://github.com/d99kris/rapidcsv
- * Version:  7.00
+ * Version:  8.53
  *
- * Copyright (C) 2017-2020 Kristofer Berggren
+ * Copyright (C) 2017-2021 Kristofer Berggren
  * All rights reserved.
  *
  * rapidcsv is distributed under the BSD 3-Clause license, see LICENSE for details.
@@ -18,6 +18,7 @@
 #include <cmath>
 #ifdef HAS_CODECVT
 #include <codecvt>
+#include <locale>
 #endif
 #include <fstream>
 #include <functional>
@@ -309,18 +310,22 @@ namespace rapidcsv
      * @brief   Constructor
      * @param   pSeparator            specifies the column separator (default ',').
      * @param   pTrim                 specifies whether to trim leading and trailing spaces from
-     *                                cells read.
+     *                                cells read (default false).
      * @param   pHasCR                specifies whether a new document (i.e. not an existing document read)
      *                                should use CR/LF instead of only LF (default is to use standard
      *                                behavior of underlying platforms - CR/LF for Win, and LF for others).
-     * @param   pQuotedLinebreaks     specifies whether to allow line breaks in quoted text.
+     * @param   pQuotedLinebreaks     specifies whether to allow line breaks in quoted text (default false)
+     * @param   pAutoQuote            specifies whether to automatically dequote data during read, and add
+     *                                quotes during write (default true).
      */
     explicit SeparatorParams(const char pSeparator = ',', const bool pTrim = false,
-                             const bool pHasCR = sPlatformHasCR, const bool pQuotedLinebreaks = false)
+                             const bool pHasCR = sPlatformHasCR, const bool pQuotedLinebreaks = false,
+                             const bool pAutoQuote = true)
       : mSeparator(pSeparator)
       , mTrim(pTrim)
       , mHasCR(pHasCR)
       , mQuotedLinebreaks(pQuotedLinebreaks)
+      , mAutoQuote(pAutoQuote)
     {
     }
 
@@ -343,6 +348,50 @@ namespace rapidcsv
      * @brief   specifies whether to allow line breaks in quoted text.
      */
     bool mQuotedLinebreaks;
+
+    /**
+     * @brief   specifies whether to automatically dequote cell data.
+     */
+    bool mAutoQuote;
+  };
+
+  /**
+   * @brief     Datastructure holding parameters controlling how special line formats should be
+   *            treated.
+   */
+  struct LineReaderParams
+  {
+    /**
+     * @brief   Constructor
+     * @param   pSkipCommentLines     specifies whether to skip lines prefixed with
+     *                                mCommentPrefix. Default: false
+     * @param   pCommentPrefix        specifies which prefix character to indicate a comment
+     *                                line. Default: #
+     * @param   pSkipEmptyLines       specifies whether to skip empty lines. Default: false
+     */
+    explicit LineReaderParams(const bool pSkipCommentLines = false,
+                              const char pCommentPrefix = '#',
+                              const bool pSkipEmptyLines = false)
+      : mSkipCommentLines(pSkipCommentLines)
+      , mCommentPrefix(pCommentPrefix)
+      , mSkipEmptyLines(pSkipEmptyLines)
+    {
+    }
+
+    /**
+     * @brief   specifies whether to skip lines prefixed with mCommentPrefix.
+     */
+    bool mSkipCommentLines;
+
+    /**
+     * @brief   specifies which prefix character to indicate a comment line.
+     */
+    char mCommentPrefix;
+
+    /**
+     * @brief   specifies whether to skip empty lines.
+     */
+    bool mSkipEmptyLines;
   };
 
   /**
@@ -359,15 +408,18 @@ namespace rapidcsv
      * @param   pSeparatorParams      specifies which field and row separators should be used.
      * @param   pConverterParams      specifies how invalid numbers (including empty strings) should be
      *                                handled.
+     * @param   pLineReaderParams     specifies how special line formats should be treated.
      */
     explicit Document(const std::string& pPath = std::string(),
                       const LabelParams& pLabelParams = LabelParams(),
                       const SeparatorParams& pSeparatorParams = SeparatorParams(),
-                      const ConverterParams& pConverterParams = ConverterParams())
+                      const ConverterParams& pConverterParams = ConverterParams(),
+                      const LineReaderParams& pLineReaderParams = LineReaderParams())
       : mPath(pPath)
       , mLabelParams(pLabelParams)
       , mSeparatorParams(pSeparatorParams)
       , mConverterParams(pConverterParams)
+      , mLineReaderParams(pLineReaderParams)
     {
       if (!mPath.empty())
       {
@@ -382,44 +434,67 @@ namespace rapidcsv
      * @param   pSeparatorParams      specifies which field and row separators should be used.
      * @param   pConverterParams      specifies how invalid numbers (including empty strings) should be
      *                                handled.
+     * @param   pLineReaderParams     specifies how special line formats should be treated.
      */
     explicit Document(std::istream& pStream,
                       const LabelParams& pLabelParams = LabelParams(),
                       const SeparatorParams& pSeparatorParams = SeparatorParams(),
-                      const ConverterParams& pConverterParams = ConverterParams())
+                      const ConverterParams& pConverterParams = ConverterParams(),
+                      const LineReaderParams& pLineReaderParams = LineReaderParams())
       : mPath()
       , mLabelParams(pLabelParams)
       , mSeparatorParams(pSeparatorParams)
       , mConverterParams(pConverterParams)
+      , mLineReaderParams(pLineReaderParams)
     {
       ReadCsv(pStream);
-    }
-
-
-    /**
-     * @brief   Copy constructor
-     * @param   pDocument             specifies the Document instance to copy.
-     */
-    explicit Document(const Document& pDocument)
-      : mPath(pDocument.mPath)
-      , mLabelParams(pDocument.mLabelParams)
-      , mSeparatorParams(pDocument.mSeparatorParams)
-      , mConverterParams(pDocument.mConverterParams)
-      , mData(pDocument.mData)
-      , mColumnNames(pDocument.mColumnNames)
-      , mRowNames(pDocument.mRowNames)
-    {
     }
 
     /**
      * @brief   Read Document data from file.
      * @param   pPath                 specifies the path of an existing CSV-file to populate the Document
      *                                data with.
+     * @param   pLabelParams          specifies which row and column should be treated as labels.
+     * @param   pSeparatorParams      specifies which field and row separators should be used.
+     * @param   pConverterParams      specifies how invalid numbers (including empty strings) should be
+     *                                handled.
+     * @param   pLineReaderParams     specifies how special line formats should be treated.
      */
-    void Load(const std::string& pPath)
+    void Load(const std::string& pPath,
+              const LabelParams& pLabelParams = LabelParams(),
+              const SeparatorParams& pSeparatorParams = SeparatorParams(),
+              const ConverterParams& pConverterParams = ConverterParams(),
+              const LineReaderParams& pLineReaderParams = LineReaderParams())
     {
       mPath = pPath;
+      mLabelParams = pLabelParams;
+      mSeparatorParams = pSeparatorParams;
+      mConverterParams = pConverterParams;
+      mLineReaderParams = pLineReaderParams;
       ReadCsv();
+    }
+
+    /**
+     * @brief   Read Document data from stream.
+     * @param   pStream               specifies an input stream to read CSV data from.
+     * @param   pLabelParams          specifies which row and column should be treated as labels.
+     * @param   pSeparatorParams      specifies which field and row separators should be used.
+     * @param   pConverterParams      specifies how invalid numbers (including empty strings) should be
+     *                                handled.
+     * @param   pLineReaderParams     specifies how special line formats should be treated.
+     */
+    void Load(std::istream& pStream,
+              const LabelParams& pLabelParams = LabelParams(),
+              const SeparatorParams& pSeparatorParams = SeparatorParams(),
+              const ConverterParams& pConverterParams = ConverterParams(),
+              const LineReaderParams& pLineReaderParams = LineReaderParams())
+    {
+      mPath = "";
+      mLabelParams = pLabelParams;
+      mSeparatorParams = pSeparatorParams;
+      mConverterParams = pConverterParams;
+      mLineReaderParams = pLineReaderParams;
+      ReadCsv(pStream);
     }
 
     /**
@@ -447,6 +522,38 @@ namespace rapidcsv
     }
 
     /**
+     * @brief   Clears loaded Document data.
+     *
+     */
+    void Clear()
+    {
+      mData.clear();
+      mColumnNames.clear();
+      mRowNames.clear();
+#ifdef HAS_CODECVT
+      mIsUtf16 = false;
+      mIsLE = false;
+#endif
+    }
+
+    /**
+     * @brief   Get column index by name.
+     * @param   pColumnName           column label name.
+     * @returns zero-based column index.
+     */
+    ssize_t GetColumnIdx(const std::string& pColumnName) const
+    {
+      if (mLabelParams.mColumnNameIdx >= 0)
+      {
+        if (mColumnNames.find(pColumnName) != mColumnNames.end())
+        {
+          return mColumnNames.at(pColumnName) - (mLabelParams.mRowNameIdx + 1);
+        }
+      }
+      return -1;
+    }
+
+    /**
      * @brief   Get column by index.
      * @param   pColumnIdx            zero-based column index.
      * @returns vector of column data.
@@ -461,9 +568,22 @@ namespace rapidcsv
       {
         if (std::distance(mData.begin(), itRow) > mLabelParams.mColumnNameIdx)
         {
-          T val;
-          converter.ToVal(itRow->at(columnIdx), val);
-          column.push_back(val);
+          if (columnIdx < static_cast<ssize_t>(itRow->size()))
+          {
+            T val;
+            converter.ToVal(itRow->at(columnIdx), val);
+            column.push_back(val);
+          }
+          else
+          {
+            const std::string errStr = "requested column index " +
+              std::to_string(columnIdx - (mLabelParams.mRowNameIdx + 1)) + " >= " +
+              std::to_string(itRow->size() - (mLabelParams.mRowNameIdx + 1)) +
+              " (number of columns on row index " +
+              std::to_string(std::distance(mData.begin(), itRow) -
+                             (mLabelParams.mColumnNameIdx + 1)) + ")";
+            throw std::out_of_range(errStr);
+          }
         }
       }
       return column;
@@ -604,6 +724,57 @@ namespace rapidcsv
     }
 
     /**
+     * @brief   Insert column at specified index.
+     * @param   pColumnIdx            zero-based column index.
+     * @param   pColumn               vector of column data (optional argument).
+     * @param   pColumnName           column label name (optional argument).
+     */
+    template<typename T>
+    void InsertColumn(const size_t pColumnIdx, const std::vector<T>& pColumn = std::vector<T>(),
+                      const std::string& pColumnName = std::string())
+    {
+      const size_t columnIdx = pColumnIdx + (mLabelParams.mRowNameIdx + 1);
+
+      std::vector<std::string> column;
+      if (pColumn.empty())
+      {
+        column.resize(GetDataRowCount());
+      }
+      else
+      {
+        column.resize(pColumn.size() + (mLabelParams.mColumnNameIdx + 1));
+        Converter<T> converter(mConverterParams);
+        for (auto itRow = pColumn.begin(); itRow != pColumn.end(); ++itRow)
+        {
+          std::string str;
+          converter.ToStr(*itRow, str);
+          const size_t rowIdx = std::distance(pColumn.begin(), itRow) + (mLabelParams.mColumnNameIdx + 1);
+          column.at(rowIdx) = str;
+        }
+      }
+
+      while (column.size() > GetDataRowCount())
+      {
+        std::vector<std::string> row;
+        const size_t columnCount = std::max(static_cast<size_t>(mLabelParams.mColumnNameIdx + 1),
+                                            GetDataColumnCount());
+        row.resize(columnCount);
+        mData.push_back(row);
+      }
+
+      for (auto itRow = mData.begin(); itRow != mData.end(); ++itRow)
+      {
+        const size_t rowIdx = std::distance(mData.begin(), itRow);
+        itRow->insert(itRow->begin() + columnIdx, column.at(rowIdx));
+      }
+
+      if (!pColumnName.empty())
+      {
+        SetColumnName(pColumnIdx, pColumnName);
+      }
+    }
+
+    /**
      * @brief   Get number of data columns (excluding label columns).
      * @returns column count.
      */
@@ -612,6 +783,23 @@ namespace rapidcsv
       const ssize_t count = static_cast<ssize_t>((mData.size() > 0) ? mData.at(0).size() : 0) -
         (mLabelParams.mRowNameIdx + 1);
       return (count >= 0) ? count : 0;
+    }
+
+    /**
+     * @brief   Get row index by name.
+     * @param   pRowName              row label name.
+     * @returns zero-based row index.
+     */
+    ssize_t GetRowIdx(const std::string& pRowName) const
+    {
+      if (mLabelParams.mRowNameIdx >= 0)
+      {
+        if (mRowNames.find(pRowName) != mRowNames.end())
+        {
+          return mRowNames.at(pRowName) - (mLabelParams.mColumnNameIdx + 1);
+        }
+      }
+      return -1;
     }
 
     /**
@@ -767,6 +955,50 @@ namespace rapidcsv
       }
 
       RemoveRow(rowIdx);
+    }
+
+    /**
+     * @brief   Insert row at specified index.
+     * @param   pRowIdx               zero-based row index.
+     * @param   pRow                  vector of row data (optional argument).
+     * @param   pRowName              row label name (optional argument).
+     */
+    template<typename T>
+    void InsertRow(const size_t pRowIdx, const std::vector<T>& pRow = std::vector<T>(),
+                   const std::string& pRowName = std::string())
+    {
+      const size_t rowIdx = pRowIdx + (mLabelParams.mColumnNameIdx + 1);
+
+      std::vector<std::string> row;
+      if (pRow.empty())
+      {
+        row.resize(GetDataColumnCount());
+      }
+      else
+      {
+        row.resize(pRow.size() + (mLabelParams.mRowNameIdx + 1));
+        Converter<T> converter(mConverterParams);
+        for (auto itCol = pRow.begin(); itCol != pRow.end(); ++itCol)
+        {
+          std::string str;
+          converter.ToStr(*itCol, str);
+          row.at(std::distance(pRow.begin(), itCol) + (mLabelParams.mRowNameIdx + 1)) = str;
+        }
+      }
+
+      while (rowIdx > GetDataRowCount())
+      {
+        std::vector<std::string> tempRow;
+        tempRow.resize(GetDataColumnCount());
+        mData.push_back(tempRow);
+      }
+
+      mData.insert(mData.begin() + rowIdx, row);
+
+      if (!pRowName.empty())
+      {
+        SetRowName(pRowIdx, pRowName);
+      }
     }
 
     /**
@@ -1025,6 +1257,18 @@ namespace rapidcsv
         throw std::out_of_range("column name row index < 0: " + std::to_string(mLabelParams.mColumnNameIdx));
       }
 
+      // increase table size if necessary:
+      const int rowIdx = mLabelParams.mColumnNameIdx;
+      if (rowIdx >= static_cast<int>(mData.size()))
+      {
+        mData.resize(rowIdx + 1);
+      }
+      auto& row = mData[rowIdx];
+      if (columnIdx >= static_cast<int>(row.size()))
+      {
+        row.resize(columnIdx + 1);
+      }
+
       mData.at(mLabelParams.mColumnNameIdx).at(columnIdx) = pColumnName;
     }
 
@@ -1074,6 +1318,17 @@ namespace rapidcsv
         throw std::out_of_range("row name column index < 0: " + std::to_string(mLabelParams.mRowNameIdx));
       }
 
+      // increase table size if necessary:
+      if (rowIdx >= static_cast<int>(mData.size()))
+      {
+        mData.resize(rowIdx + 1);
+      }
+      auto& row = mData[rowIdx];
+      if (mLabelParams.mRowNameIdx >= static_cast<int>(row.size()))
+      {
+        row.resize(mLabelParams.mRowNameIdx + 1);
+      }
+
       mData.at(rowIdx).at(mLabelParams.mRowNameIdx) = pRowName;
     }
 
@@ -1103,24 +1358,30 @@ namespace rapidcsv
       std::ifstream stream;
       stream.exceptions(std::ifstream::failbit | std::ifstream::badbit);
       stream.open(mPath, std::ios::binary);
+      ReadCsv(stream);
+    }
+
+    void ReadCsv(std::istream& pStream)
+    {
+      Clear();
+      pStream.seekg(0, std::ios::end);
+      std::streamsize length = pStream.tellg();
+      pStream.seekg(0, std::ios::beg);
 
 #ifdef HAS_CODECVT
-      stream.seekg(0, std::ios::end);
-      std::streamsize length = stream.tellg();
-      stream.seekg(0, std::ios::beg);
-
-      std::vector<char> bom(2, '\0');
+      std::vector<char> bom2b(2, '\0');
       if (length >= 2)
       {
-        stream.read(bom.data(), 2);
+        pStream.read(bom2b.data(), 2);
+        pStream.seekg(0, std::ios::beg);
       }
 
       static const std::vector<char> bomU16le = { '\xff', '\xfe' };
       static const std::vector<char> bomU16be = { '\xfe', '\xff' };
-      if ((bom == bomU16le) || (bom == bomU16be))
+      if ((bom2b == bomU16le) || (bom2b == bomU16be))
       {
         mIsUtf16 = true;
-        mIsLE = (bom == bomU16le);
+        mIsLE = (bom2b == bomU16le);
 
         std::wifstream wstream;
         wstream.exceptions(std::wifstream::failbit | std::wifstream::badbit);
@@ -1142,21 +1403,35 @@ namespace rapidcsv
         wss << wstream.rdbuf();
         std::string utf8 = ToString(wss.str());
         std::stringstream ss(utf8);
-        ReadCsv(ss);
+        ParseCsv(ss, utf8.size());
       }
       else
 #endif
       {
-        stream.seekg(0, std::ios::beg);
-        ReadCsv(stream);
+        // check for UTF-8 Byte order mark and skip it when found
+        if (length >= 3)
+        {
+          std::vector<char> bom3b(3, '\0');
+          pStream.read(bom3b.data(), 3);
+          static const std::vector<char> bomU8 = { '\xef', '\xbb', '\xbf' };
+          if (bom3b != bomU8)
+          {
+            // file does not start with a UTF-8 Byte order mark
+            pStream.seekg(0, std::ios::beg);
+          }
+          else
+          {
+            // file did start with a UTF-8 Byte order mark, simply skip it
+            length -= 3;
+          }
+        }
+
+        ParseCsv(pStream, length);
       }
     }
 
-    void ReadCsv(std::istream& pStream)
+    void ParseCsv(std::istream& pStream, std::streamsize p_FileLength)
     {
-      pStream.seekg(0, std::ios::end);
-      std::streamsize fileLength = pStream.tellg();
-      pStream.seekg(0, std::ios::beg);
       const std::streamsize bufLength = 64 * 1024;
       std::vector<char> buffer(bufLength);
       std::vector<std::string> row;
@@ -1165,25 +1440,9 @@ namespace rapidcsv
       int cr = 0;
       int lf = 0;
 
-      // check for UTF-8 Byte order mark and skip it when found
-      if (std::min(fileLength, bufLength) >= 3)
+      while (p_FileLength > 0)
       {
-        pStream.read(buffer.data(), 3);
-        if (!std::equal(buffer.begin(), buffer.begin() + 3, "\xEF\xBB\xBF"))
-        {
-          // file does not start with a UTF-8 Byte order mark
-          pStream.seekg(0, std::ios::beg);
-        }
-        else
-        {
-          // file did start with a UTF-8 Byte order mark
-          fileLength -= 3;
-        }
-      }
-
-      while (fileLength > 0)
-      {
-        std::streamsize readLength = std::min(fileLength, bufLength);
+        std::streamsize readLength = std::min<std::streamsize>(p_FileLength, bufLength);
         pStream.read(buffer.data(), readLength);
         for (int i = 0; i < readLength; ++i)
         {
@@ -1199,7 +1458,7 @@ namespace rapidcsv
           {
             if (!quoted)
             {
-              row.push_back(mSeparatorParams.mTrim ? Trim(cell) : cell);
+              row.push_back(Unquote(Trim(cell)));
               cell.clear();
             }
             else
@@ -1227,11 +1486,28 @@ namespace rapidcsv
             else
             {
               ++lf;
-              row.push_back(mSeparatorParams.mTrim ? Trim(cell) : cell);
-              cell.clear();
-              mData.push_back(row);
-              row.clear();
-              quoted = false;
+              if (mLineReaderParams.mSkipEmptyLines && row.empty() && cell.empty())
+              {
+                // skip empty line
+              }
+              else
+              {
+                row.push_back(Unquote(Trim(cell)));
+
+                if (mLineReaderParams.mSkipCommentLines && !row.at(0).empty() &&
+                    (row.at(0)[0] == mLineReaderParams.mCommentPrefix))
+                {
+                  // skip comment line
+                }
+                else
+                {
+                  mData.push_back(row);
+                }
+
+                cell.clear();
+                row.clear();
+                quoted = false;
+              }
             }
           }
           else
@@ -1239,13 +1515,13 @@ namespace rapidcsv
             cell += buffer[i];
           }
         }
-        fileLength -= readLength;
+        p_FileLength -= readLength;
       }
 
       // Handle last line without linebreak
       if (!cell.empty() || !row.empty())
       {
-        row.push_back(mSeparatorParams.mTrim ? Trim(cell) : cell);
+        row.push_back(Unquote(Trim(cell)));
         cell.clear();
         mData.push_back(row);
         row.clear();
@@ -1307,7 +1583,7 @@ namespace rapidcsv
                                     new std::codecvt_utf16<wchar_t, 0x10ffff>));
         }
 
-        wstream << (wchar_t) 0xfeff;
+        wstream << static_cast<wchar_t>(0xfeff);
         wstream << wstr;
       }
       else
@@ -1326,14 +1602,19 @@ namespace rapidcsv
       {
         for (auto itc = itr->begin(); itc != itr->end(); ++itc)
         {
-          if ((std::string::npos == itc->find(mSeparatorParams.mSeparator)) ||
-              ((itc->length() >= 2) && ((*itc)[0] == '\"') && ((*itc)[itc->length() - 1] == '\"')))
+          if (mSeparatorParams.mAutoQuote &&
+              ((itc->find(mSeparatorParams.mSeparator) != std::string::npos) ||
+               (itc->find(' ') != std::string::npos)))
           {
-            pStream << *itc;
+            // escape quotes in string
+            std::string str = *itc;
+            ReplaceString(str, "\"", "\"\"");
+
+            pStream << "\"" << str << "\"";
           }
           else
           {
-            pStream << '"' << *itc << '"';
+            pStream << *itc;
           }
 
           if (std::distance(itc, itr->end()) > 1)
@@ -1343,30 +1624,6 @@ namespace rapidcsv
         }
         pStream << (mSeparatorParams.mHasCR ? "\r\n" : "\n");
       }
-    }
-
-    ssize_t GetColumnIdx(const std::string& pColumnName) const
-    {
-      if (mLabelParams.mColumnNameIdx >= 0)
-      {
-        if (mColumnNames.find(pColumnName) != mColumnNames.end())
-        {
-          return mColumnNames.at(pColumnName) - (mLabelParams.mRowNameIdx + 1);
-        }
-      }
-      return -1;
-    }
-
-    ssize_t GetRowIdx(const std::string& pRowName) const
-    {
-      if (mLabelParams.mRowNameIdx >= 0)
-      {
-        if (mRowNames.find(pRowName) != mRowNames.end())
-        {
-          return mRowNames.at(pRowName) - (mLabelParams.mColumnNameIdx + 1);
-        }
-      }
-      return -1;
     }
 
     size_t GetDataRowCount() const
@@ -1379,45 +1636,71 @@ namespace rapidcsv
       return (mData.size() > 0) ? mData.at(0).size() : 0;
     }
 
+    std::string Trim(const std::string& pStr)
+    {
+      if (mSeparatorParams.mTrim)
+      {
+        std::string str = pStr;
+
+        // ltrim
+        str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) { return !isspace(ch); }));
+
+        // rtrim
+        str.erase(std::find_if(str.rbegin(), str.rend(), [](int ch) { return !isspace(ch); }).base(), str.end());
+
+        return str;
+      }
+      else
+      {
+        return pStr;
+      }
+    }
+
+    std::string Unquote(const std::string& pStr)
+    {
+      if (mSeparatorParams.mAutoQuote && (pStr.size() >= 2) && (pStr.front() == '"') && (pStr.back() == '"'))
+      {
+        // remove start/end quotes
+        std::string str = pStr.substr(1, pStr.size() - 2);
+
+        // unescape quotes in string
+        ReplaceString(str, "\"\"", "\"");
+
+        return str;
+      }
+      else
+      {
+        return pStr;
+      }
+    }
+
 #ifdef HAS_CODECVT
 #if defined(_MSC_VER)
 #pragma warning (disable: 4996)
 #endif
     static std::string ToString(const std::wstring& pWStr)
     {
-      size_t len = std::wcstombs(nullptr, pWStr.c_str(), 0) + 1;
-      char* cstr = new char[len];
-      std::wcstombs(cstr, pWStr.c_str(), len);
-      std::string str(cstr);
-      delete[] cstr;
-      return str;
+      return std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>{ }.to_bytes(pWStr);
     }
 
     static std::wstring ToWString(const std::string& pStr)
     {
-      size_t len = 1 + mbstowcs(nullptr, pStr.c_str(), 0);
-      wchar_t* wcstr = new wchar_t[len];
-      std::mbstowcs(wcstr, pStr.c_str(), len);
-      std::wstring wstr(wcstr);
-      delete[] wcstr;
-      return wstr;
+      return std::wstring_convert<std::codecvt_utf8<wchar_t>, wchar_t>{ }.from_bytes(pStr);
     }
 #if defined(_MSC_VER)
 #pragma warning (default: 4996)
 #endif
 #endif
 
-    static std::string Trim(const std::string& pStr)
+    static void ReplaceString(std::string& pStr, const std::string& pSearch, const std::string& pReplace)
     {
-      std::string str = pStr;
+      size_t pos = 0;
 
-      // ltrim
-      str.erase(str.begin(), std::find_if(str.begin(), str.end(), [](int ch) { return !isspace(ch); }));
-
-      // rtrim
-      str.erase(std::find_if(str.rbegin(), str.rend(), [](int ch) { return !isspace(ch); }).base(), str.end());
-
-      return str;
+      while ((pos = pStr.find(pSearch, pos)) != std::string::npos)
+      {
+        pStr.replace(pos, pSearch.size(), pReplace);
+        pos += pReplace.size();
+      }
     }
 
   private:
@@ -1425,6 +1708,7 @@ namespace rapidcsv
     LabelParams mLabelParams;
     SeparatorParams mSeparatorParams;
     ConverterParams mConverterParams;
+    LineReaderParams mLineReaderParams;
     std::vector<std::vector<std::string>> mData;
     std::map<std::string, size_t> mColumnNames;
     std::map<std::string, size_t> mRowNames;

@@ -2,16 +2,16 @@
 // Demonstrating string member function substr.
 #include <iostream>
 #include <string>
-using namespace std;
 
 int main() {
-   const string s{"airplane"};
-   cout << s.substr(3, 4) << endl; // retrieve substring "plan" 
+   const std::string s{"airplane"};
+   std::cout << s.substr(3, 4) << '\n'; // retrieve substring "plan" 
 }
 
 
+
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

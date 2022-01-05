@@ -1,24 +1,20 @@
 // fig08_04.cpp
 // Using the swap function to swap two strings.
+#include <fmt/format.h> 
 #include <iostream>
 #include <string>
-#include "fmt/format.h" // In C++20, this will be #include <format>  
-using namespace std;
 
 int main() {
-   string first{"one"};
-   string second{"two"};
+   std::string s1{"one"};
+   std::string s2{"two"};
 
-   cout << fmt::format(
-      "Before swap:\nfirst: {}; second: {}", first, second);
-   first.swap(second); // swap strings
-   cout << fmt::format(
-      "\n\nAfter swap:\nfirst: {}; second: {}", first, second);
+   std::cout << fmt::format("Before swap:\ns1: {}; s2: {}", s1, s2);
+   s1.swap(s2); // swap strings
+   std::cout << fmt::format("\n\nAfter swap:\ns1: {}; s2: {}", s1, s2);
 }
 
-
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

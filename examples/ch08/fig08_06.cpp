@@ -1,51 +1,50 @@
 // fig08_06.cpp
 // Demonstrating the string find member functions.
+#include <fmt/format.h> 
 #include <iostream>
 #include <string>
-#include "fmt/format.h" // In C++20, this will be #include <format>  
-using namespace std;
 
 int main() {
-   const string s{"noon is 12pm; midnight is not"};
-   cout << "Original string: " << s;
+   const std::string s{"noon is 12pm; midnight is not"};
+   std::cout << "Original string: " << s;
 
    // find "is" from the beginning and end of s
-   cout << fmt::format("\ns.find(\"is\"): {}\ns.rfind(\"is\"): {}",
+   std::cout << fmt::format("\ns.find(\"is\"): {}\ns.rfind(\"is\"): {}",
       s.find("is"), s.rfind("is"));
 
    // find 'o' from beginning
-   int location = s.find_first_of("misop");
-   cout << fmt::format("\ns.find_first_of(\"misop\") found {} at {}",
+   int location{s.find_first_of("misop")};
+   std::cout << fmt::format("\ns.find_first_of(\"misop\") found {} at {}",
       s.at(location), location);
 
    // find 'o' from end
    location = s.find_last_of("misop");
-   cout << fmt::format("\ns.find_last_of(\"misop\") found {} at {}",
+   std::cout << fmt::format("\ns.find_last_of(\"misop\") found {} at {}",
       s.at(location), location);
 
    // find '1' from beginning
    location = s.find_first_not_of("noi spm");
-   cout << fmt::format(
+   std::cout << fmt::format(
       "\ns.find_first_not_of(\"noi spm\") found {} at {}",
       s.at(location), location);
 
-   // find ';'
+   // find ';' at location 12
    location = s.find_first_not_of("12noi spm");
-   cout << fmt::format(
+   std::cout << fmt::format(
       "\ns.find_first_not_of(\"12noi spm\") found {} at {}",
       s.at(location), location);
 
    // search for characters not in "noon is 12pm; midnight is not"
    location = s.find_first_not_of("noon is 12pm; midnight is not");
-   cout << fmt::format("\ns.find_first_not_of("s +
-      "\"noon is 12pm; midnight is not\"): {}"s, location);
+   std::cout << fmt::format("\n{}: {}\n",
+      "s.find_first_not_of(\"noon is 12pm; midnight is not\")",
+      location);
 }
 
 
 
-
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

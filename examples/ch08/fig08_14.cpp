@@ -1,29 +1,29 @@
 // fig08_14.cpp
 // Reading from a CSV file.
+#include <fmt/format.h> 
 #include <iostream>
-#include <string>
+#include <rapidcsv.h> 
 #include <vector>
-#include "fmt/format.h" // In C++20, this will be #include <format>  
-#include "rapidcsv.h"
-using namespace std;
 
 int main() {
    rapidcsv::Document document{"accounts.csv"}; // loads accounts.csv
-   vector<int> accounts{document.GetColumn<int>("account")};
-   vector<string> names{document.GetColumn<string>("name")};
-   vector<double> balances{document.GetColumn<double>("balance")};
+   std::vector<int> accounts{document.GetColumn<int>("account")};
+   std::vector<std::string> names{
+      document.GetColumn<std::string>("name")};
+   std::vector<double> balances{document.GetColumn<double>("balance")};
 
-   cout << fmt::format("{:<10}{:<13}{}\n", "Account", "Name", "Balance");
+   std::cout << fmt::format(
+      "{:<10}{:<13}{:>7}\n", "Account", "Name", "Balance");
 
    for (size_t i{0}; i < accounts.size(); ++i) {
-      cout << fmt::format("{:<10}{:<13}{:>7.2f}\n", 
-                 accounts.at(i), names.at(i), balances.at(i));
+      std::cout << fmt::format("{:<10}{:<13}{:>7.2f}\n",
+         accounts.at(i), names.at(i), balances.at(i));
    }
 }
 
 
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

@@ -1,9 +1,9 @@
 Rapidcsv
 ========
 
-| **Linux + Mac** | **Windows** |
-|-----------------|-------------|
-| [![Build status](https://travis-ci.com/d99kris/rapidcsv.svg?branch=master)](https://travis-ci.com/d99kris/rapidcsv) | [![Build status](https://ci.appveyor.com/api/projects/status/yyc65as5ln6m6i8l/branch/master?svg=true)](https://ci.appveyor.com/project/d99kris/rapidcsv/branch/master) |
+| **Linux** | **Mac** | **Windows** |
+|-----------|---------|-------------|
+| [![Linux](https://github.com/d99kris/rapidcsv/workflows/Linux/badge.svg)](https://github.com/d99kris/rapidcsv/actions?query=workflow%3ALinux) | [![macOS](https://github.com/d99kris/rapidcsv/workflows/macOS/badge.svg)](https://github.com/d99kris/rapidcsv/actions?query=workflow%3AmacOS) | [![Windows](https://github.com/d99kris/rapidcsv/workflows/Windows/badge.svg)](https://github.com/d99kris/rapidcsv/actions?query=workflow%3AWindows) |
 
 Rapidcsv is a C++ header-only library for CSV parsing. While the name
 admittedly was inspired by the rapidjson project, the objectives are not the
@@ -48,9 +48,9 @@ Supported Platforms
 ===================
 Rapidcsv is implemented using C++11 with the intention of being portable. It's
 been tested on:
-- macOS Catalina 10.15
+- macOS Big Sur 11.0
 - Ubuntu 20.04 LTS
-- Windows 10 / Visual Studio 2015
+- Windows 10 / Visual Studio 2019
 
 Installation
 ============
@@ -378,6 +378,43 @@ one can for example do:
       (std::find(columnNames.begin(), columnNames.end(), "A") != columnNames.end());
 ```
 
+Handling Quoted Cells
+---------------------
+By default rapidcsv automatically dequotes quoted cells (i.e. removes the encapsulating
+`"` characters from `"example quoted cell"`). This functionality may be disabled by
+passing `pAutoQuote = false` in `SeparatorParams`, example:
+
+```cpp
+    rapidcsv::Document doc("file.csv", rapidcsv::LabelParams(),
+                           rapidcsv::SeparatorParams(',' /* pSeparator */, 
+                                                     false /* pTrim */, 
+                                                     rapidcsv::sPlatformHasCR /* pHasCR */,
+                                                     false /* pQuotedLinebreaks */, 
+                                                     false /* pAutoQuote */));
+```
+
+Skipping Empty and Comment Lines
+--------------------------------
+Rapidcsv reads all lines by default, but may be called to ignore comment lines
+starting with a specific character, example:
+
+```cpp
+    rapidcsv::Document doc("file.csv", rapidcsv::LabelParams(), rapidcsv::SeparatorParams(),
+                           rapidcsv::ConverterParams(),
+                           rapidcsv::LineReaderParams(true /* pSkipCommentLines */,
+                                                      '#' /* pCommentPrefix */));
+```
+
+Using LineReaderParams it is also possible to skip empty lines, example:
+
+```cpp
+    rapidcsv::Document doc("file.csv", rapidcsv::LabelParams(), rapidcsv::SeparatorParams(),
+                           rapidcsv::ConverterParams(),
+                           rapidcsv::LineReaderParams(false /* pSkipCommentLines */,
+                                                      '#' /* pCommentPrefix */,
+                                                      true /* pSkipEmptyLines */));
+```
+
 UTF-16 and UTF-8
 ----------------
 Rapidcsv's preferred encoding for non-ASCII text is UTF-8. UTF-16 LE and
@@ -388,13 +425,20 @@ codecvt and sets HAS_CODECVT as needed, see [CMakeLists.txt](CMakeLists.txt)
 for reference. When enabled, the UTF-16 encoding of any loaded file is
 automatically detected.
 
+CMake FetchContent
+------------------
+Rapidcsv may be included in a CMake project using FetchContent. Refer to the
+[CMake FetchContent Example Project](examples/cmake-fetchcontent) and in
+particular its [CMakeLists.txt](examples/cmake-fetchcontent/CMakeLists.txt).
+
 API Documentation
 =================
 The following classes makes up the Rapidcsv interface:
  - [class rapidcsv::Document](doc/rapidcsv_Document.md)
- - [class rapidcsv::SeparatorParams](doc/rapidcsv_SeparatorParams.md)
  - [class rapidcsv::LabelParams](doc/rapidcsv_LabelParams.md)
+ - [class rapidcsv::SeparatorParams](doc/rapidcsv_SeparatorParams.md)
  - [class rapidcsv::ConverterParams](doc/rapidcsv_ConverterParams.md)
+ - [class rapidcsv::LineReaderParams](doc/rapidcsv_LineReaderParams.md)
  - [class rapidcsv::no_converter](doc/rapidcsv_no_converter.md)
  - [class rapidcsv::Converter< T >](doc/rapidcsv_Converter.md)
 
@@ -402,12 +446,12 @@ Technical Details
 =================
 Rapidcsv uses cmake for its tests. Commands to build and execute the test suite:
 
-    mkdir -p build && cd build && cmake .. && make && ctest -C unit --output-on-failure && ctest -C perf --verbose ; cd -
+    mkdir -p build && cd build && cmake -DRAPIDCSV_BUILD_TESTS=ON .. && make && ctest -C unit --output-on-failure && ctest -C perf --verbose ; cd -
 
-Rapidcsv uses [doxyman2md](https://github.com/d99kris/doxyman2md) to generate
-its API documentation:
+Rapidcsv uses [doxygenmd](https://github.com/d99kris/doxygenmd) to generate
+its Markdown API documentation:
 
-    doxyman2md src doc
+    doxygenmd src doc
 
 Rapidcsv uses Uncrustify to ensure consistent code formatting:
 
@@ -416,8 +460,6 @@ Rapidcsv uses Uncrustify to ensure consistent code formatting:
 Alternatives
 ============
 There are many CSV parsers for C++, for example:
-- [CSV Parser](https://github.com/AriaFallah/csv-parser)
-- [CSVparser](https://github.com/MyBoon/CSVparser)
 - [Fast C++ CSV Parser](https://github.com/ben-strasser/fast-cpp-csv-parser)
 - [Vince's CSV Parser](https://github.com/vincentlaucsb/csv-parser)
 
