@@ -13,7 +13,7 @@ public:
 
    // function to set the account name
    void setName(std::string_view name) {
-      m_name = name; // replace m_name's value with name
+      m_name = name;
    }
 
    // function to retrieve the account name
@@ -21,13 +21,13 @@ public:
       return m_name;
    }
 private:
-   std::string m_name; // account name data member
+   std::string m_name; // account name 
 }; // end class Account
 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

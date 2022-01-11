@@ -2,37 +2,40 @@
 // Time class member-function definitions.
 #include <stdexcept>
 #include "Time.h" // include definition of class Time
-using namespace std;
 
-// set values of hour, minute and second
+// set new Time value using 24-hour time
 void Time::setTime(int hour, int minute, int second) {
    // validate hour, minute and second
-   if ((hour < 0 || hour >= 24) || (minute < 0 || minute >= 60) || 
-      (second < 0 || second >= 60)) {
-      throw invalid_argument{"hour, minute or second was out of range"};
-   } 
+   if (hour < 0 || hour >= 24) {
+      throw std::invalid_argument{"hour was out of range"};
+   }
+
+   if (minute < 0 || minute >= 60) {
+      throw std::invalid_argument{"minute was out of range"};
+   }
+
+   if (second < 0 || second >= 60) {
+      throw std::invalid_argument{"second was out of range"};
+   }
 
    m_hour = hour;
    m_minute = minute;
    m_second = second;
-} 
+}
 
 // return hour value
 int Time::getHour() const {return m_hour;}
 
 // poor practice: returning a reference to a private data member. 
 int& Time::badSetHour(int hour) {
-   if (hour < 0 || hour >= 24) {
-      throw invalid_argument{"hour must be 0-23"};
-   } 
-
-   m_hour = hour;
+   setTime(hour, m_minute, m_second);
    return m_hour; // dangerous reference return                    
-}                                   
+}
+
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

@@ -1,6 +1,7 @@
 // Fig. 9.5: Account.h
 // Account class with m_name and m_balance data members, and a 
 // constructor and deposit function that each perform validation.
+#include <algorithm>
 #include <string>
 #include <string_view>
 
@@ -8,13 +9,8 @@ class Account {
 public:
    // Account constructor with two parameters  
    Account(std::string_view name, double balance)
-      : m_name{name} { // member initializer for m_name  
-
-      // validate that balance is greater than 0.0; if not,  
-      // data member m_balance keeps its default initial value of 0.0     
-      if (balance > 0.0) { // if the balance is valid     
-         m_balance = balance; // assign it to data member m_balance  
-      }
+      : m_name{name}, m_balance{std::max(0.0, balance)} { // member init
+      // empty body
    }
 
    // function that deposits (adds) only a valid amount to the balance
@@ -40,13 +36,14 @@ public:
    }
 private:
    std::string m_name; // account name data member 
-   double m_balance{0.0}; // data member with default initial value
+   double m_balance; // data member with default initial value
 }; // end class Account
 
 
 
+
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

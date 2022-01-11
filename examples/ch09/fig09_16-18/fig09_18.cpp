@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fmt/format.h>
 #include "Time.h" // include definition of class Time
-using namespace std;
 
 int main() {
    Time t{}; // create Time object
@@ -12,21 +11,22 @@ int main() {
    // initialize hourRef with the reference returned by badSetHour
    int& hourRef{t.badSetHour(20)}; // 20 is a valid hour 
 
-   cout << fmt::format("Valid hour before modification: {}\n", hourRef);
+   std::cout << fmt::format(
+      "Valid hour before modification: {}\n", hourRef);
    hourRef = 30; // use hourRef to set invalid value in Time object t
-   cout << fmt::format("Invalid hour after modification: {}\n\n", 
-              t.getHour());
+   std::cout << fmt::format(
+      "Invalid hour after modification: {}\n\n", t.getHour());
 
    // Dangerous: Function call that returns a reference can be 
    // used as an lvalue! POOR PROGRAMMING PRACTICE!!!!!!!!
    t.badSetHour(12) = 74; // assign another invalid value to hour
 
-   cout << "After using t.badSetHour(12) as an lvalue, "
-        << fmt::format("hour is: {}\n", t.getHour());
-} 
+   std::cout << "After using t.badSetHour(12) as an lvalue, "
+      << fmt::format("hour is: {}\n", t.getHour());
+}
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

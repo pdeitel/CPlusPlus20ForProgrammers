@@ -1,42 +1,43 @@
 // Fig. 9.24: Date.cpp
 // Date class member-function definitions.
 #include <array>
+#include <fmt/format.h>
 #include <iostream>
 #include <stdexcept>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Date.h" // include Date class definition
-using namespace std;
 
 // constructor confirms proper value for month; calls
 // utility function checkDay to confirm proper value for day
 Date::Date(int year, int month, int day)
    : m_year{year}, m_month{month}, m_day{day} {
    if (m_month < 1 || m_month > monthsPerYear) { // validate the month
-      throw invalid_argument{"month must be 1-12"};
+      throw std::invalid_argument{"month must be 1-12"};
    }
 
    if (!checkDay(day)) { // validate the day
-      throw invalid_argument{"Invalid day for current month and year"};
+      throw std::invalid_argument{
+         "Invalid day for current month and year"};
    }
 
    // output Date object to show when its constructor is called
-   cout << fmt::format("Date object constructor: {}\n", toString());
+   std::cout << fmt::format("Date object constructor: {}\n", toString());
 }
 
 // gets string representation of a Date in the form yyyy-mm-dd
-string Date::toString() const {
+std::string Date::toString() const {
    return fmt::format("{}-{:02d}-{:02d}", m_year, m_month, m_day);
 }
 
 // output Date object to show when its destructor is called
 Date::~Date() {
-   cout << fmt::format("Date object destructor: {}\n", toString());
+   std::cout << fmt::format("Date object destructor: {}\n", toString());
 }
 
 // utility function to confirm proper day value based on 
 // month and year; handles leap years, too
 bool Date::checkDay(int day) const {
-   static const array daysPerMonth{
+   // we ignore element 0
+   static const std::array daysPerMonth{
       0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
    // determine whether testDay is valid for specified month
@@ -56,7 +57,7 @@ bool Date::checkDay(int day) const {
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

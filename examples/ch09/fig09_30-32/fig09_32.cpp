@@ -1,7 +1,7 @@
 // fig09_32.cpp
 // Cascading member-function calls with the this pointer.
+#include <fmt/format.h>
 #include <iostream>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Time.h" // Time class definition
 using namespace std;
 
@@ -11,16 +11,16 @@ int main() {
    t.setHour(18).setMinute(30).setSecond(22); // cascaded function calls
 
    // output time in 24-hour and 12-hour formats
-   cout << fmt::format("24-hour time: {}\n12-hour time: {}\n\n",
-              t.to24HourString(), t.to12HourString());
+   std::cout << fmt::format("24-hour time: {}\n12-hour time: {}\n\n",
+      t.to24HourString(), t.to12HourString());
 
    // cascaded function calls        
-   cout << fmt::format("New 12-hour time: {}\n",
-              t.setTime(20, 20, 20).to12HourString());
+   std::cout << fmt::format("New 12-hour time: {}\n",
+      t.setTime(20, 20, 20).to12HourString());
 }
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

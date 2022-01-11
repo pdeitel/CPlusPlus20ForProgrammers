@@ -1,42 +1,44 @@
 // fig09_35.cpp
 // static data member tracking the number of objects of a class.
+#include <fmt/format.h>
 #include <iostream>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Employee.h" // Employee class definition
-using namespace std;
 
 int main() {
    // no objects exist; use class name and scope resolution 
    // operator to access static member function getCount
-   cout << fmt::format("Initial employee count: {}\n", 
-              Employee::getCount()); // use class name
+   std::cout << fmt::format("Initial employee count: {}\n",
+      Employee::getCount()); // use class name
 
    // the following scope creates and destroys 
    // Employee objects before main terminates
    {
-      const Employee e1{"Susan", "Baker"}; 
+      const Employee e1{"Susan", "Baker"};
       const Employee e2{"Robert", "Jones"};
 
       // two objects exist; call static member function getCount again 
       // using the class name and the scope resolution operator
-      cout << fmt::format("Employee count after creating objects: {}\n\n",
-                 Employee::getCount());
+      std::cout << fmt::format(
+         "Employee count after creating objects: {}\n\n",
+         Employee::getCount());
 
-      cout << fmt::format("Employee 1: {} {}\nEmployee 2: {} {}\n\n", 
-                 e1.getFirstName(), e1.getLastName(), 
-                 e2.getFirstName(), e2.getLastName()); 
-   } 
+      std::cout << fmt::format("Employee 1: {} {}\nEmployee 2: {} {}\n\n",
+         e1.getFirstName(), e1.getLastName(),
+         e2.getFirstName(), e2.getLastName());
+   }
 
    // no objects exist, so call static member function getCount again 
    // using the class name and the scope resolution operator
-   cout << fmt::format("Employee count after objects are deleted: {}\n",
-              Employee::getCount());
-} 
+   std::cout << fmt::format(
+      "Employee count after objects are deleted: {}\n",
+      Employee::getCount());
+}
+
 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

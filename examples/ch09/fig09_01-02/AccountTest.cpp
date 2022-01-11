@@ -1,32 +1,30 @@
 // Fig. 9.1: AccountTest.cpp
 // Creating and manipulating an Account object.
+#include <fmt/format.h>
 #include <iostream>
 #include <string>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Account.h"
-
-using namespace std;
 
 int main() {
    Account myAccount{}; // create Account object myAccount
 
    // show that the initial value of myAccount's name is the empty string
-   cout << fmt::format("Initial account name: {}\n", myAccount.getName());
+   std::cout << fmt::format("Initial account name: {}\n",
+      myAccount.getName());
 
    // prompt for and read the name
-   cout << "Enter the account name: ";
-   string name{};
-   getline(cin, name); // read a line of text       
+   std::cout << "Enter the account name: ";
+   std::string name{};
+   std::getline(std::cin, name); // read a line of text       
    myAccount.setName(name); // put name in the myAccount object
 
    // display the name stored in object myAccount
-   cout << fmt::format("Updated account name: {}\n", myAccount.getName());
+   std::cout << fmt::format("Updated account name: {}\n",
+      myAccount.getName());
 }
 
-
-
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

@@ -8,7 +8,7 @@ public:
    static const int monthsPerYear{12}; // months in a year
    Date(int year, int month, int day);
    std::string toString() const; // date string in yyyy-mm-dd format
-   ~Date(); // provided to show when destruction occurs
+   ~Date(); // implementation displays when destruction occurs
 private:
    int m_year; // any year
    int m_month; // 1-12 (January-December)
@@ -20,7 +20,7 @@ private:
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

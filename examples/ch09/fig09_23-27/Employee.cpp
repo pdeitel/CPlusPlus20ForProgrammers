@@ -1,37 +1,37 @@
 // Fig. 9.26: Employee.cpp
 // Employee class member-function definitions.
+#include <fmt/format.h>
 #include <iostream>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Employee.h" // Employee class definition
-#include "Date.h" // Date class definition
 using namespace std;
 
 // constructor uses member initializer list to pass initializer 
 // values to constructors of member objects 
-Employee::Employee(string_view firstName, string_view lastName,
-   const Date &birthDate, const Date & hireDate)
+Employee::Employee(std::string_view firstName, std::string_view lastName,
+   const Date& birthDate, const Date& hireDate)
    : m_firstName{firstName}, m_lastName{lastName},
-     m_birthDate{birthDate}, m_hireDate{hireDate} {
+   m_birthDate{birthDate}, m_hireDate{hireDate} {
    // output Employee object to show when constructor is called
-   cout << fmt::format("Employee object constructor: {} {}\n", 
-              m_firstName, m_lastName);
-} 
+   std::cout << fmt::format("Employee object constructor: {} {}\n",
+      m_firstName, m_lastName);
+}
 
 // gets string representation of an Employee object
-string Employee::toString() const {
+std::string Employee::toString() const {
    return fmt::format("{}, {}  Hired: {}  Birthday: {}", m_lastName,
-             m_firstName, m_hireDate.toString(), m_birthDate.toString());
-} 
+      m_firstName, m_hireDate.toString(), m_birthDate.toString());
+}
 
 // output Employee object to show when its destructor is called
 Employee::~Employee() {
    cout << fmt::format("Employee object destructor: {}, {}\n",
-              m_lastName, m_firstName);
+      m_lastName, m_firstName);
 }
 
 
+
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

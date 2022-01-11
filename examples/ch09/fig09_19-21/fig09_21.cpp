@@ -1,25 +1,27 @@
 // fig09_21.cpp 
 // Demonstrating that class objects can be assigned
 // to each other using the default assignment operator.
+#include <fmt/format.h>
 #include <iostream>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Date.h" // include definition of class Date from Date.h
 using namespace std;
 
 int main() {
-   const Date date1{2004, 7, 4};
-   Date date2{2020, 1, 1};
+   const Date date1{2006, 7, 4};
+   Date date2{2022, 1, 1};
 
-   cout << fmt::format("date1: {}\ndate2: {}\n\n",
+   std::cout << fmt::format("date1: {}\ndate2: {}\n\n",
       date1.toString(), date2.toString());
    date2 = date1; // uses the default assignment operator
-   cout << fmt::format("After assignment, date2: {}\n", date2.toString());
+   std::cout << fmt::format("After assignment, date2: {}\n",
+      date2.toString());
 }
 
 
 
+
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

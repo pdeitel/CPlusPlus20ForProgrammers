@@ -1,16 +1,15 @@
 // fig09_09.cpp
 // Program to test class Time.                     
-// NOTE: This file must be compiled with Time.cpp. 
+// NOTE: This file must be linked with Time.cpp. 
+#include <fmt/format.h>
 #include <iostream>
 #include <stdexcept> // invalid_argument exception class
 #include <string_view> 
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Time.h" // definition of class Time from Time.h 
-using namespace std;
 
 // displays a Time in 24-hour and 12-hour formats
-void displayTime(string_view message, const Time& time) {
-   cout << fmt::format("{}\n24-hour time: {}\n12-hour time: {}\n\n",
+void displayTime(std::string_view message, const Time& time) {
+   std::cout << fmt::format("{}\n24-hour time: {}\n12-hour time: {}\n\n",
       message, time.to24HourString(), time.to12HourString());
 }
 
@@ -25,8 +24,8 @@ int main() {
    try {
       t.setTime(99, 99, 99); // all values out of range
    }
-   catch (const invalid_argument& e) {
-      cout << fmt::format("Exception: {}\n\n", e.what());
+   catch (const std::invalid_argument& e) {
+      std::cout << fmt::format("Exception: {}\n\n", e.what());
    }
 
    // display t's value after attempting to set an invalid time
@@ -34,7 +33,7 @@ int main() {
 }
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

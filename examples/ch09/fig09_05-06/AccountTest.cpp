@@ -1,47 +1,47 @@
 // Fig. 9.6: AccountTest.cpp
 // Displaying and updating Account balances.
+#include <fmt/format.h>
 #include <iostream>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Account.h"
-
-using namespace std;
 
 int main() {
    Account account1{"Jane Green", 50.00};
    Account account2{"John Blue", -7.00};
 
    // display initial balance of each object
-   cout << fmt::format("account1: {} balance is ${:.2f}\n",
+   std::cout << fmt::format("account1: {} balance is ${:.2f}\n",
       account1.getName(), account1.getBalance());
-   cout << fmt::format("account2: {} balance is ${:.2f}\n\n",
+   std::cout << fmt::format("account2: {} balance is ${:.2f}\n\n",
       account2.getName(), account2.getBalance());
 
-   cout << "Enter deposit amount for account1: "; // prompt
+   std::cout << "Enter deposit amount for account1: "; // prompt
    double amount;
-   cin >> amount; // obtain user input
-   cout << fmt::format("adding ${:.2f} to account1 balance\n\n", amount);
+   std::cin >> amount; // obtain user input
+   std::cout << fmt::format(
+      "adding ${:.2f} to account1 balance\n\n", amount);
    account1.deposit(amount); // add to account1's balance
 
    // display balances
-   cout << fmt::format("account1: {} balance is ${:.2f}\n",
+   std::cout << fmt::format("account1: {} balance is ${:.2f}\n",
       account1.getName(), account1.getBalance());
-   cout << fmt::format("account2: {} balance is ${:.2f}\n\n",
+   std::cout << fmt::format("account2: {} balance is ${:.2f}\n\n",
       account2.getName(), account2.getBalance());
 
-   cout << "Enter deposit amount for account2: "; // prompt
-   cin >> amount; // obtain user input
-   cout << fmt::format("adding ${:.2f} to account2 balance\n\n", amount);
+   std::cout << "Enter deposit amount for account2: "; // prompt
+   std::cin >> amount; // obtain user input
+   std::cout << fmt::format(
+      "adding ${:.2f} to account2 balance\n\n", amount);
    account2.deposit(amount); // add to account2 balance
 
    // display balances
-   cout << fmt::format("account1: {} balance is ${:.2f}\n",
+   std::cout << fmt::format("account1: {} balance is ${:.2f}\n",
       account1.getName(), account1.getBalance());
-   cout << fmt::format("account2: {} balance is ${:.2f}\n",
+   std::cout << fmt::format("account2: {} balance is ${:.2f}\n",
       account2.getName(), account2.getBalance());
 }
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

@@ -1,67 +1,64 @@
 // fig09_36.cpp
 // Serializing and deserializing objects with the cereal library.
-#include <iostream>
+#include <cereal/archives/json.hpp> 
+#include <cereal/types/vector.hpp>  
+#include <fmt/format.h>
 #include <fstream>
+#include <iostream>
 #include <vector>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
-#include <cereal/archives/json.hpp>
-#include <cereal/types/vector.hpp>
-
-using namespace std;
 
 struct Record {
    int account{};
-   string first{};
-   string last{};
+   std::string first{};
+   std::string last{};
    double balance{};
 };
 
 // function template serialize is responsible for serializing and 
 // deserializing Record objects to/from the specified Archive
-template <typename Archive> 
+template <typename Archive>
 void serialize(Archive& archive, Record& record) {
-   archive(cereal::make_nvp("account", record.account), 
-      cereal::make_nvp("first", record.first), 
-      cereal::make_nvp("last", record.last), 
+   archive(cereal::make_nvp("account", record.account),
+      cereal::make_nvp("first", record.first),
+      cereal::make_nvp("last", record.last),
       cereal::make_nvp("balance", record.balance));
 }
 
 // display record at command line
-void displayRecords(const vector<Record>& records) {
+void displayRecords(const std::vector<Record>& records) {
    for (const auto& r : records) {
-      cout << fmt::format("{} {} {} {:.2f}\n",
-                 r.account, r.first, r.last, r.balance);
+      std::cout << fmt::format("{} {} {} {:.2f}\n",
+         r.account, r.first, r.last, r.balance);
    }
 }
 
 int main() {
-   vector records{
+   std::vector records{
       Record{100, "Brian", "Blue", 123.45},
       Record{200, "Sue", "Green", 987.65}
    };
 
-   cout << "Records to serialize:\n";
+   std::cout << "Records to serialize:\n";
    displayRecords(records);
 
    // serialize vector of Records to JSON and store in text file
-   if (ofstream output{"records.json"}) {
+   if (std::ofstream output{"records.json"}) {
       cereal::JSONOutputArchive archive{output};
       archive(cereal::make_nvp("records", records)); // serialize records
    }
 
    // deserialize JSON from text file into vector of Records
-   if (ifstream input{"records.json"}) {
+   if (std::ifstream input{"records.json"}) {
       cereal::JSONInputArchive archive{input};
-      vector<Record> deserializedRecords{};
+      std::vector<Record> deserializedRecords{};
       archive(deserializedRecords); // deserialize records
-      cout << "\nDeserialized records:\n";
+      std::cout << "\nDeserialized records:\n";
       displayRecords(deserializedRecords);
    }
 }
 
-
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

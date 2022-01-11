@@ -1,7 +1,7 @@
 // Fig. 9.34: Employee.cpp
 // Employee class member-function definitions.
+#include <fmt/format.h>
 #include <iostream>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Employee.h" // Employee class definition 
 using namespace std;
 
@@ -14,14 +14,14 @@ int Employee::getCount() {return m_count;}
 Employee::Employee(string_view firstName, string_view lastName)
    : m_firstName(firstName), m_lastName(lastName) {
    ++m_count; // increment static count of employees
-   cout << fmt::format("Employee constructor called for {} {}\n", 
-              m_firstName, m_lastName);
+   std::cout << fmt::format("Employee constructor called for {} {}\n", 
+      m_firstName, m_lastName);
 } 
 
 // destructor decrements the count
 Employee::~Employee() {
-   cout << fmt::format("~Employee() called for {} {}\n", 
-              m_firstName, m_lastName);
+   std::cout << fmt::format("~Employee() called for {} {}\n", 
+      m_firstName, m_lastName);
    --m_count; // decrement static count of employees
 }
 
@@ -31,8 +31,9 @@ const string& Employee::getFirstName() const {return m_firstName;}
 // return last name of employee
 const string& Employee::getLastName() const {return m_lastName;}
 
+
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

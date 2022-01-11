@@ -1,11 +1,9 @@
 // Fig. 9.4: AccountTest.cpp
-// Using the Account constructor to initialize the m_name data
-// member at the time each Account object is created.
+// Using the Account constructor to initialize the m_name 
+// data member when each Account object is created.
+#include <fmt/format.h>
 #include <iostream>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Account.h"
-
-using namespace std;
 
 int main() {
    // create two Account objects
@@ -13,14 +11,15 @@ int main() {
    Account account2{"John Blue"};
 
    // display initial each Account's corresponding name
-   cout << fmt::format("account1 name is: {}\naccount2 name is: {}\n",
-              account1.getName(), account2.getName());
+   std::cout << fmt::format(
+      "account1 name is: {}\naccount2 name is: {}\n",
+      account1.getName(), account2.getName());
 }
 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

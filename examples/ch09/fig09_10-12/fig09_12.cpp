@@ -1,25 +1,24 @@
 // fig09_12.cpp 
 // Constructor with default arguments.
+#include <fmt/format.h>
 #include <iostream>
 #include <stdexcept>
 #include <string>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Time.h" // include definition of class Time from Time.h
-using namespace std;
 
 // displays a Time in 24-hour and 12-hour formats
-void displayTime(string_view message, const Time& time) {
-   cout << fmt::format("{}\n24-hour time: {}\n12-hour time: {}\n\n",
+void displayTime(std::string_view message, const Time& time) {
+   std::cout << fmt::format("{}\n24-hour time: {}\n12-hour time: {}\n\n",
       message, time.to24HourString(), time.to12HourString());
 }
 
 int main() {
    const Time t1{}; // all arguments defaulted                            
-   const Time t2{2}; // hour specified; minute and second defaulted     
-   const Time t3{21, 34}; // hour and minute specified; second defaulted
-   const Time t4{12, 25, 42}; // hour, minute and second specified      
+   const Time t2{2}; // hour specified; minute & second defaulted     
+   const Time t3{21, 34}; // hour & minute specified; second defaulted
+   const Time t4{12, 25, 42}; // hour, minute & second specified      
 
-   cout << "Constructed with:\n\n";
+   std::cout << "Constructed with:\n\n";
    displayTime("t1: all arguments defaulted", t1);
    displayTime("t2: hour specified; minute and second defaulted", t2);
    displayTime("t3: hour and minute specified; second defaulted", t3);
@@ -29,15 +28,15 @@ int main() {
    try {
       const Time t5{27, 74, 99}; // all bad values specified
    }
-   catch (const invalid_argument& e) {
-      cerr << fmt::format("t5 not created: {}\n", e.what());
+   catch (const std::invalid_argument& e) {
+      std::cerr << fmt::format("t5 not created: {}\n", e.what());
    }
 }
 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

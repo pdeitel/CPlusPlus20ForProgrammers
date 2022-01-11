@@ -1,15 +1,13 @@
 // fig09_37.cpp
 // Serializing and deserializing objects containing private data.
-#include <iostream>
+#include <cereal/archives/json.hpp>
+#include <cereal/types/vector.hpp>
+#include <fmt/format.h>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <string_view>
 #include <vector>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
-#include <cereal/archives/json.hpp>
-#include <cereal/types/vector.hpp>
-
-using namespace std;
 
 class Record {
    // declare serialize as a friend for direct access to private data
@@ -18,21 +16,21 @@ class Record {
 
 public:
    // constructor
-   explicit Record(int account = 0, string_view first = "",
-      string_view last = "", double balance = 0.0)
+   explicit Record(int account = 0, std::string_view first = "",
+      std::string_view last = "", double balance = 0.0)
       : m_account{account}, m_first{first},
       m_last{last}, m_balance{balance} {}
 
    // get member functions
    int getAccount() const { return m_account; }
-   const string& getFirst() const { return m_first; }
-   const string& getLast() const { return m_last; }
+   const std::string& getFirst() const { return m_first; }
+   const std::string& getLast() const { return m_last; }
    double getBalance() const { return m_balance; }
 
 private:
    int m_account{};
-   string m_first{};
-   string m_last{};
+   std::string m_first{};
+   std::string m_last{};
    double m_balance{};
 };
 
@@ -47,41 +45,40 @@ void serialize(Archive& archive, Record& record) {
 }
 
 // display record at command line
-void displayRecords(const vector<Record>& records) {
+void displayRecords(const std::vector<Record>& records) {
    for (const auto& r : records) {
-      cout << fmt::format("{} {} {} {:.2f}\n", r.getAccount(), 
-                 r.getFirst(), r.getLast(), r.getBalance());
+      std::cout << fmt::format("{} {} {} {:.2f}\n", r.getAccount(),
+         r.getFirst(), r.getLast(), r.getBalance());
    }
 }
 
 int main() {
-   vector records{
+   std::vector records{
       Record{100, "Brian", "Blue", 123.45},
       Record{200, "Sue", "Green", 987.65}
    };
 
-   cout << "Records to serialize:\n";
+   std::cout << "Records to serialize:\n";
    displayRecords(records);
 
    // serialize vector of Records to JSON and store in text file
-   if (ofstream output{"records2.json"}) {
+   if (std::ofstream output{"records2.json"}) {
       cereal::JSONOutputArchive archive{output};
       archive(cereal::make_nvp("records", records)); // serialize records
    }
 
    // deserialize JSON from text file into vector of Records
-   if (ifstream input{"records2.json"}) {
+   if (std::ifstream input{"records2.json"}) {
       cereal::JSONInputArchive archive{input};
-      vector<Record> deserializedRecords{};
+      std::vector<Record> deserializedRecords{};
       archive(deserializedRecords); // deserialize records
-      cout << "\nDeserialized records:\n";
+      std::cout << "\nDeserialized records:\n";
       displayRecords(deserializedRecords);
    }
 }
 
-
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

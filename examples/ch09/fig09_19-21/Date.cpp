@@ -1,21 +1,20 @@
 // Fig. 9.20: Date.cpp
 // Date class member-function definitions.
+#include <fmt/format.h>
 #include <string>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Date.h" // include definition of class Date from Date.h
-using namespace std;
 
 // Date constructor (should do range checking)
 Date::Date(int year, int month, int day)
    : m_year{year}, m_month{month}, m_day{day} {}
 
 // return string representation of a Date in the format yyyy-mm-dd
-string Date::toString() const {
+std::string Date::toString() const {
    return fmt::format("{}-{:02d}-{:02d}", m_year, m_month, m_day);
 }
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

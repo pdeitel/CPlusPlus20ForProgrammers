@@ -1,24 +1,22 @@
 // fig09_27.cpp
 // Demonstrating composition--an object with member objects.
+#include <fmt/format.h>
 #include <iostream>
-#include "fmt/format.h" // In C++20, this will be #include <format> 
 #include "Date.h" // Date class definition
 #include "Employee.h" // Employee class definition
-using namespace std;
 
 int main() {
-   const Date birth{1987, 7, 24};
+   const Date birth{1987 ,7, 24};
    const Date hire{2018, 3, 12};
-   const Employee manager{"Sue", "Green", birth, hire}; 
+   const Employee manager{"Sue", "Green", birth, hire};
 
-   cout << fmt::format("\n{}\n", manager.toString());
-} 
-
+   std::cout << fmt::format("\n{}\n\n", manager.toString());
+}
 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

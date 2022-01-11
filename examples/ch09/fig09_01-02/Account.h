@@ -1,5 +1,5 @@
 // Fig. 9.2: Account.h
-// Account class with a data member and 
+// Account class with a data member and
 // member functions to set and get its value.
 #include <string> 
 #include <string_view> 
@@ -13,7 +13,7 @@ public:
 
    // member function that retrieves the account name from the object
    const std::string& getName() const {
-      return m_name; // return the name to this function's caller 
+      return m_name; // return m_name's value to this function's caller 
    }
 private:
    std::string m_name; // data member containing account holder's name
@@ -22,8 +22,9 @@ private:
 
 
 
+
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *
