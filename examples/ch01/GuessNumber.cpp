@@ -1,25 +1,14 @@
 // Randomly generate numbers between 1 and 1000 for user to guess.
 #include <iostream>
 #include <random> // contains C++11 random number generation features 
-#include <ctime>
 using namespace std;
 
-void guessGame(); // function prototype
 bool isCorrect(int, int); // function prototype
 
 int main() {
-   guessGame();
-
-   return 0; // indicate successful termination
-} 
-
-// guessGame generates numbers between 1 and 1000
-// and checks user's guess
-void guessGame() {
    // use the default random-number generation engine to                
    // produce uniformly distributed pseudorandom int values from 1 to 6 
-//   default_random_engine engine{static_cast<unsigned int>(time(0))};
-   default_random_engine engine{};
+   default_random_engine engine{random_device{}()};
    uniform_int_distribution<int> randomInt{1, 1000};
 
    char response = 'n'; // determines whether to continue playing
@@ -31,25 +20,27 @@ void guessGame() {
       const int answer{randomInt(engine)};
 
       // prompt for guess
-      cout << "I have a number between 1 and 1000.\n" 
-           << "Can you guess my number?\n" 
-           << "Please type your first guess." << endl << "? ";
+      cout << "I have a number between 1 and 1000.\n"
+         << "Can you guess my number?\n"
+         << "Please type your first guess." << endl << "? ";
       int guess;
       cin >> guess;
 
       // loop until correct number
-      while (!isCorrect(guess, answer)) { 
-         cin >> guess;   
+      while (!isCorrect(guess, answer)) {
+         cin >> guess;
       }
 
       // prompt for another game
       cout << "\nExcellent! You guessed the number!\n"
-           << "Would you like to play again (y or n)? ";
+         << "Would you like to play again (y or n)? ";
       cin >> response;
 
       cout << endl;
    } while (response == 'y');
-} // end function guessGame
+
+   return 0; // indicate successful termination
+} 
 
 // isCorrect returns true if g equals a
 // if g does not equal a, displays hint
@@ -73,7 +64,7 @@ bool isCorrect(int guess, int answer) {
 
 
 /**************************************************************************
- * (C) Copyright 1992-2012 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *
