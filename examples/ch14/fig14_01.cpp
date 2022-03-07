@@ -14,14 +14,13 @@ int main() {
 
    // output each element multiplied by two
    std::cout << "\nDisplay each element multiplied by two: ";
-   std::ranges::for_each(values, [](auto i) {std::cout << i * 2 << " "; });
+   std::ranges::for_each(values, [](auto i) {std::cout << i * 2 << " ";});
 
    // add each element to sum
    int sum{0}; // initialize sum to zero
-   std::ranges::for_each(values, [&sum](auto i) {sum += i; });
+   std::ranges::for_each(values, [&sum](auto i) {sum += i;});
    std::cout << "\nSum of value's elements is: " << sum << "\n";
 }
-
 
 
 /**************************************************************************

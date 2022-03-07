@@ -14,12 +14,12 @@ int main() {
       cout << count << " ";
    }
 
-   cout << "\nBroke out of loop at count = " << count << endl;
+   cout << "\nBroke out of loop at count = " << count << "\n";
 } 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

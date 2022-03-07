@@ -9,9 +9,9 @@
 
 // binary function returns the sum of its first argument total 
 // and the square of its second argument value
-int sumSquares(int total, int value) {                       
-   return total + value * value;                             
-}                               
+int sumSquares(int total, int value) {
+   return total + value * value;
+}
 
 // class SumSquaresClass defines overloaded operator()
 // that returns the sum of its first argument total 
@@ -51,7 +51,7 @@ int main() {
       0, [](auto total, auto value) {return total + value * value; });
 
    std::cout << "\nvia a lambda: " << result << "\n";
-} 
+}
 
 
 /**************************************************************************

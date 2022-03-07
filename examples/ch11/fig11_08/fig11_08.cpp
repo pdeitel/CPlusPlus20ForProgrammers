@@ -7,22 +7,21 @@ using namespace std;
 void outputArray(const MyArray&); // prototype
 
 int main() {
-   MyArray ints1(7); // 7-element MyArray
+   MyArray ints1{7}; // 7-element MyArray
    outputArray(ints1); // output MyArray ints1
    outputArray(3); // convert 3 to a MyArray and output its contents
    outputArray(MyArray(3)); // explicit single-argument constructor call
-}  
+}
 
 // print MyArray contents
 void outputArray(const MyArray& arrayToOutput) {
-   cout << "The MyArray received has " << arrayToOutput.size() 
+   std::cout << "The MyArray received has " << arrayToOutput.size()
       << " elements. The contents are: " << arrayToOutput << "\n";
-} 
-
+}
 
 
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

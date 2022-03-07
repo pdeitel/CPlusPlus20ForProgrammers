@@ -3,7 +3,7 @@
 #include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Derived.h"
 
-// constructor for Derived calls Base 1 and Base2 constructors.
+// constructor for Derived calls Base1 and Base2 constructors
 Derived::Derived(int value, char letter, double real)
    : Base1{value}, Base2{letter}, m_real{real} {} 
 
@@ -11,13 +11,14 @@ Derived::Derived(int value, char letter, double real)
 double Derived::getReal() const {return m_real;}
 
 // display all data members of Derived
-string Derived::toString() const {
+std::string Derived::toString() const { 
    return fmt::format("int: {}; char: {}; double: {}", 
-             Base1::getData(), Base2::getData(), getReal());
+      Base1::getData(), Base2::getData(), getReal()); 
 } 
 
+
 /**************************************************************************
- * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

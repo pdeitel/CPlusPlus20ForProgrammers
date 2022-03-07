@@ -24,13 +24,13 @@ public:
    MyArray(MyArray&& original) noexcept; // move constructor
    MyArray& operator=(MyArray&& right) noexcept; // move assignment
 
-   ~MyArray(); // destructor                 
+   ~MyArray(); // destructor 
 
-   size_t size() const noexcept {return m_size;}; // return size
+   size_t size() const noexcept { return m_size; }; // return size
    std::string toString() const; // create string representation
 
-   // equality operator; compiler autogenerates !=
-   bool operator==(const MyArray& right) const noexcept; 
+   // equality operator
+   bool operator==(const MyArray& right) const noexcept;
 
    // subscript operator for non-const objects returns modifiable lvalue
    int& operator[](size_t index);
@@ -39,13 +39,13 @@ public:
    const int& operator[](size_t index) const;
 
    // convert MyArray to a bool value: true if non-empty; false if empty
-   explicit operator bool() const noexcept {return size() != 0;}
+   explicit operator bool() const noexcept { return size() != 0; }
 
    // preincrement every element, then return updated MyArray  
-   MyArray& operator++();      
+   MyArray& operator++();
 
    // postincrement every element, and return copy of original MyArray  
-   MyArray operator++(int); // postfix increment operator
+   MyArray operator++(int);
 
    // add value to every element, then return updated MyArray
    MyArray& operator+=(int value);
@@ -57,10 +57,8 @@ private:
 // overloaded operator<< is not a friend--does not access private data
 std::ostream& operator<<(std::ostream& out, const MyArray& a);
 
-
-
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

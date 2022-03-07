@@ -1,5 +1,5 @@
 // fig02_03.cpp
-// Displaying multiple lines of text with a single statement.
+// Displayings multiple lines of text with a single statement.
 #include <iostream> // enables program to output data to the screen
 
 // function main begins program execution
@@ -10,7 +10,7 @@ int main() {
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

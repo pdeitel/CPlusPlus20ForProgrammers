@@ -5,7 +5,7 @@
 #include <map> // multimap class-template definition
 
 int main() {
-   std::multimap<int, double, std::less<int>> pairs{}; // create multimap
+   std::multimap<int, double> pairs{}; // create multimap
    std::cout << fmt::format("Number of 15 keys in pairs: {}\n",
       pairs.count(15));
 
@@ -32,7 +32,7 @@ int main() {
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

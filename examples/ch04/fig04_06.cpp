@@ -66,16 +66,16 @@ int main() {
          << total << "\nClass average is " << average  
          << "\nNumber of students who received each grade:"
          << "\nA: " << aCount << "\nB: " << bCount << "\nC: " << cCount
-         << "\nD: " << dCount << "\nF: " << fCount << endl; 
+         << "\nD: " << dCount << "\nF: " << fCount << "\n"; 
    } 
    else { // no grades were entered, so output appropriate message
-      cout << "No grades were entered" << endl;
+      cout << "No grades were entered" << "\n";
    }
 }
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

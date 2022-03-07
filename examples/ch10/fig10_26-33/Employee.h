@@ -5,19 +5,20 @@
 #include <string_view> 
 #include "CompensationModel.h"
 
-class Employee {
+class Employee final {
 public:
    Employee(std::string_view name, CompensationModel* modelPtr);
-   void setCompensationModel(CompensationModel *modelPtr);
+   void setCompensationModel(CompensationModel* modelPtr);
    double earnings() const;
    std::string toString() const;
 private:
    std::string m_name{};
    CompensationModel* m_modelPtr{}; // pointer to an implementation object
-}; 
+};
+
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

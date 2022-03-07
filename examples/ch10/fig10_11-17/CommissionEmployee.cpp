@@ -1,12 +1,11 @@
 // Fig. 10.16: CommissionEmployee.cpp
 // CommissionEmployee class member-function definitions.
+#include <fmt/format.h>
 #include <stdexcept>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "CommissionEmployee.h" // CommissionEmployee class definition
-using namespace std;
 
 // constructor                                                        
-CommissionEmployee::CommissionEmployee(string_view name, 
+CommissionEmployee::CommissionEmployee(std::string_view name, 
    double grossSales, double commissionRate) : Employee{name} {
    setGrossSales(grossSales); 
    setCommissionRate(commissionRate); 
@@ -15,7 +14,7 @@ CommissionEmployee::CommissionEmployee(string_view name,
 // set gross sales amount
 void CommissionEmployee::setGrossSales(double grossSales) {
    if (grossSales < 0.0) {
-      throw invalid_argument("Gross sales must be >= 0.0");
+      throw std::invalid_argument("Gross sales must be >= 0.0");
    } 
 
    m_grossSales = grossSales;
@@ -27,7 +26,8 @@ double CommissionEmployee::getGrossSales() const {return m_grossSales;}
 // set commission rate
 void CommissionEmployee::setCommissionRate(double commissionRate) {
    if (commissionRate <= 0.0 || commissionRate >= 1.0) {
-      throw invalid_argument("Commission rate must be > 0.0 and < 1.0");
+      throw std::invalid_argument(
+         "Commission rate must be > 0.0 and < 1.0");
    } 
 
    m_commissionRate = commissionRate;
@@ -44,14 +44,14 @@ double CommissionEmployee::earnings() const {
 }                                            
 
 // return string representation of CommissionEmployee object        
-string CommissionEmployee::toString() const {                       
+std::string CommissionEmployee::toString() const {                       
    return fmt::format("{}\n{}: ${:.2f}\n{}: {:.2f}", Employee::toString(),
-             "gross sales", getGrossSales(),
-             "commission rate", getCommissionRate());                  
-}                                                     
+      "gross sales", getGrossSales(),
+      "commission rate", getCommissionRate());                  
+}                                                                   
 
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

@@ -5,15 +5,15 @@
 // class Base2 definition
 class Base2 {
 public:
-   Base2(char letter) : m_letter{letter} {}
-   char getData() const {return m_letter;}
+   explicit Base2(char letter) : m_letter{letter} {}
+   char getData() const { return m_letter; }
 private: // accessible to derived classes via getData member function
-   char m_letter; 
-}; 
+   char m_letter;
+};
 
 
 /**************************************************************************
- * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

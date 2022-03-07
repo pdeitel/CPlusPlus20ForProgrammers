@@ -12,11 +12,11 @@ int main() {
    double principal{1000.00}; // initial amount before interest
    double rate{0.05}; // interest rate
 
-   cout << "Initial principal: " << principal << endl;
-   cout << "    Interest rate:    " << rate << endl;
+   cout << "Initial principal: " << principal << "\n";
+   cout << "    Interest rate:    " << rate << "\n";
 
    // display headers
-   cout << "\nYear" << setw(20) << "Amount on deposit" << endl;
+   cout << "\nYear" << setw(20) << "Amount on deposit" << "\n";
 
    // calculate amount on deposit for each of ten years
    for (int year{1}; year <= 10; ++year) {
@@ -24,13 +24,13 @@ int main() {
       double amount{principal * pow(1.0 + rate, year)} ;             
 
       // display the year and the amount
-      cout << setw(4) << year << setw(20) << amount << endl;
+      cout << setw(4) << year << setw(20) << amount << "\n";
    } 
 }
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

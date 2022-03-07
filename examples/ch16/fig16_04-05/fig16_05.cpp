@@ -9,7 +9,7 @@ int main() {
    std::cout << "square(3) = " << deitel::math::square(3) << '\n';
 
    // cannot call cube because it's not exported 
-   std::cout << "cube(3) = " << deitel::math::cube(7.5, 2.5) << '\n';
+   std::cout << "cube(3) = " << deitel::math::cube(3) << '\n';
 }
 
 

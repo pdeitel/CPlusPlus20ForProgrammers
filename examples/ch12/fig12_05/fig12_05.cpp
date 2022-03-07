@@ -1,17 +1,17 @@
 // fig12_05.cpp
 // Demonstrating a function try block.
+#include <fmt/format.h>
 #include <iostream>
 #include <limits>
 #include <stdexcept>
-using namespace std;
 
-// class Integer purposesly throws an exception from it's constructor
+// class Integer purposely throws an exception from its constructor
 class Integer {
 public:
    explicit Integer(int i) : value{i} {
-      cout << "Integer constructor: " << value 
-         << "\nPurposely throwing exception from Integer constructor\n";
-      throw runtime_error("Integer constructor failed");
+      std::cout << fmt::format("Integer constructor: {}\n", value)
+         << "Purposely throwing exception from Integer constructor\n";
+      throw std::runtime_error("Integer constructor failed");
    }
 private:
    int value{};
@@ -20,28 +20,30 @@ private:
 class ResourceManager {
 public:
    ResourceManager(int i) try : myInteger(i) {
-      cout << "ResourceManager constructor called\n";
+      std::cout << "ResourceManager constructor called\n";
    }
-   catch (const runtime_error& ex) {
-      cout << "Exception while constructing ResourceManager: " 
-         << ex.what() << "\nAutomatically rethrowing the exception\n";
+   catch (const std::runtime_error& ex) {
+      std::cout << fmt::format(
+         "Exception while constructing ResourceManager: ", ex.what())
+         << "\nAutomatically rethrowing the exception\n";
    }
 private:
    Integer myInteger;
 };
 
-int main() {   
+int main() {
    try {
       const ResourceManager resource{7};
    }
-   catch (const runtime_error& ex) {
-      cout << "Rethrown exception caught in main: " << ex.what() << "\n";
+   catch (const std::runtime_error& ex) {
+      std::cout << fmt::format("Rethrown exception caught in main: {}\n",
+         ex.what());
    }
-} 
+}
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

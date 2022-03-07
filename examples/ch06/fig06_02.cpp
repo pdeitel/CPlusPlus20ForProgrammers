@@ -14,7 +14,7 @@ int main() {
 
    std::cout << "\n\n";
 
-   // using class-template argument deduction to determine values2's type
+   // using class template argument deduction to determine values2's type
    std::array values2{1.1, 2.2, 3.3, 4.4};
 
    // output each array element's value
@@ -28,7 +28,7 @@ int main() {
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

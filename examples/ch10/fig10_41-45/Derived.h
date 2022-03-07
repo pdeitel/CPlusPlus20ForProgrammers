@@ -2,7 +2,6 @@
 // Definition of class Derived which inherits
 // multiple base classes (Base1 and Base2).
 #pragma once
-
 #include <iostream>
 #include <string>
 #include "Base1.h"
@@ -17,12 +16,13 @@ public:
    std::string toString() const;
 private:
    double m_real; // derived class's private data
-}; 
+};
+
 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2014 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

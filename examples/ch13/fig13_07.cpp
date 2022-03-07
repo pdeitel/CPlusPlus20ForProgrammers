@@ -18,21 +18,21 @@ int main() {
    // p.second represents whether 13.8 was inserted         
    auto p{doubles.insert(13.8)}; // value not in set   
    std::cout << fmt::format("\n{} {} inserted\n", *(p.first),
-                   (p.second ? "was" : "was not"));
+      (p.second ? "was" : "was not"));
    std::cout << "doubles contains: ";
    std::ranges::copy(doubles, output);
 
    // insert 9.5 in doubles                          
    p = doubles.insert(9.5); // value already in set
    std::cout << fmt::format("\n{} {} inserted\n", *(p.first),
-                   (p.second ? "was" : "was not"));
+      (p.second ? "was" : "was not"));
    std::cout << "doubles contains: ";
    std::ranges::copy(doubles, output);
    std::cout << "\n";
 }
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

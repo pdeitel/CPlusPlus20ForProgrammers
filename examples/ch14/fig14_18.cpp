@@ -46,12 +46,12 @@ int main() {
       output);
 
    // allow std::string object literals
-   using namespace std::literals::string_literals;
+   using namespace std::string_literals;
 
    std::map<std::string, int> romanNumerals{
       {"I"s, 1}, {"II"s, 2}, {"III"s, 3}, {"IV"s, 4}, {"V"s, 5}};
    auto displayPair{[](const auto& p) {
-         std::cout << p.first << " = " << p.second << "\n";}};
+         std::cout << p.first << " = " << p.second << "\n"; }};
    std::cout << "\n\nromanNumerals:\n";
    std::ranges::for_each(romanNumerals, displayPair);
 
@@ -70,6 +70,7 @@ int main() {
    std::ranges::copy(romanNumerals | std::views::elements<1>, output);
    std::cout << "\n";
 }
+
 
 
 /**************************************************************************

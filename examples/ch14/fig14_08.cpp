@@ -10,41 +10,42 @@ int main() {
    std::ostream_iterator<int> output{std::cout, " "};
 
    std::cout << "values contains: ";
-   std::ranges::copy(values, output); 
+   std::ranges::copy(values, output);
 
    std::swap(values[0], values[1]); // swap elements at index 0 and 1
 
-   std::cout << "\nvalues after swapping a[0] and a[1] with swap: ";
-   std::ranges::copy(values, output); 
+   std::cout << "\nafter std::swap of values[0] and values[1]: ";
+   std::ranges::copy(values, output);
 
    // use iterators to swap elements at locations 0 and 1 
-   std::iter_swap(values.begin(), values.begin() + 1); 
-   std::cout << "\nvalues after swapping a[0] and a[1] with iter_swap: ";
+   std::iter_swap(values.begin(), values.begin() + 1);
+   std::cout << "\nafter std::iter_swap of values[0] and values[1]: ";
    std::ranges::copy(values, output);
 
    // swap values and values2  
    std::array values2{10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
    std::cout << "\n\nBefore swap_ranges\nvalues contains: ";
-   std::ranges::copy(values, output); 
+   std::ranges::copy(values, output);
    std::cout << "\nvalues2 contains: ";
-   std::ranges::copy(values2, output); 
+   std::ranges::copy(values2, output);
    std::ranges::swap_ranges(values, values2);
    std::cout << "\n\nAfter swap_ranges\nvalues contains: ";
-   std::ranges::copy(values, output); 
+   std::ranges::copy(values, output);
    std::cout << "\nvalues2 contains: ";
-   std::ranges::copy(values2, output); 
+   std::ranges::copy(values2, output);
 
    // swap first five elements of values and values2
-   std::ranges::swap_ranges(values.begin(), values.begin() + 5, 
+   std::ranges::swap_ranges(values.begin(), values.begin() + 5,
       values2.begin(), values2.begin() + 5);
 
-   std::cout << "\n\nAfter swap_ranges for 5 elements" 
+   std::cout << "\n\nAfter swap_ranges for 5 elements"
       << "\nvalues contains: ";
-   std::ranges::copy(values, output); 
+   std::ranges::copy(values, output);
    std::cout << "\nvalues2 contains: ";
-   std::ranges::copy(values2, output); 
+   std::ranges::copy(values2, output);
    std::cout << "\n";
-} 
+}
+
 
 
 /**************************************************************************

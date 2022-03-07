@@ -3,7 +3,7 @@
 // set_symmetric_difference and set_union.
 #include <array>
 #include <algorithm>
-#include <fmt/format.h> // C++20: This will be #include <fo rmat>
+#include <fmt/format.h> // C++20: This will be #include <format>
 #include <iostream>
 #include <iterator> 
 #include <vector> 
@@ -22,35 +22,33 @@ int main() {
    std::ranges::copy(a3, output); // display array a3
 
    // determine whether a2 is completely contained in a1
-   std::cout << fmt::format("\n\na1 {} a2", 
-                   std::ranges::includes(a1, a2) ? 
-                      "includes" : "does not include");
-      
+   std::cout << fmt::format("\n\na1 {} a2",
+      std::ranges::includes(a1, a2) ? "includes" : "does not include");
+
    // determine whether a3 is completely contained in a1
-   std::cout << fmt::format("\n\na1 {} a3", 
-                   std::ranges::includes(a1, a3) ? 
-                      "includes" : "does not include");
+   std::cout << fmt::format("\n\na1 {} a3",
+      std::ranges::includes(a1, a3) ? "includes" : "does not include");
 
    // determine elements of a1 not in a2 
    std::vector<int> difference{};
    std::ranges::set_difference(a1, a2, std::back_inserter(difference));
    std::cout << "\n\nset_difference of a1 and a2 is: ";
-   std::ranges::copy(difference, output); 
+   std::ranges::copy(difference, output);
 
    // determine elements in both a1 and a2                 
    std::vector<int> intersection{};
-   std::ranges::set_intersection(a1, a2, 
+   std::ranges::set_intersection(a1, a2,
       std::back_inserter(intersection));
    std::cout << "\n\nset_intersection of a1 and a2 is: ";
-   std::ranges::copy(intersection, output); 
+   std::ranges::copy(intersection, output);
 
    // determine elements of a1 that are not in a3 and              
    // elements of a3 that are not in a1                            
    std::vector<int> symmetricDifference{};
-   std::ranges::set_symmetric_difference(a1, a3, 
-      back_inserter(symmetricDifference));
+   std::ranges::set_symmetric_difference(a1, a3,
+      std::back_inserter(symmetricDifference));
    std::cout << "\n\nset_symmetric_difference of a1 and a3 is: ";
-   std::ranges::copy(symmetricDifference, output); 
+   std::ranges::copy(symmetricDifference, output);
 
    // determine elements that are in either or both sets
    std::vector<int> unionSet{};
@@ -58,7 +56,7 @@ int main() {
    std::cout << "\n\nset_union of a1 and a3 is: ";
    std::ranges::copy(unionSet, output);
    std::cout << "\n";
-} 
+}
 
 
 /**************************************************************************

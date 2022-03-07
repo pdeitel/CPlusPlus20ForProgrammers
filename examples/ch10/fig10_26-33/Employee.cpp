@@ -1,14 +1,13 @@
 // Fig. 10.28: Employee.cpp
 // Class Employee member-function definitions.
+#include <fmt/format.h> 
 #include <string> 
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "CompensationModel.h"
 #include "Employee.h" 
-using namespace std;
 
 // constructor performs "constructor injection" to initialize  
-// the CompensationModel pointer to an CompensationModel implementation 
-Employee::Employee(string_view name, CompensationModel* modelPtr)
+// the CompensationModel pointer to a CompensationModel implementation 
+Employee::Employee(std::string_view name, CompensationModel* modelPtr)
    : m_name{name}, m_modelPtr{modelPtr} {}
 
 // set function performs "property injection" to change the   
@@ -22,13 +21,13 @@ double Employee::earnings() const {
    return m_modelPtr->earnings();
 }; 
 
-// return string representation of an Employee object        
-string Employee::toString() const {                       
+// return string representation of Employee object        
+std::string Employee::toString() const {                       
    return fmt::format("{}\n{}", m_name, m_modelPtr->toString());
-}            
+}                    
 
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

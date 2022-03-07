@@ -9,12 +9,12 @@ int main() {
    string student{"Paul"};
    int grade{87};
 
-   cout << format("{}'s grade is {}", student, grade) << endl;
+   cout << format("{}'s grade is {}\n", student, grade);
 }
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

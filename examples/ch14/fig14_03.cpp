@@ -32,8 +32,7 @@ int main() {
    // check for mismatch between a1 and a3 
    auto location{std::ranges::mismatch(a1, a3)};
    std::cout << fmt::format("a1 and a3 mismatch at index {} ({} vs. {})\n",
-      (location.in1 - a1.begin()),
-      *location.in1, *location.in2);
+      (location.in1 - a1.begin()), *location.in1, *location.in2);
 
    std::string s1{"HELLO"};
    std::string s2{"BYE BYE"};
@@ -42,7 +41,6 @@ int main() {
    std::cout << fmt::format("\"{}\" < \"{}\": {}\n", s1, s2,
       std::ranges::lexicographical_compare(s1, s2));
 }
-
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

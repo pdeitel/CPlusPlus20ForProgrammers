@@ -35,15 +35,15 @@ int main() {
       cout << "\nTotal of the " << gradeCounter 
          << " grades entered is " << total;
       cout << setprecision(2) << fixed; 
-      cout << "\nClass average is " << average << endl; 
+      cout << "\nClass average is " << average << "\n"; 
    } 
    else { // no grades were entered, so output appropriate message
-      cout << "No grades were entered" << endl; 
+      cout << "No grades were entered\n"; 
    }
 } 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

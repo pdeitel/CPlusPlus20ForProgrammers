@@ -1,25 +1,22 @@
 // fig12_08.cpp
 // Division by zero with a precondition.
 #include <iostream>
-using namespace std;
 
 double quotient(double numerator, double denominator) 
-   [[pre: denominator != 0.0]]
-   [[post result: result != ]];
+   [[pre: denominator != 0.0]];
 
 int main() {
-   cout << "quotient(100, 7): " << quotient(100, 7)
+   std::cout << "quotient(100, 7): " << quotient(100, 7)
       << "\nquotient(100, 0): " << quotient(100, 0) << '\n';
 } 
 
 // perform division 
 double quotient(double numerator, double denominator) {
-   double result{numerator / denominator}; 
-   return result;
+   return numerator / denominator;
 }
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

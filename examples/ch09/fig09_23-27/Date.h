@@ -1,5 +1,5 @@
 // Fig. 9.23: Date.h 
-// Date class definition; Member functions defined in Date.cpp
+// Date class definition; member functions defined in Date.cpp
 #pragma once // prevent multiple inclusions of header
 #include <string>
 

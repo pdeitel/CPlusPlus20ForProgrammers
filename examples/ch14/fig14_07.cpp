@@ -11,21 +11,17 @@ int main() {
 
    std::cout << "values contains: ";
    std::ranges::copy(values, output); // display output vector
-   
-   // locate first occurrence of 16 in values          
-   auto loc1{std::ranges::find(values, 16)};
 
-   if (loc1 != values.cend()) { // found 16
+   // locate first occurrence of 16 in values          
+   if (auto loc1{std::ranges::find(values, 16)}; loc1 != values.cend()) {
       std::cout << "\n\nFound 16 at index: " << (loc1 - values.cbegin());
    }
    else { // 16 not found
       std::cout << "\n\n16 not found";
    }
-   
-   // locate first occurrence of 100 in values  
-   auto loc2{std::ranges::find(values, 100)};
 
-   if (loc2 != values.cend()) { // found 100
+   // locate first occurrence of 100 in values  
+   if (auto loc2{std::ranges::find(values, 100)}; loc2 != values.cend()) {
       std::cout << "\nFound 100 at index: " << (loc2 - values.cbegin());
    }
    else { // 100 not found 
@@ -33,20 +29,20 @@ int main() {
    }
 
    // create variable to store lambda for reuse later
-   constexpr auto isGreaterThan10{[](auto x){return x > 10;}};
+   auto isGreaterThan10{[](auto x) {return x > 10; }};
 
    // locate first occurrence of value greater than 10 in values
    auto loc3{std::ranges::find_if(values, isGreaterThan10)};
 
    if (loc3 != values.cend()) { // found value greater than 10
-      std::cout << "\n\nFirst value greater than 10: " << *loc3 
+      std::cout << "\n\nFirst value greater than 10: " << *loc3
          << "\nfound at index: " << (loc3 - values.cbegin());
    }
    else { // value greater than 10 not found
       std::cout << "\n\nNo values greater than 10 were found";
    }
 
-   // sort elements of a      
+   // sort elements of values      
    std::ranges::sort(values);
    std::cout << "\n\nvalues after sort: ";
    std::ranges::copy(values, output);
@@ -87,15 +83,15 @@ int main() {
    if (std::ranges::none_of(values, isGreaterThan10)) {
       std::cout << "\n\nNo values elements are greater than 10";
    }
-   else { 
+   else {
       std::cout << "\n\nSome values elements are greater than 10";
    }
 
-   // locate first occurrence of value that
+   // locate first occurrence of value that is not greater than 10
    auto loc4{std::ranges::find_if_not(values, isGreaterThan10)};
 
    if (loc4 != values.cend()) { // found a value less than or equal to 10
-      std::cout << "\n\nFirst value not greater than 10: " << *loc4 
+      std::cout << "\n\nFirst value not greater than 10: " << *loc4
          << "\nfound at index: " << (loc4 - values.cbegin());
    }
    else { // no values less than or equal to 10 were found
@@ -103,7 +99,7 @@ int main() {
    }
 
    std::cout << "\n";
-} 
+}
 
 
 /**************************************************************************

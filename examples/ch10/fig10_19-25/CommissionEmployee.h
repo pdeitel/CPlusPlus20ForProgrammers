@@ -7,27 +7,27 @@
 
 class CommissionEmployee final : public Employee {
 public:
-   CommissionEmployee(std::string_view name, double grossSales, 
+   CommissionEmployee(std::string_view name, double grossSales,
       double commissionRate);
    virtual ~CommissionEmployee() = default; // virtual destructor
 
-   void setGrossSales(double grossSales); 
-   double getGrossSales() const; 
+   void setGrossSales(double grossSales);
+   double getGrossSales() const;
 
-   void setCommissionRate(double commissionRate); 
-   double getCommissionRate() const; 
+   void setCommissionRate(double commissionRate);
+   double getCommissionRate() const;
 private:
-   double m_grossSales{0.0};      
-   double m_commissionRate{0.0};  
+   double m_grossSales{0.0};
+   double m_commissionRate{0.0};
 
    // keyword override signals intent to override                 
    double getPay() const override; // calculate earnings        
    std::string getString() const override; // string representation
-}; 
+};
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

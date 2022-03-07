@@ -18,7 +18,7 @@ int main() {
    std::cout << "\n\nstd::lcm(3, 5): " << std::lcm(3, 5)
       << "\nstd::lcm(12, 9): " << std::lcm(12, 9);
 
-   // fill an array with integers using the std::iota algorithm;
+   // fill an array with integers using the std::iota algorithm
    std::array<int, 5> ints{};
    std::iota(ints.begin(), ints.end(), 1);
    std::cout << "\n\nints: ";
@@ -35,10 +35,11 @@ int main() {
    std::ranges::copy(ints, output);
    std::cout << "\n\npartial_sum of ints using std::plus by default: ";
    std::partial_sum(ints.begin(), ints.end(), output);
-   std::cout << "\n\npartial_sum of ints using std::multiplies: ";
+   std::cout << "\npartial_sum of ints using std::multiplies: ";
    std::partial_sum(ints.begin(), ints.end(), output, std::multiplies{});
    std::cout << "\n";
-} 
+}
+
 
 
 /**************************************************************************

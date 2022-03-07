@@ -1,7 +1,7 @@
 # C++20 for Programmers
 This repository contains the source code and supporting files associated with our book **C++20 for Programmers**. https://deitel.com/c-plus-plus-20-for-programmers 
     
-These files are Copyright 2021 by Deitel & Associates, Inc. and Pearson Education, Inc. All Rights Reserved. 
+These files are Copyright 2022 by Deitel & Associates, Inc. and Pearson Education, Inc. All Rights Reserved. 
 
 You may use these files for your personal purposes, but please do not repost them without our express written consent.
 

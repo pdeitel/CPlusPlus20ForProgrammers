@@ -11,12 +11,12 @@ int main() {
       ++counter;
    } while (counter <= 10); // end do...while 
 
-   cout << endl; 
+   cout << "\n"; 
 } 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

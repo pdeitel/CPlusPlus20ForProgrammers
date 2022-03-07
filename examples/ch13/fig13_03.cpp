@@ -22,7 +22,7 @@ int main() {
    integers[0] = 7; // set first element to 7             
    integers.at(2) = 10; // set element at position 2 to 10
 
-   // insert 22 as 2nd element                  
+   // insert 22 as second element                  
    integers.insert(integers.cbegin() + 1, 22);
 
    std::cout << "Contents of vector integers after changes: ";
@@ -42,7 +42,7 @@ int main() {
    std::cout << "\nContents of vector integers before clear: ";
    std::ranges::copy(integers, output);
 
-   // empty integers; clear calls erase to empty a collection
+   // empty integers; clear empties a collection
    integers.clear();
    std::cout << fmt::format("\nAfter clear, integers {} empty\n",
       integers.empty() ? "is" : "is not");
@@ -50,7 +50,7 @@ int main() {
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

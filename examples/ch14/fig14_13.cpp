@@ -1,5 +1,5 @@
 // fig14_13.cpp
-// Algorithms min, max, minmax and minmax_element.
+// Algorithms min, max and minmax.
 #include <array>
 #include <algorithm>
 #include <iostream>
@@ -21,12 +21,11 @@ int main() {
 
    std::cout << "\n\nitems: ";
    std::ranges::copy(items, output);
-   
-   const auto& [smallest, largest]{std::ranges::minmax(items)};
+
+   auto [smallest, largest]{std::ranges::minmax(items)};
    std::cout << "\nMinimum value in items: " << smallest
       << "\nMaximum value in items is: " << largest << "\n";
-} 
-
+}
 
 
 /**************************************************************************

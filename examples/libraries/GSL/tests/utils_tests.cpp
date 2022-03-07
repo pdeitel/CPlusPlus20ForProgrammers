@@ -16,8 +16,8 @@
 
 #include <gtest/gtest.h>
 
-#include <gsl/gsl_util> // for narrow, finally, narrow_cast, narrowing_e...
-
+#include <gsl/util>     // finally, narrow_cast
+#include <gsl/narrow>   // for narrow, narrowing_error
 #include <algorithm>   // for move
 #include <functional>  // for reference_wrapper, _Bind_helper<>::type
 #include <limits>      // for numeric_limits
@@ -66,6 +66,28 @@ TEST(utils_tests, finally_lambda_move)
             EXPECT_TRUE(i == 1);
         }
         EXPECT_TRUE(i == 1);
+    }
+    EXPECT_TRUE(i == 1);
+}
+
+TEST(utils_tests, finally_const_lvalue_lambda)
+{
+    int i = 0;
+    {
+        const auto const_lvalue_lambda = [&]() { f(i); };
+        auto _ = finally(const_lvalue_lambda);
+        EXPECT_TRUE(i == 0);
+    }
+    EXPECT_TRUE(i == 1);
+}
+
+TEST(utils_tests, finally_mutable_lvalue_lambda)
+{
+    int i = 0;
+    {
+        auto mutable_lvalue_lambda = [&]() { f(i); };
+        auto _ = finally(mutable_lvalue_lambda);
+        EXPECT_TRUE(i == 0);
     }
     EXPECT_TRUE(i == 1);
 }
@@ -122,8 +144,4 @@ TEST(utils_tests, narrow)
 
     n = -42;
     EXPECT_THROW(narrow<unsigned>(n), narrowing_error);
-
-#if GSL_CONSTEXPR_NARROW
-    static_assert(narrow<char>(120) == 120, "Fix GSL_CONSTEXPR_NARROW");
-#endif
 }

@@ -18,7 +18,7 @@ int main() {
    pairs[25] = 9999.99; // use subscripting to change value for key 25
    pairs[40] = 8765.43; // use subscripting to insert value for key 40
 
-   // use const_iterator to walk through elements of pairs
+   // walk through elements of pairs
    std::cout << "\nAfter updates, pairs contains:\nKey\tValue\n";
    for (const auto& pair : pairs) {
       std::cout << fmt::format("{}\t{}\n", pair.first, pair.second);
@@ -28,7 +28,7 @@ int main() {
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

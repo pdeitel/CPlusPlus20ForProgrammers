@@ -1,36 +1,58 @@
 cmake_minimum_required(VERSION 3.0.2)
 
 project(GSLTests CXX)
+enable_testing()  # again, for support standalone testing
+
+include(FindPkgConfig)
+include(ExternalProject)
 
 # will make visual studio generated project group files
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
-execute_process(
-    COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
-    RESULT_VARIABLE result
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download
-)
-if(result)
-    message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+if(IOS)
+  add_compile_definitions(GTEST_HAS_DEATH_TEST=1)
 endif()
 
-execute_process(
-    COMMAND ${CMAKE_COMMAND} --build .
-    RESULT_VARIABLE result
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download
-)
-if(result)
-    message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+pkg_search_module(GTestMain gtest_main)
+if (NOT GTestMain_FOUND)
+    # No pre-installed GTest is available, try to download it using Git.
+    find_package(Git REQUIRED QUIET)
+
+    configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+        RESULT_VARIABLE result
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download
+    )
+    if(result)
+        message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+    endif()
+
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} --build .
+        RESULT_VARIABLE result
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download
+    )
+    if(result)
+        message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+    endif()
+
+    set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    set(GTestMain_LIBRARIES gtest_main)
+
+    add_subdirectory(
+        ${CMAKE_CURRENT_BINARY_DIR}/googletest-src
+        ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
+        EXCLUDE_FROM_ALL
+    )
 endif()
 
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-
-add_subdirectory(
-    ${CMAKE_CURRENT_BINARY_DIR}/googletest-src
-    ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
-    EXCLUDE_FROM_ALL
-)
+if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
+    # CMake has been started independently in this directory with tests. Do
+    # import the globally installed Guidelines Support Library and test it
+    # instead of the current version from the include/ folder.
+    find_package(Microsoft.GSL REQUIRED)
+endif()
 
 if (MSVC AND (GSL_CXX_STANDARD EQUAL 17))
     set(GSL_CPLUSPLUS_OPT -Zc:__cplusplus -permissive-)
@@ -147,9 +169,9 @@ set_property(TARGET  PROPERTY FOLDER "GSL_tests")
 function(add_gsl_test name)
     add_executable(${name} ${name}.cpp)
     target_link_libraries(${name}
-        GSL
+        Microsoft.GSL::GSL
         gsl_tests_config
-        gtest_main
+        ${GTestMain_LIBRARIES}
     )
     add_test(
         ${name}
@@ -162,11 +184,8 @@ endfunction()
 add_gsl_test(span_tests)
 add_gsl_test(span_ext_tests)
 add_gsl_test(span_compatibility_tests)
-add_gsl_test(multi_span_tests)
-add_gsl_test(strided_span_tests)
 add_gsl_test(string_span_tests)
 add_gsl_test(at_tests)
-add_gsl_test(bounds_tests)
 add_gsl_test(notnull_tests)
 add_gsl_test(assertion_tests)
 add_gsl_test(utils_tests)
@@ -252,9 +271,9 @@ endif(MSVC)
 function(add_gsl_test_noexcept name)
     add_executable(${name} ${name}.cpp)
     target_link_libraries(${name}
-        GSL
+        Microsoft.GSL::GSL
         gsl_tests_config_noexcept
-        gtest_main
+        ${GTestMain_LIBRARIES}
     )
     add_test(
       ${name}

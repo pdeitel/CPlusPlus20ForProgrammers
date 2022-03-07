@@ -9,7 +9,7 @@ export std::string welcomeStandalone() {
    return "welcomeStandalone function called";
 }
 
-// export block exports all items in the block's braces
+// exporting all items in the braces that follow export
 export {
    std::string welcomeFromExportBlock() {
       return "welcomeFromExportBlock function called";
@@ -23,7 +23,7 @@ export namespace TestNamespace1 {
    }
 }
 
-// exporting an item in a namespace exports the namespace name too
+// exporting an item in a namespace exports the namespace name, too
 namespace TestNamespace2 {
    export std::string welcomeFromTestNamespace2() {
       return "welcomeFromTestNamespace2 function called";

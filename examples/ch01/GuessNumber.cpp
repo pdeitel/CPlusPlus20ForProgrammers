@@ -7,7 +7,7 @@ bool isCorrect(int, int); // function prototype
 
 int main() {
    // use the default random-number generation engine to                
-   // produce uniformly distributed pseudorandom int values from 1 to 6 
+   // produce uniformly distributed pseudorandom int values from 1 to 1000
    default_random_engine engine{random_device{}()};
    uniform_int_distribution<int> randomInt{1, 1000};
 
@@ -42,8 +42,8 @@ int main() {
    return 0; // indicate successful termination
 } 
 
-// isCorrect returns true if g equals a
-// if g does not equal a, displays hint
+// isCorrect returns true if guess equals answer;
+// otherwise it displays a hint and returns false
 bool isCorrect(int guess, int answer) {
    // guess is correct
    if (guess == answer) {

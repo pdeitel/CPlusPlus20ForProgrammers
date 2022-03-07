@@ -1,4 +1,4 @@
-// SalariedEmployee.h
+// Fig. 10.1: SalariedEmployee.h
 // SalariedEmployee class definition.
 #pragma once // prevent multiple inclusions of header
 #include <string> 
@@ -7,24 +7,23 @@
 class SalariedEmployee {
 public:
    SalariedEmployee(std::string_view name, double salary);
-   
-   void setName(std::string_view name); 
-   std::string getName() const; 
 
-   void setSalary(double salary); 
-   double getSalary() const; 
+   void setName(std::string_view name);
+   std::string getName() const;
 
-   virtual double earnings() const; 
-   virtual std::string toString() const; 
+   void setSalary(double salary);
+   double getSalary() const;
+
+   virtual double earnings() const;
+   virtual std::string toString() const;
 private:
-   std::string m_name{};                        
-   double m_salary{0.0}; 
-}; 
-
+   std::string m_name{};
+   double m_salary{0.0};
+};
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

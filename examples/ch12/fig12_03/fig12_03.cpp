@@ -2,40 +2,40 @@
 // Rethrowing an exception.
 #include <iostream>
 #include <exception>
-using namespace std;
 
 // throw, catch and rethrow exception
 void throwException() {
    // throw exception and catch it immediately
    try {
-      cout << "  Function throwException throws an exception\n";
-      throw exception{}; // generate exception
-   } 
-   catch (const exception&) { // handle exception
-      cout << "  Exception handled in function throwException"
+      std::cout << "  Function throwException throws an exception\n";
+      throw std::exception{}; // generate exception
+   }
+   catch (const std::exception&) { // handle exception
+      std::cout << "  Exception handled in function throwException"
          << "\n  Function throwException rethrows exception";
       throw; // rethrow exception for further processing
-   } 
+   }
 
-   cout << "This should not print\n";
-} 
+   std::cout << "This should not print\n";
+}
 
 int main() {
-   // throw exception
+   // call throwException
    try {
-      cout << "\nmain invokes function throwException\n";
+      std::cout << "main invokes function throwException\n";
       throwException();
-      cout << "This should not print\n";
-   } 
-   catch (const exception&) { // handle exception
-      cout << "\n\nException handled in main\n";
-   } 
+      std::cout << "This should not print\n";
+   }
+   catch (const std::exception&) { // handle exception
+      std::cout << "\n\nException handled in main\n";
+   }
 
-   cout << "Program control continues after catch in main\n";
-} 
+   std::cout << "Program control continues after catch in main\n";
+}
+
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

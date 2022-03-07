@@ -5,7 +5,7 @@
 #include <iostream>
 #include <iterator> // ostream_iterator
 
-// generator function returns next letter (starts with A)
+// returns the next letter (starts with A)
 char nextLetter() {
    static char letter{'A'};
    return letter++;
@@ -49,6 +49,7 @@ int main() {
    std::ranges::copy(chars, output);
    std::cout << "\n";
 }
+
 
 
 /**************************************************************************

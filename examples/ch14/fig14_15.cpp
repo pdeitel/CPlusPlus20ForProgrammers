@@ -1,13 +1,13 @@
 // fig14_15.cpp
-// Algorithms push_heap, pop_heap, make_heap and sort_heap.
-#include <array>
-#include <algorithm>
+// Algorithms make_heap, sort_heap, push_heap and pop_heap.
 #include <iostream>
-#include <iterator> 
+#include <algorithm>
+#include <array>
 #include <vector>
+#include <iterator> 
 
 int main() {
-   std::ostream_iterator<int> output(std::cout, " ");
+   std::ostream_iterator<int> output{std::cout, " "};
 
    std::array heapArray{3, 100, 52, 77, 22, 31, 1, 98, 13, 40};
    std::cout << "heapArray before make_heap:\n";

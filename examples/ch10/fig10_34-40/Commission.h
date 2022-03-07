@@ -6,17 +6,17 @@
 class Commission {
 public:
    Commission(double grossSales, double commissionRate);
-   double earnings() const;        
-   std::string toString() const; 
+   double earnings() const;
+   std::string toString() const;
 private:
-   double m_grossSales{0.0};      
-   double m_commissionRate{0.0}; 
-}; 
+   double m_grossSales{0.0};
+   double m_commissionRate{0.0};
+};
 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

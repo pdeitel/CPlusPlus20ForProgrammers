@@ -4,7 +4,6 @@
 #include <string>
 #include "SalariedEmployee.h"
 #include "SalariedCommissionEmployee.h"
-using namespace std;
 
 int main() {
    SalariedCommissionEmployee salariedCommission{
@@ -15,19 +14,19 @@ int main() {
 
    // invoke base-class member functions on derived-class
    // object through base-class pointer (allowed)
-   string name{salariedPtr->getName()};
+   std::string name{salariedPtr->getName()};
    double salary{salariedPtr->getSalary()};        
    
    // attempt to invoke derived-class-only member functions          
    // on derived-class object through base-class pointer (disallowed)
-   double grossSales{salariedPtr->getGrossSales()};
-   double commissionRate{salariedPtr->getCommissionRate()};
+   double grossSales{salariedPtr->getGrossSales()};  
+   double commissionRate{salariedPtr->getCommissionRate()}; 
    salariedPtr->setGrossSales(8000.0);                      
 } 
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

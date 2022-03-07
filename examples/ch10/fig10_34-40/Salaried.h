@@ -6,15 +6,16 @@
 class Salaried {
 public:
    Salaried(double salary);
-   double earnings() const;        
-   std::string toString() const; 
+   double earnings() const;
+   std::string toString() const;
 private:
-   double m_salary{0.0}; 
-}; 
+   double m_salary{0.0};
+};
+
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

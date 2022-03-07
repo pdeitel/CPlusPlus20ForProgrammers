@@ -1,5 +1,5 @@
 // fig14_10.cpp
-// Algorithms inplace_merge, reverse_copy and unique_copy.
+// Algorithms inplace_merge, unique_copy and reverse_copy.
 #include <algorithm>
 #include <array> 
 #include <iostream>
@@ -8,14 +8,14 @@
 
 int main() {
    std::array a1{1, 3, 5, 7, 9, 1, 3, 5, 7, 9};
-   std::ostream_iterator<int> output(std::cout, " ");
+   std::ostream_iterator<int> output{std::cout, " "};
 
    std::cout << "array a1 contains: ";
    std::ranges::copy(a1, output);
 
    // merge first half of a1 with second half of a1 such that
    // a1 contains sorted set of elements after merge         
-   std::ranges::inplace_merge(a1, a1.begin() + 5);    
+   std::ranges::inplace_merge(a1, a1.begin() + 5);
    std::cout << "\nAfter inplace_merge, a1 contains: ";
    std::ranges::copy(a1, output);
 
@@ -24,14 +24,14 @@ int main() {
    std::ranges::unique_copy(a1, std::back_inserter(results1));
    std::cout << "\nAfter unique_copy, results1 contains: ";
    std::ranges::copy(results1, output);
-   
+
    // copy elements of a1 into results2 in reverse order             
    std::vector<int> results2{};
    std::ranges::reverse_copy(a1, std::back_inserter(results2));
    std::cout << "\nAfter reverse_copy, results2 contains: ";
-   std::ranges::copy(results2, output); 
+   std::ranges::copy(results2, output);
    std::cout << "\n";
-} 
+}
 
 
 /**************************************************************************

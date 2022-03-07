@@ -1,30 +1,13 @@
 // fig12_09.cpp
-// binarySearch function with a precondition and a postcondition.
+// binarySearch function with a precondition requiring a sorted vector.
 #include <algorithm>
 #include <iostream>
 #include <vector>
-using namespace std;
 
-template <typename T>                                
-int binarySearch(const vector<T>& items, const T& key)
-   [[pre audit: is_sorted(begin(items), end(items))]]
-   [[post loc: loc == -1 || (loc >= 0 && loc < items.size())]];
-
-int main() {
-   // sorted vector v1 satisfies binarySearch's precondition
-   vector v1{10, 20, 30, 40, 50, 60, 70, 80, 90};
-   int result1 = binarySearch(v1, 70);
-   cout << "70 was " << (result1 != -1 ? "" : "not ") << "found in v1\n";
-    
-   // unsorted vector v2 violates binarySearch's precondition
-   vector v2{60, 70, 80, 90, 10, 20, 30, 40, 50};
-   int result2 = binarySearch(v2, 60);
-   cout << "60 was " << (result2 != -1 ? "" : "not ") << "found in v2\n";
-}
-
-// perform a binary search
-template <typename T>                                
-int binarySearch(const vector<T>& items, const T& key) {     
+template<class T>
+int binarySearch(const std::vector<T>& items, const T& key)
+   [[pre: items.size() > 0]]
+   [[pre audit: std::is_sorted(items.begin(), items.end())]] {
    size_t low{0}; // low index of elements to search                 
    size_t high{items.size() - 1}; // high index
    size_t middle{(low + high + 1) / 2}; // middle element            
@@ -48,9 +31,22 @@ int binarySearch(const vector<T>& items, const T& key) {
    return loc; // return location of key
 } 
 
+int main() {
+   // sorted vector v1 satisfies binarySearch's sorted vector precondition
+   std::vector v1{10, 20, 30, 40, 50, 60, 70, 80, 90};
+   int result1{binarySearch(v1, 70)};
+   std::cout << "70 was " << (result1 != -1 ? "" : "not ") << "found in v1\n";
+
+   // unsorted vector v2 violates binarySearch's sorted vector precondition
+   std::vector v2{60, 70, 80, 90, 10, 20, 30, 40, 50};
+   int result2{binarySearch(v2, 60)};
+   std::cout << "60 was " << (result2 != -1 ? "" : "not ") << "found in v2\n";
+}
+
+
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

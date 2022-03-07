@@ -31,21 +31,21 @@ int main() {
    
    // powers of 100,000,000 with BigNumber
    BigNumber value4{100'000'000};
-   cout << "\n\nvalue4: " << value4 << endl;
+   cout << "\n\nvalue4: " << value4 << "\n";
 
    counter = 2;
 
    while (counter <= 5) {
       cout << "value4.pow(" << counter << "): " 
-         << value4.pow(counter) << endl;
+         << value4.pow(counter) << "\n";
       ++counter;
    }
 
-   cout << endl;
+   cout << "\n";
 }
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

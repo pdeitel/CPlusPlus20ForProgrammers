@@ -5,17 +5,17 @@ using namespace std;
 
 int main() {
    if (int value{7}; value == 7) {
-      cout << "value is " << value << endl;
+      cout << "value is " << value << "\n";
    }
    else {
-      cout << "value is not 7; it is " << value << endl;
+      cout << "value is not 7; it is " << value << "\n";
    }
 
    if (int value{13}; value == 9) {
-      cout << "value is " << value << endl;
+      cout << "value is " << value << "\n";
    }
    else {
-      cout << "value is not 9; it is " << value << endl;
+      cout << "value is not 9; it is " << value << "\n";
    }
 
    cout << value;
@@ -23,7 +23,7 @@ int main() {
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

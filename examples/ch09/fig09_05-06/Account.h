@@ -20,7 +20,7 @@ public:
       }
    }
 
-   // function returns the account balance
+   // function that returns the account balance
    double getBalance() const {
       return m_balance;
    }
@@ -35,8 +35,8 @@ public:
       return m_name;
    }
 private:
-   std::string m_name; // account name data member 
-   double m_balance; // data member with default initial value
+   std::string m_name; 
+   double m_balance; 
 }; // end class Account
 
 

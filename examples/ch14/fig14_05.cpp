@@ -18,7 +18,7 @@ int main() {
    std::ranges::copy(a1, output);
 
    std::array a2{10, 2, 15, 4, 10, 6};
-   std::array<int, a2.size()> c1{}; 
+   std::array<int, a2.size()> c1{};
    std::cout << "\n\na2: ";
    std::ranges::copy(a2, output);
 
@@ -32,7 +32,7 @@ int main() {
    std::ranges::copy(a3, output);
 
    // replace values greater than 9 in a3 with 100   
-   constexpr auto greaterThan9 = [](auto x) {return x > 9;};
+   auto greaterThan9{[](auto x) {return x > 9; }};
    std::ranges::replace_if(a3, greaterThan9, 100);
    std::cout << "\na3 after replacing values greater than 9 with 100s: ";
    std::ranges::copy(a3, output);
@@ -48,8 +48,7 @@ int main() {
       << "greater than 9 with 100s: ";
    std::ranges::copy(c2, output);
    std::cout << "\n";
-} 
-
+}
 
 /**************************************************************************
  * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *

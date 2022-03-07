@@ -1,17 +1,16 @@
 // fig11_06.cpp
 // C++20 three-way comparison (spaceship) operator.
 #include <compare>
+#include <fmt/format.h>
 #include <iostream>
 #include <string>
-#include "fmt/format.h"
-using namespace std;
 
 class Time {
 public:
    Time(int hr, int min, int sec) noexcept
       : m_hr{hr}, m_min{min}, m_sec{sec} {}
 
-   string toString() const {
+   std::string toString() const {
       return fmt::format("hr={}, min={}, sec={}", m_hr, m_min, m_sec);
    }
 
@@ -28,41 +27,41 @@ int main() {
    const Time t2(12, 15, 30);
    const Time t3(6, 30, 0);
 
-   cout << fmt::format("t1: {}\nt2: {}\nt3: {}\n\n", 
-              t1.toString(), t2.toString(), t3.toString());
+   std::cout << fmt::format("t1: {}\nt2: {}\nt3: {}\n\n",
+      t1.toString(), t2.toString(), t3.toString());
 
    // using the equality and relational operators 
-   cout << fmt::format("t1 == t2: {}\n", t1 == t2);
-   cout << fmt::format("t1 != t2: {}\n", t1 != t2);
-   cout << fmt::format("t1 < t2: {}\n", t1 < t2);
-   cout << fmt::format("t1 <= t2: {}\n", t1 <= t2);
-   cout << fmt::format("t1 > t2: {}\n", t1 > t2);
-   cout << fmt::format("t1 >= t2: {}\n\n", t1 >= t2);
+   std::cout << fmt::format("t1 == t2: {}\n", t1 == t2);
+   std::cout << fmt::format("t1 != t2: {}\n", t1 != t2);
+   std::cout << fmt::format("t1 < t2: {}\n", t1 < t2);
+   std::cout << fmt::format("t1 <= t2: {}\n", t1 <= t2);
+   std::cout << fmt::format("t1 > t2: {}\n", t1 > t2);
+   std::cout << fmt::format("t1 >= t2: {}\n\n", t1 >= t2);
 
-   cout << fmt::format("t1 == t3: {}\n", t1 == t3);
-   cout << fmt::format("t1 != t3: {}\n", t1 != t3);
-   cout << fmt::format("t1 < t3: {}\n", t1 < t3);
-   cout << fmt::format("t1 <= t3: {}\n", t1 <= t3);
-   cout << fmt::format("t1 > t3: {}\n", t1 > t3);
-   cout << fmt::format("t1 >= t3: {}\n\n", t1 >= t3);
+   std::cout << fmt::format("t1 == t3: {}\n", t1 == t3);
+   std::cout << fmt::format("t1 != t3: {}\n", t1 != t3);
+   std::cout << fmt::format("t1 < t3: {}\n", t1 < t3);
+   std::cout << fmt::format("t1 <= t3: {}\n", t1 <= t3);
+   std::cout << fmt::format("t1 > t3: {}\n", t1 > t3);
+   std::cout << fmt::format("t1 >= t3: {}\n\n", t1 >= t3);
 
    // using <=> to perform comparisons
    if ((t1 <=> t2) == 0) {
-      cout << "t1 is equal to t2\n";
+      std::cout << "t1 is equal to t2\n";
    }
 
    if ((t1 <=> t3) > 0) {
-      cout << "t1 is greater than t3\n";
+      std::cout << "t1 is greater than t3\n";
    }
 
    if ((t3 <=> t1) < 0) {
-      cout << "t3 is less than t1\n";
+      std::cout << "t3 is less than t1\n";
    }
 }
 
 
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

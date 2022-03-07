@@ -10,7 +10,7 @@ int main() {
    Account account1{"Jane Green"};
    Account account2{"John Blue"};
 
-   // display initial each Account's corresponding name
+   // display each Account's corresponding name
    std::cout << fmt::format(
       "account1 name is: {}\naccount2 name is: {}\n",
       account1.getName(), account2.getName());

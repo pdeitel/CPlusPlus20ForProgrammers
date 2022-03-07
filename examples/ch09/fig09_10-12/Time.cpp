@@ -54,7 +54,7 @@ std::string Time::to24HourString() const {
       getHour(), getMinute(), getSecond());
 } 
 
-// return Time as string in 12-hour format (HH:MM:SS AM or PM)
+// return Time as a string in 12-hour format (HH:MM:SS AM or PM)
 std::string Time::to12HourString() const {
    return fmt::format("{}:{:02d}:{:02d} {}", 
       ((getHour() % 12 == 0) ? 12 : getHour() % 12), 

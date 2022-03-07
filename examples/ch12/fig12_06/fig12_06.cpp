@@ -2,30 +2,31 @@
 // Demonstrating standard new throwing bad_alloc when memory
 // cannot be allocated.
 #include <array>
+#include <fmt/format.h>
 #include <iostream>
 #include <memory>
 #include <new> // bad_alloc class is defined here
-using namespace std;
 
 int main() {
-   array<unique_ptr<double[]>, 1000> items{};
-   
+   std::array<std::unique_ptr<double[]>, 1000> items{};
+
    // aim each unique_ptr at a big block of memory
    try {
-      for (int i{0}; auto& item : items) {
-         item = make_unique<double[]>(500'000'000); 
-         cout << "items[" << i++ << "] points to 500,000,000 doubles\n";
-      } 
-   } 
-   catch (bad_alloc& memoryAllocationException) {
-      cerr << "Exception occurred: " 
-         << memoryAllocationException.what() << '\n';
-   } 
-} 
+      for (int i{0}; auto & item : items) {
+         item = std::make_unique<double[]>(500'000'000);
+         std::cout << fmt::format(
+            "items[{}] points to 500,000,000 doubles\n", i++);
+      }
+   }
+   catch (const std::bad_alloc& memoryAllocationException) {
+      std::cerr << fmt::format("Exception occurred: {}\n",
+         memoryAllocationException.what());
+   }
+}
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

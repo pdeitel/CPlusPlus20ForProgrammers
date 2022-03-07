@@ -45,19 +45,19 @@ int main() {
 
    // determine lower and upper bound of 22 in ints
    std::cout << fmt::format(
-                   "\n\nlower_bound(22): {}\nupper_bound(22): {}\n\n",
-                   *(ints.lower_bound(22)), *(ints.upper_bound(22)));
+      "\n\nlower_bound(22): {}\nupper_bound(22): {}\n\n",
+      *ints.lower_bound(22), *ints.upper_bound(22));
 
    // use equal_range to determine lower and upper bound of 22 in ints 
    auto p{ints.equal_range(22)};
    std::cout << fmt::format(
-                   "lower_bound(22): {}\nupper_bound(22): {}\n",
-                   *(p.first), *(p.second));
+      "lower_bound(22): {}\nupper_bound(22): {}\n",
+      *(p.first), *(p.second));
 }
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

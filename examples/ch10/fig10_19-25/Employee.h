@@ -7,10 +7,10 @@
 class Employee {
 public:
    Employee(std::string_view name);
-   virtual ~Employee() = default; 
+   virtual ~Employee() = default;
 
-   void setName(std::string_view name); 
-   std::string getName() const; 
+   void setName(std::string_view name);
+   std::string getName() const;
 
    double earnings() const; // not virtual 
    std::string toString() const; // not virtual 
@@ -19,10 +19,10 @@ protected:
 private:
    std::string m_name;
    virtual double getPay() const = 0; // pure virtual
-}; 
+};
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

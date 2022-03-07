@@ -1,20 +1,20 @@
 // Fig. 10.37: Commission.cpp
 // Commission member-function definitions.
+#include <fmt/format.h>
 #include <stdexcept>
-#include <fmt/format.h> // In C++20, this will be #include <format> 
 #include "Commission.h" // class definition
-using namespace std;
 
 // constructor                                                        
 Commission::Commission(double grossSales, double commissionRate)         
    : m_grossSales{grossSales}, m_commissionRate{commissionRate} {
 
    if (m_grossSales < 0.0) {
-      throw invalid_argument("Gross sales must be >= 0.0");
+      throw std::invalid_argument("Gross sales must be >= 0.0");
    } 
 
    if (m_commissionRate <= 0.0 || m_commissionRate >= 1.0) {
-      throw invalid_argument("Commission rate must be > 0.0 and < 1.0");
+      throw std::invalid_argument(
+         "Commission rate must be > 0.0 and < 1.0");
    } 
 }                                      
 
@@ -24,13 +24,14 @@ double Commission::earnings() const {
 }                                            
 
 // return string containing Commission information
-string Commission::toString() const {                       
+std::string Commission::toString() const {                       
    return fmt::format("gross sales: ${:.2f}; commission rate: {:.2f}", 
       m_grossSales, m_commissionRate);
-}       
+}   
+
 
 /**************************************************************************
- * (C) Copyright 1992-2017 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

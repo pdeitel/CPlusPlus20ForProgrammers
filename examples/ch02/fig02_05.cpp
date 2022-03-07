@@ -5,7 +5,6 @@
 
 using std::cout; // program uses cout
 using std::cin; // program uses cin
-using std::endl; // program uses endl
 
 // function main begins program execution
 int main() {
@@ -16,33 +15,33 @@ int main() {
    cin >> number1 >> number2; // read two integers from user
 
    if (number1 == number2) {
-      cout << number1 << " == " << number2 << endl;
+      cout << number1 << " == " << number2 << "\n";
    }
 
    if (number1 != number2) {
-      cout << number1 << " != " << number2 << endl;
+      cout << number1 << " != " << number2 << "\n";
    }
 
    if (number1 < number2) {
-      cout << number1 << " < " << number2 << endl;
+      cout << number1 << " < " << number2 << "\n";
    }
 
    if (number1 > number2) {
-      cout << number1 << " > " << number2 << endl;
+      cout << number1 << " > " << number2 << "\n";
    }
 
    if (number1 <= number2) {
-      cout << number1 << " <= " << number2 << endl;
+      cout << number1 << " <= " << number2 << "\n";
    }
 
    if (number1 >= number2) {
-      cout << number1 << " >= " << number2 << endl;
+      cout << number1 << " >= " << number2 << "\n";
    }
 } // end function main
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

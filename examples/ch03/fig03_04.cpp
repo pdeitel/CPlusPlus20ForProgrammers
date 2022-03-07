@@ -6,22 +6,22 @@ using namespace std;
 int main() {
    // demonstrate postfix increment operator
    int c{5}; 
-   cout << "c before postincrement: " << c << endl; // prints 5
-   cout << "    postincrementing c: " << c++ << endl; // prints 5
-   cout << " c after postincrement: " << c << endl; // prints 6                     
+   cout << "c before postincrement: " << c << "\n"; // prints 5
+   cout << "    postincrementing c: " << c++ << "\n"; // prints 5
+   cout << " c after postincrement: " << c << "\n"; // prints 6                     
 
    cout << endl; // skip a line
 
    // demonstrate prefix increment operator
    c = 5;  
-   cout << " c before preincrement: " << c << endl; // prints 5
-   cout << "     preincrementing c: " << ++c << endl; // prints 6
-   cout << "  c after preincrement: " << c << endl; // prints 6                     
+   cout << " c before preincrement: " << c << "\n"; // prints 5
+   cout << "     preincrementing c: " << ++c << "\n"; // prints 6
+   cout << "  c after preincrement: " << c << "\n"; // prints 6                     
 }
 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

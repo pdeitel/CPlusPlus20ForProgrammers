@@ -22,11 +22,11 @@ int main() {
 
    // display total and average of grades
    cout << "\nTotal of all 10 grades is " << total;
-   cout << "\nClass average is " << average << endl;
+   cout << "\nClass average is " << average << "\n";
 } 
 
 /**************************************************************************
- * (C) Copyright 1992-2020 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *

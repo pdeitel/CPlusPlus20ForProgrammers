@@ -2,44 +2,43 @@
 // Demonstrating stack unwinding.
 #include <iostream>
 #include <stdexcept>     
-using namespace std;
 
 // function3 throws runtime error
 void function3() {
-   cout << "In function 3\n";
+   std::cout << "In function 3\n";
 
    // no try block, stack unwinding occurs, return control to function2
-   throw runtime_error{"runtime_error in function3"}; // no print
-} 
+   throw std::runtime_error{"runtime_error in function3"};
+}
 
 // function2 invokes function3
 void function2() {
-   cout << "function3 is called inside function2\n";
+   std::cout << "function3 is called inside function2\n";
    function3(); // stack unwinding occurs, return control to function1
-} 
+}
 
 // function1 invokes function2
 void function1() {
-   cout << "function2 is called inside function1\n";
+   std::cout << "function2 is called inside function1\n";
    function2(); // stack unwinding occurs, return control to main
-} 
+}
 
 // demonstrate stack unwinding
 int main() {
    // invoke function1
    try {
-      cout << "function1 is called inside main\n";
-      function1(); // call function1 which throws runtime_error
-   } 
-   catch (const runtime_error& error) { // handle runtime error
-      cout << "Exception occurred: " << error.what() 
+      std::cout << "function1 is called inside main\n";
+      function1(); // call function1 which leads to a runtime_error
+   }
+   catch (const std::runtime_error& error) { // handle runtime error
+      std::cout << "Exception occurred: " << error.what()
          << "\nException handled in main\n";
-   } 
-} 
+   }
+}
 
 
 /**************************************************************************
- * (C) Copyright 1992-2021 by Deitel & Associates, Inc. and               *
+ * (C) Copyright 1992-2022 by Deitel & Associates, Inc. and               *
  * Pearson Education, Inc. All Rights Reserved.                           *
  *                                                                        *
  * DISCLAIMER: The authors and publisher of this book have used their     *
