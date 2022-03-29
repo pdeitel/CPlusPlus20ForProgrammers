@@ -1,5 +1,5 @@
 // fig19_06.cpp 
-// Using stream manipulators dex, oct, hex and setbase.
+// Using stream manipulators dec, oct, hex and setbase.
 #include <iomanip>
 #include <iostream>
 

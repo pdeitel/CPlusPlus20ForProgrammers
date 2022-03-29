@@ -5,7 +5,7 @@
 
 int main() {
    // floating-point presentation types
-   std::cout << "Display 17.489 with and default, .1 and .2 precisions:\n"
+   std::cout << "Display 17.489 with default, .1 and .2 precisions:\n"
       << std::format("f: {0:f}\n.1f: {0:.1f}\n.2f: {0:.2f}\n\n", 17.489);
 
    std::cout << "Display 10000000000000000.0 with f, e, g and a\n"

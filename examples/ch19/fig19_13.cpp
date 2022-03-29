@@ -9,31 +9,31 @@ int main() {
 
    // display x
    std::cout << x << " printed as int right and left aligned\n"
-      << "and as hex with internal justification.\n"
+      << "and as hex with internal alignment.\n"
       << "Using the default pad character (space):\n";
 
    // display x 
    std::cout << std::setw(10) << x << "\n";
 
-   // display x with left justification
+   // display x with left alignment
    std::cout << std::left << std::setw(10) << x << "\n";
 
-   // display x with base as hex with internal justification
+   // display x with base as hex with internal alignment
    std::cout << std::showbase << std::internal << std::setw(10) 
       << std::hex << x << "\n\n";
 
    std::cout << "Using various padding characters:\n";
 
-   // display x using padded characters (right justification)
+   // display x using padded characters (right alignment)
    std::cout << std::right;
    std::cout.fill('*');
    std::cout << std::setw(10) << std::dec << x << "\n";
 
-   // display x using padded characters (left justification)
+   // display x using padded characters (left alignment)
    std::cout << std::left << std::setw(10) << std::setfill('%') 
       << x << "\n";
 
-   // display x using padded characters (internal justification)
+   // display x using padded characters (internal alignment)
    std::cout << std::internal << std::setw(10) 
       << std::setfill('^') << std::hex << x << "\n";
 } 

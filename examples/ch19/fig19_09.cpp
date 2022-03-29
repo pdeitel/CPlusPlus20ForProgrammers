@@ -14,7 +14,7 @@ std::ostream& tab(std::ostream& output) {
 }
 
 int main() {
-   // use tab and endLine manipulators
+   // use tab and bell manipulators
    std::cout << "Testing the tab manipulator:\n"
       << 'a' << tab << 'b' << tab << 'c' << '\n';
 
