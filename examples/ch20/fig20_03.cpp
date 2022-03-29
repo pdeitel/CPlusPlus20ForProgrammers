@@ -45,7 +45,7 @@ int main() {
 void Example::printValues() {
    std::cout << "\nIn printValues:\n";
    std::cout << fmt::format(
-      "integer1 = {}\npi = {}\ne = {}\n", pi, e, integer1);
+      "integer1 = {}\npi = {}\ne = {}\n", integer1, pi, e);
    std::cout << fmt::format(
       "doubleInUnnamed = {}\n(global) integer1 = {}\nfiscal3 = {}\n",
       doubleInUnnamed, ::integer1, Inner::fiscal3);

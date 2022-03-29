@@ -1,6 +1,5 @@
 // fig20_04.cpp
 // Demonstrating operator keywords.
-//#include <ciso646> // enables operator keywords in Microsoft Visual C++
 #include <fmt/format.h>
 #include <iostream>
 
