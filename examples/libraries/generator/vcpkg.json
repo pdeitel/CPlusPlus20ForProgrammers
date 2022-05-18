@@ -1,0 +1,6 @@
+{
+  "name": "generator",
+  "version-semver": "0.3.0",
+  "maintainers": [ "Sy Brand (tartanllama@gmail.com)" ],
+  "description":  "C++20 generator implementation on coroutines"
+}
