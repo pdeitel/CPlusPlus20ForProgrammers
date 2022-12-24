@@ -13,8 +13,8 @@
 // concept for an input range containing integer or floating-point values
 template<typename T>
 concept NumericInputRange = std::ranges::input_range<T> &&
-(std::integral<typename T::value_type> ||
-   std::floating_point<typename T::value_type>);
+   (std::integral<typename T::value_type> ||
+    std::floating_point<typename T::value_type>);
 
 // calculate the average of a NumericInputRange's elements
 auto average(NumericInputRange auto const& range) {

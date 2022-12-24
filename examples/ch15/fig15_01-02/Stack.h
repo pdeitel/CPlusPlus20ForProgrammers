@@ -19,7 +19,7 @@ public:
    bool isEmpty() const {return stack.empty();}
 
    // return size of Stack
-   size_t size() const {return stack.empty();}
+   size_t size() const {return stack.size();}
 private:
    std::deque<T> stack{}; // internal representation of Stack
 }; 

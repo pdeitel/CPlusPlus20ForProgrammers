@@ -7,9 +7,9 @@
 #include <initializer_list>
 #include <iostream>
 #include <iterator>
-#include <memory>
 #include <stdexcept>
 #include <utility>
+
 
 // class template ConstIterator for a MyArray const iterator 
 template <typename T>
