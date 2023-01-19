@@ -42,7 +42,7 @@ int main() {
       << fmt::format("Wally: {}; E: {}\n\n",
             std::regex_match("Wally", r6), std::regex_match("E", r6));
 
-   // matching zero or one occurrenctes of a subexpression
+   // matching zero or one occurrences of a subexpression
    std::regex r7{"labell?ed"};
    std::cout << "Matching against: labell?ed\n"
       << fmt::format("labelled: {}; labeled: {}; labellled: {}\n\n",
