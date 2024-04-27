@@ -13,7 +13,7 @@ template <std::input_iterator Iterator>
 auto customDistance(Iterator begin, Iterator end) {
    // for random-access iterators subtract the iterators
    if constexpr (std::is_base_of_v<std::random_access_iterator_tag,
-      Iterator::iterator_category>) {
+      typename Iterator::iterator_category>) {
 
       std::cout << "customDistance with random-access iterators\n";
       return end - begin; // O(1) operation for random-access iterators
