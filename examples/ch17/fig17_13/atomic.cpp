@@ -33,7 +33,7 @@ int main() {
    }
 
    std::cout << fmt::format("Final count1: {}\n", count1);
-   std::cout << fmt::format("Final atomicCount: {}\n", atomicCount);
+   std::cout << fmt::format("Final atomicCount: {}\n", atomicCount.load());
    std::cout << fmt::format("Final count2: {}\n", count2);
 }
 
