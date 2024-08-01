@@ -6,7 +6,7 @@
 
 // Count class definition 
 class Count {
-   friend void setX(Count& c, int value); // friend declaration
+   friend void modifyX(Count& c, int value); // friend declaration
 public:
    int getX() const { return m_x; }
 private:
